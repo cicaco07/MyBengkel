@@ -12,6 +12,9 @@ module.exports = {
         'primary': '#0F172A',
         'purple' : '#B3C5EF',
         'secondary' : '#1E293B',
+        'blue1' : '#38PDf8',
+        'yellow1' : '#F4G35E',
+
       },
       fontFamily: {
         sans: ['Poppins', 'sans-serif'],
