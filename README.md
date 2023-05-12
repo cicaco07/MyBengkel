@@ -8,6 +8,7 @@ Produk Sistem Informasi Antrian Servis adalah sebuah aplikasi yang dikembangkan 
 ### Dikembangkan Menggunakan
 - [Laravel](https://laravel.com/)
 - [TailwindCSS](https://tailwindcss.com/)
+- [Flowbite](https://flowbite.com/)
 
 ### Anggota Tim
 - Aryo Deva Saputra
