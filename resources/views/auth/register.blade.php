@@ -1,5 +1,7 @@
 @extends('layouts.header')
 
+@section('title', 'Register')
+
 @section('content')
 <div class="flex items-center justify-center h-screen">
     <div class="w-full max-w-2xl p-4 bg-secondary rounded-lg shadow sm:p-6 md:p-8 sm:m-6">
