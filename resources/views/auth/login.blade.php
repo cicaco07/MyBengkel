@@ -4,7 +4,7 @@
     
 @section('content')
 <div class="flex items-center justify-center h-screen">     
-    <div class="w-full max-w-sm p-4 bg-secondary rounded-lg shadow sm:p-6 md:p-8">
+    <div class="w-10/12 md:w-full max-w-sm p-4 bg-secondary rounded-lg shadow sm:p-6 md:p-8">
         <form class="space-y-6" action="#">
             <h3 class="text-2xl font-medium font-sans text-purple text-center">Login</h3>
             <div>

@@ -6,31 +6,32 @@
 <div class="p-4 border-1 rounded-lg mt-14 bg-secondary">
 <div class="text-purple m-4 font-semibold text-2xl tracking-wide">Profilku</div>
 <div class="flex items-center justify-center">
-    <img class="rounded-full w-48 h-48 bg-white mb-8" src="{{ asset('img/herta.jpg')}}">
+    <img class="rounded-full w-36 md:w-48 h-36 md:h-48 bg-white mb-8" src="{{ asset('img/herta.jpg')}}">
+</div>
+<div class="text-xs md:text-lg">
+    <div class="text-purple md:mx-8 my-4 flex ">
+        <span class="w-4/12 md:w-1/6">Nama Mekanik</span>
+        <span class="w-1/12 md:w-1/6 text-center">:</span>
+        <span class="w-7/12 md:w-4/6">Aryo Deva Saputra</span>
+    </div>
+    <div class="text-purple md:mx-8 my-4 flex">
+        <span class="w-4/12 md:w-1/6">Alamat</span>
+        <span class="w-1/12 md:w-1/6 text-center">:</span>
+        <span class="w-7/12 md:w-4/6">Jl. Kenangan No. 15, Kelurahan Cibaduyut, Kecamatan Bandung Wetan, Kota Bandung</span>
+    </div>
+    <div class="text-purple md:mx-8 my-4 flex">
+        <span class="w-4/12 md:w-1/6">No Telepon</span>
+        <span class="w-1/12 md:w-1/6 text-center">:</span>
+        <span class="w-7/12 md:w-4/6">089123123178</span>
+    </div>
+    <div class="text-purple md:mx-8 my-4 flex">
+        <span class="w-4/12 md:w-1/6">Username</span>
+        <span class="w-1/12 md:w-1/6 text-center">:</span>
+        <span class="w-7/12 md:w-4/6">cicaco07</span>
+    </div>
 </div>
 
-<div class="text-purple mx-8 my-4 flex">
-    <span class="w-1/6">Nama Mekanik</span>
-    <span class="w-1/6 text-center">:</span>
-    <span class="w-4/6">Aryo Deva Saputra</span>
-</div>
-<div class="text-purple mx-8 my-4 flex">
-    <span class="w-1/6">Alamat</span>
-    <span class="w-1/6 text-center">:</span>
-    <span class="w-4/6">Jl. Kenangan No. 15, Kelurahan Cibaduyut, 
-        Kecamatan Bandung Wetan, Kota Bandung</span>
-</div>
-<div class="text-purple mx-8 my-4 flex">
-    <span class="w-1/6">No Telepon</span>
-    <span class="w-1/6 text-center">:</span>
-    <span class="w-4/6">089123123178</span>
-</div>
-<div class="text-purple mx-8 my-4 flex">
-    <span class="w-1/6 sm:w-2/12">Username</span>
-    <span class="w-1/6 sm:w-2/12 text-center">:</span>
-    <span class="w-4/6 sm:w-8/12">cicaco07</span>
-</div>
-<button data-modal-target="staticModal" data-modal-toggle="staticModal" class="block text-white bg-blue-700 mx-8 my-6 hover:bg-blue-800 focus:ring-1 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center" type="button">
+<button data-modal-target="staticModal" data-modal-toggle="staticModal" class="block text-white bg-blue-700 md:mx-8 my-6 hover:bg-blue-800 focus:ring-1 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs md:text-sm px-5 py-2.5 text-center" type="button">
     Ubah Data
   </button>
   <div id="staticModal" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">

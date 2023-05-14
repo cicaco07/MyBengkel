@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="flex items-center justify-center h-screen">
-    <div class="w-full max-w-2xl p-4 bg-secondary rounded-lg shadow sm:p-6 md:p-8 sm:m-6">
+    <div class="w-10/12 md:w-full max-w-2xl p-4 bg-secondary rounded-lg shadow sm:p-6 md:p-8 sm:m-6">
         <div class="text-center text-purple text-2xl mb-6">Register</div>
         <form>
             <div class="relative z-0 w-full mb-6 group">
@@ -40,7 +40,7 @@
                 </div>
                 <div class="relative z-0 w-full mb-6 group">
                     <input type="text" name="floating_company" id="floating_company" class="block py-2.5 px-0 w-full text-sm text-purple bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-purple peer" placeholder=" " required />
-                    <label for="floating_company" class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-purple peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Company (Ex. Google)</label>
+                    <label for="floating_company" class="peer-focus:font-medium absolute text-sm text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-purple peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Address</label>
                 </div>
             </div>
             <button type="submit" class="mb-6 w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Register Now</button>

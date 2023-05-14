@@ -14,7 +14,6 @@
               </svg>
            </button>
           <a href="#" class="flex ml-2 md:mr-24">
-            <img src="https://flowbite.com/docs/images/logo.svg" class="h-8 mr-3" alt="FlowBite Logo" />
             <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap text-purple">@yield('role')</span>
           </a>
         </div>
@@ -53,7 +52,7 @@
   
   <aside id="logo-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-primary border-r-2 border-secondary sm:translate-x-0" aria-label="Sidebar">
      <div class="h-full px-3 pb-4 overflow-y-auto bg-primary">
-        <ul class="space-y-2 font-medium">
+        <ul class="space-y-2 font-normal md:font-medium text-sm md:text-lg">
            @yield('list-menu')
         </ul>
      </div>

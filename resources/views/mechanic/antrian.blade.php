@@ -5,7 +5,7 @@
 @section('main-content')
 <div class="p-4 border-1 rounded-lg mt-14 bg-secondary">
     
-<div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+<div class="relative overflow-x-auto shadow-md rounded-lg">
     <table class="w-full text-sm text-left text-gray-500">
         <thead class="text-xs text-purple uppercase bg-table-head">
             <tr>
@@ -23,7 +23,7 @@
                 </th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="text-xs md:text-base">
             <tr class="bg-primary border-b border-purple text-purple">
                 <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap dark:text-white">
                     1.
