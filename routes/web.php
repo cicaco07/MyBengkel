@@ -38,3 +38,14 @@ Route::prefix('mechanic')->group(function() {
         return view('mechanic.servisku');
     });
 });
+Route::prefix('admin')->group(function() {
+    Route::get('/dashboard', function () {
+        return view('admin.dashboard');
+    });
+    Route::get('/data-dealer', function () {
+        return view('admin.data');
+    });
+    Route::get('/tambah-dealer', function () {
+        return view('admin.tambah');
+    });
+});
