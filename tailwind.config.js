@@ -13,8 +13,9 @@ module.exports = {
         'purple' : '#B3C5EF',
         'secondary' : '#1E293B',
         'dark-purple' : '#818CF8',
-        'warning' : '#F4G35E',
-        'table-head' : '#2E2F5B'
+        'warning' : '#F4D35E',
+        'table-head' : '#2E2F5B',
+        'success' : '#2DD4BF',
 
       },
       fontFamily: {
