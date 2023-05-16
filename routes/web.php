@@ -20,8 +20,28 @@ Route::get('/login', [LoginController::class, 'login'])->name('login');
 
 Route::get('/register', [LoginController::class, 'register'])->name('register');
 
-Route::get('/dealer/dashboard', function(){
-    return view('dealer.dashboard');
+Route::prefix('dealer')->group(function() {
+    Route::get('/dashboard', function () {
+        return view('dealer.dashboard');
+    });
+    Route::get('/dealerku', function () {
+        return view('dealer.dealerku');
+    });
+    Route::get('/datapegawai', function () {
+        return view('dealer.pegawai');
+    });
+    Route::get('/dataantrian', function () {
+        return view('dealer.antrian');
+    });
+    Route::get('/dataservis', function () {
+        return view('dealer.servis');
+    });
+    Route::get('/datasparepart', function () {
+        return view('dealer.sparepart');
+    });
+    Route::get('/transaksi', function () {
+        return view('dealer.transaksi');
+    });
 });
 
 Route::prefix('mechanic')->group(function() {
