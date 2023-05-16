@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MechanicController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,6 +18,7 @@ Route::get('/', function () {
     return view('auth.login');
 });
 Route::get('/login', [LoginController::class, 'login'])->name('login');
+Route::post('/login-process', [LoginController::class, 'login_process'])->name('login_process');
 
 Route::get('/register', [LoginController::class, 'register'])->name('register');
 
@@ -25,16 +27,8 @@ Route::get('/dealer/dashboard', function(){
 });
 
 Route::prefix('mechanic')->group(function() {
-    Route::get('/dashboard', function () {
-        return view('mechanic.dashboard');
-    });
-    Route::get('/profilku', function () {
-        return view('mechanic.profilku');
-    });
-    Route::get('/antrian', function () {
-        return view('mechanic.antrian');
-    });
-    Route::get('/servisku', function () {
-        return view('mechanic.servisku');
-    });
+    Route::get('/dashboard', [MechanicController::class, 'dashboard'])->name('dashboard');
+    Route::get('/profilku', [MechanicController::class, 'profilku']);
+    Route::get('/antrian', [MechanicController::class, 'antrian']);
+    Route::get('/servisku', [MechanicController::class, 'servisku']);
 });
