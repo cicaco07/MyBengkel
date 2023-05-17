@@ -69,3 +69,30 @@ Route::prefix('admin')->group(function() {
         return view('admin.tambah');
     });
 });
+
+Route::prefix('user')->group(function() {
+    // // Route::get('/dashboard', function () {
+    // //     return view('user.dashboard');
+    // });
+    Route::get('/yamaha', function () {
+        return view('user.yamaha');
+    });
+    Route::get('/honda', function () {
+        return view('user.honda');
+    });
+    Route::get('/suzuki', function () {
+        return view('user.suzuki');
+    });
+    Route::get('/servisku', function () {
+        return view('user.servisku');
+    });
+    Route::get('/servisku2', function () {
+        return view('user.servisku2');
+    });
+    Route::get('/form', function () {
+        return view('user.form');
+    });
+    Route::get('/form2', function () {
+        return view('user.form2');
+    });
+});
