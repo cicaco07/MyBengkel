@@ -47,26 +47,12 @@ Route::prefix('dealer')->group(function() {
 });
 
 Route::prefix('mechanic')->group(function() {
-<<<<<<< HEAD
     Route::get('/dashboard', [MechanicController::class, 'dashboard'])->name('dashboard');
     Route::get('/profilku', [MechanicController::class, 'profilku']);
     Route::get('/antrian', [MechanicController::class, 'antrian']);
     Route::get('/servisku', [MechanicController::class, 'servisku']);
 });
-=======
-    Route::get('/dashboard', function () {
-        return view('mechanic.dashboard');
-    });
-    Route::get('/profilku', function () {
-        return view('mechanic.profilku');
-    });
-    Route::get('/antrian', function () {
-        return view('mechanic.antrian');
-    });
-    Route::get('/servisku', function () {
-        return view('mechanic.servisku');
-    });
-});
+
 Route::prefix('admin')->group(function() {
     Route::get('/dashboard', function () {
         return view('admin.dashboard');
@@ -78,4 +64,30 @@ Route::prefix('admin')->group(function() {
         return view('admin.tambah');
     });
 });
->>>>>>> 82f49f42928074e4ceac3c3fbc685ba89eee3696
+
+Route::prefix('user')->group(function() {
+    // // Route::get('/dashboard', function () {
+    // //     return view('user.dashboard');
+    // });
+    Route::get('/yamaha', function () {
+        return view('user.yamaha');
+    });
+    Route::get('/honda', function () {
+        return view('user.honda');
+    });
+    Route::get('/suzuki', function () {
+        return view('user.suzuki');
+    });
+    Route::get('/servisku', function () {
+        return view('user.servisku');
+    });
+    Route::get('/servisku2', function () {
+        return view('user.servisku2');
+    });
+    Route::get('/form', function () {
+        return view('user.form');
+    });
+    Route::get('/form2', function () {
+        return view('user.form2');
+    });
+});
