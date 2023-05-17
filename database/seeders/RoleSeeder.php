@@ -14,18 +14,11 @@ class RoleSeeder extends Seeder
     public function run(): void
     {
         DB::table('role')->insert([
-            [
-                'role'=>'Customer',
-            ],
-            [
-                'role'=>'Admin',
-            ],
-            [
-                'role'=>'Mekanik',
-            ],
-            [
-                'role'=>'Dealer',
-            ],
+            ['role' => 'Customer',],
+            ['role' => 'Admin',],
+            ['role' => 'Kepala Mekanik',],
+            ['role' => 'Mekanik',],
+            ['role' => 'Dealer',],
         ]);
     }
 }
