@@ -84,6 +84,12 @@ Route::prefix('user')->group(function() {
     Route::get('/servisku2', function () {
         return view('user.servisku2');
     });
+    Route::get('/servisku3', function () {
+        return view('user.servisku3');
+    });
+    Route::get('/servisku4', function () {
+        return view('user.servisku4');
+    });
     Route::get('/form', function () {
         return view('user.form');
     });
