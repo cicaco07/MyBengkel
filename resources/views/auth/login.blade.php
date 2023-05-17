@@ -5,7 +5,7 @@
 @section('content')
 <div class="flex items-center justify-center h-screen">     
     <div class="w-10/12 md:w-full max-w-sm p-4 bg-secondary rounded-lg shadow sm:p-6 md:p-8">
-        <form action="{{ route('login_process') }}" method="post" class="space-y-6">
+        <form action="{{ route('login') }}" method="post" class="space-y-6">
             <h3 class="text-2xl font-medium font-sans text-purple text-center">Login</h3>
             @csrf
             <div>
@@ -25,7 +25,7 @@
             <div class="flex items-start">
                 <div class="flex items-start">
                     <div class="flex items-center h-5">
-                        <input id="remember" type="checkbox" value="" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300" required>
+                        <input id="remember" type="checkbox" value="" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300">
                     </div>
                     <label for="remember" class="ml-2 text-sm font-medium text-purple">Remember me</label>
                 </div>

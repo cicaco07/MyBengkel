@@ -6,19 +6,17 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class RoleSeeder extends Seeder
+class ManufactureSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        DB::table('role')->insert([
-            ['role' => 'Customer',],
-            ['role' => 'Admin',],
-            ['role' => 'Kepala Mekanik',],
-            ['role' => 'Mekanik',],
-            ['role' => 'Dealer',],
+        DB::table('manufacture')->insert([
+            ['brand' => 'Yamaha',],
+            ['brand' => 'Suzuki',],
+            ['brand' => 'Honda',],
         ]);
     }
 }

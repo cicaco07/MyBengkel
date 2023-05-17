@@ -11,14 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->string('username');
-            $table->string('password');
+        Schema::create('branch_company', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
             $table->string('address');
-            $table->string('phone_number');
-            $table->enum('role', ['admin', 'mechanic', 'master_mechanic' ,'dealer', 'customer'])->default('customer');
+            $table->unsignedBigInteger('brand_id');
+            $table->timestamps();
+
+            $table->foreign('brand_id')->references('id')->on('manufacture');
         });
-        
     }
 
     /**
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('branch_company');
     }
 };
