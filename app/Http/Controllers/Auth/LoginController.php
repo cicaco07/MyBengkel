@@ -14,12 +14,6 @@ class LoginController extends Controller
 
     protected $redirectTo = RouteServiceProvider::HOME;
 
-    public function __construct()
-    {
-        // $this->middleware('guest')->except('logout');
-        // $this->middleware('guest')->except('logout')->except('csrf_protect');
-    }
-
     public function showLoginForm()
     {
         return view('auth.login');
@@ -73,12 +67,8 @@ class LoginController extends Controller
         }
     }
 
-    public function logout(Request $request)
+    public function logout()
     {
-        // $this->guard()->logout();
-        // $request->session()->invalidate();
-        // $request->session()->regenerateToken();
-
-        return view('auth.login');
+        return redirect()->route('loginForm');
     }
 }

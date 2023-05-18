@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\DealerController;
-use App\Http\Controllers\LoginController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\MechanicController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
@@ -17,11 +19,13 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('/register', 'App\Http\Controllers\Auth\RegisterController@showRegistrationForm')->name('register');
-Route::post('/register', 'App\Http\Controllers\Auth\RegisterController@register');
-Route::get('/login', 'App\Http\Controllers\Auth\LoginController@showLoginForm')->name('login');
-Route::post('/login', 'App\Http\Controllers\Auth\LoginController@login');
-Route::post('/logout', 'App\Http\Controllers\Auth\LoginController@logout')->name('logout');
+Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('registerForm');
+Route::post('/register-validate', [RegisterController::class, 'register'])->name('registerValidate');
+
+Route::get('/login', [LoginController::class, 'showLoginForm'])->name('loginForm');
+Route::post('/login-validate', [LoginController::class, 'login'])->name('loginValidate');
+
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/dashboard', function () {
@@ -51,9 +55,16 @@ Route::middleware(['auth', 'role:dealer'])->group(function () {
 });
 
 Route::middleware(['auth', 'role:customer'])->group(function () {
-    Route::get('/customer/dashboard', function () {
-        return view('dashboard');
-    })->name('customer.dashboard');
+    Route::prefix('customer')->group(function(){
+        Route::get('/dashboard', [CustomerController::class, 'dashboard'])->name('customer.dashboard');
+        Route::get('/yamaha', [CustomerController::class, 'yamaha']);
+        Route::get('/honda', [CustomerController::class, 'honda']);
+        Route::get('/suzuki', [CustomerController::class, 'suzuki']);
+        Route::get('/servisku', [CustomerController::class, 'servisku']);
+        Route::get('/servisku2', [CustomerController::class, 'servisku2']);
+        Route::get('/form', [CustomerController::class, 'form']);
+        Route::get('/form2', [CustomerController::class, 'form2']);
+    });
 });
 
 
@@ -66,32 +77,5 @@ Route::prefix('admin')->group(function() {
     });
     Route::get('/tambah-dealer', function () {
         return view('admin.tambah');
-    });
-});
-
-Route::prefix('user')->group(function() {
-    // // Route::get('/dashboard', function () {
-    // //     return view('user.dashboard');
-    // });
-    Route::get('/yamaha', function () {
-        return view('user.yamaha');
-    });
-    Route::get('/honda', function () {
-        return view('user.honda');
-    });
-    Route::get('/suzuki', function () {
-        return view('user.suzuki');
-    });
-    Route::get('/servisku', function () {
-        return view('user.servisku');
-    });
-    Route::get('/servisku2', function () {
-        return view('user.servisku2');
-    });
-    Route::get('/form', function () {
-        return view('user.form');
-    });
-    Route::get('/form2', function () {
-        return view('user.form2');
     });
 });

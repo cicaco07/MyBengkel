@@ -6,7 +6,7 @@
 <div class="flex items-center justify-center h-screen">
     <div class="w-10/12 md:w-full max-w-2xl p-4 bg-secondary rounded-lg shadow sm:p-6 md:p-8 sm:m-6">
         <div class="text-center text-purple text-2xl mb-6">Register</div>
-        <form action="{{ route('register') }}" method="POST">
+        <form action="{{ route('registerValidate') }}" method="POST">
             @csrf
             <div class="relative z-0 w-full mb-6 group">
                 <input type="text" name="username" id="username" class="block py-2.5 px-0 w-full text-sm text-purple bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-purple peer" placeholder=" " required />
@@ -43,7 +43,7 @@
             <button type="submit" class="mb-6 w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Register Now</button>
             </form>
           <div class="text-sm font-medium text-gray-500 text-center">
-            Already have account? <a href="{{ Route('login') }}" class="text-blue-700 hover:underline">Sign up now</a>
+            Already have account? <a href="{{ Route('loginForm') }}" class="text-blue-700 hover:underline">Sign up now</a>
         </div>
             </div>
         </div>

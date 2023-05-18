@@ -3,7 +3,7 @@
 @section('title', 'Sidebar')
     
 @section('content')
-<nav class="fixed top-0 z-50 w-full bg-primary border-b-2 border-secondary  ">
+<nav class="fixed top-0 z-50 w-full bg-primary border-b-2 border-secondary">
     <div class="px-3 py-3 lg:px-5 lg:pl-3">
       <div class="flex items-center justify-between">
         <div class="flex items-center justify-start">
@@ -41,7 +41,7 @@
                   <li>
                     <form action="{{ route('logout') }}" method="POST">
                       @csrf
-                      <button type="submit">Logout</button>
+                      <button type="submit" class="text-sm px-4 py-2 text-purple hover:text-primary hover:bg-dark-purple">Logout</button>
                   </form>                  
                   </li>
                 </ul>
