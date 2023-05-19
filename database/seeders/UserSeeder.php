@@ -17,52 +17,52 @@ class UserSeeder extends Seeder
         DB::table('users')->insert([
             [
                 'username'=>'aryo',
-                'role'=> '1',
                 'first_name'=> 'Aryo', 
                 'last_name'=> 'Deva', 
                 'email'=> 'aryo@gmail.com',
-                'alamat' => 'Malang', 
-                'no_handphone'=> '082333441678', 
+                'address' => 'Malang', 
+                'phone_number'=> '082333441678',
+                'role'=> 'mechanic', 
                 'password'=> Hash::make('password')
             ],
             [
                 'username'=>'bryan',
                 'first_name'=> 'Bryan',
                 'last_name'=> 'Tosin',
-                'role'=> '2', 
                 'email'=> 'bryan@gmail.com',
-                'alamat' => 'Malang', 
-                'no_handphone'=> '082333441671',
+                'address' => 'Malang', 
+                'phone_number'=> '082333441671',
+                'role'=> 'master_mechanic',
                 'password'=> Hash::make('password')
             ],
             [
                 'username'=>'desy',
                 'first_name'=> 'Desy',
                 'last_name'=> 'Ayu',
-                'role'=> '3', 
                 'email'=> 'desy@gmail.com',
-                'alamat' => 'Malang', 
-                'no_handphone'=> '082333441672',
+                'address' => 'Malang', 
+                'phone_number'=> '082333441672',
+                'role'=> 'admin',
                 'password'=> Hash::make('password')
             ],
             [
                 'username'=>'dani',
                 'first_name'=> 'Febrian', 
                 'last_name'=> 'Dani', 
-                'role'=> '4',
                 'email'=> 'dani@gmail.com',
-                'alamat' => 'Malang', 
-                'no_handphone'=> '082333441673',
+                'address' => 'Malang', 
+                'phone_number'=> '082333441673',
+                'role'=> 'dealer',
                 'password'=> Hash::make('password')
             ],
             [
                 'username'=>'rafi',
                 'first_name'=> 'Rafi',
                 'last_name'=> 'Prabowo',
-                'role'=> '5', 
                 'email'=> 'rafi@gmail.com',
-                'alamat' => 'Malang', 
-                'no_handphone'=> '082333441674',
+                'address' => 'Malang', 
+                'phone_number'=> '082333441674',
+                'role'=> 'customer',
                 'password'=> Hash::make('password')
             ],
         ]);
