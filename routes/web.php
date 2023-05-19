@@ -1,6 +1,13 @@
 <?php
 
-use App\Http\Controllers\LoginController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\DealerController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\MechanicController;
+use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +20,8 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::redirect('/', '/login');
+
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('registerForm');
 Route::post('/register-validate', [RegisterController::class, 'register'])->name('registerValidate');
 
@@ -22,9 +31,11 @@ Route::post('/login-validate', [LoginController::class, 'login'])->name('loginVa
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::middleware(['auth', 'role:admin'])->group(function () {
-    Route::get('/admin/dashboard', function () {
-        return view('dashboard');
-    })->name('admin.dashboard');
+    Route::prefix('admin')->group(function(){
+        Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+        Route::get('/data', [AdminController::class, 'data']);
+        Route::get('/tambah', [AdminController::class, 'tambah']);
+    });
 });
 
 Route::middleware(['auth', 'role:mechanic'])->group(function () {
@@ -58,18 +69,5 @@ Route::middleware(['auth', 'role:customer'])->group(function () {
         Route::get('/servisku2', [CustomerController::class, 'servisku2']);
         Route::get('/form', [CustomerController::class, 'form']);
         Route::get('/form2', [CustomerController::class, 'form2']);
-    });
-});
-
-
-Route::prefix('admin')->group(function() {
-    Route::get('/dashboard', function () {
-        return view('admin.dashboard');
-    });
-    Route::get('/data-dealer', function () {
-        return view('admin.data');
-    });
-    Route::get('/tambah-dealer', function () {
-        return view('admin.tambah');
     });
 });
