@@ -25,10 +25,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/admin/dashboard', function () {
         return view('dashboard');
     })->name('admin.dashboard');
-Route::get('/', function () {
-    return view('auth.login');
 });
-Route::get('/login', [LoginController::class, 'login'])->name('login');
 
 Route::middleware(['auth', 'role:mechanic'])->group(function () {
     Route::prefix('mechanic')->group(function(){
@@ -38,7 +35,6 @@ Route::middleware(['auth', 'role:mechanic'])->group(function () {
         Route::get('/servisku', [MechanicController::class, 'servisku']);
     });
 });
-Route::get('/register', [LoginController::class, 'register'])->name('register');
 
 Route::middleware(['auth', 'role:dealer'])->group(function () {
     Route::prefix('dealer')->group(function(){
@@ -49,27 +45,6 @@ Route::middleware(['auth', 'role:dealer'])->group(function () {
         Route::get('/sparepart', [DealerController::class, 'sparepart']);
         Route::get('/servis', [DealerController::class, 'servis']);
         Route::get('/transaksi', [DealerController::class, 'transaksi']);
-Route::prefix('dealer')->group(function() {
-    Route::get('/dashboard', function () {
-        return view('dealer.dashboard');
-    });
-    Route::get('/dealerku', function () {
-        return view('dealer.dealerku');
-    });
-    Route::get('/datapegawai', function () {
-        return view('dealer.pegawai');
-    });
-    Route::get('/dataantrian', function () {
-        return view('dealer.antrian');
-    });
-    Route::get('/dataservis', function () {
-        return view('dealer.servis');
-    });
-    Route::get('/datasparepart', function () {
-        return view('dealer.sparepart');
-    });
-    Route::get('/transaksi', function () {
-        return view('dealer.transaksi');
     });
 });
 
@@ -83,18 +58,6 @@ Route::middleware(['auth', 'role:customer'])->group(function () {
         Route::get('/servisku2', [CustomerController::class, 'servisku2']);
         Route::get('/form', [CustomerController::class, 'form']);
         Route::get('/form2', [CustomerController::class, 'form2']);
-Route::prefix('mechanic')->group(function() {
-    Route::get('/dashboard', function () {
-        return view('mechanic.dashboard');
-    });
-    Route::get('/profilku', function () {
-        return view('mechanic.profilku');
-    });
-    Route::get('/antrian', function () {
-        return view('mechanic.antrian');
-    });
-    Route::get('/servisku', function () {
-        return view('mechanic.servisku');
     });
 });
 
@@ -103,10 +66,10 @@ Route::prefix('admin')->group(function() {
     Route::get('/dashboard', function () {
         return view('admin.dashboard');
     });
+    Route::get('/data-dealer', function () {
+        return view('admin.data');
+    });
     Route::get('/tambah-dealer', function () {
         return view('admin.tambah');
-    });
-    Route::get('/', function () {
-        return view('admin.dashboard');
     });
 });
