@@ -11,15 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('branch_company', function (Blueprint $table) {
             $table->id();
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->string('email')->unique();
-            $table->rememberToken();
+            $table->string('name');
+            $table->string('address');
+            $table->unsignedBigInteger('brand_id');
             $table->timestamps();
-            $table->timestamp('email_verified_at')->nullable();
-            
+
+            $table->foreign('brand_id')->references('id')->on('manufacture');
         });
     }
 
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('branch_company');
     }
 };
