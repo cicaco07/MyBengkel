@@ -15,7 +15,7 @@
                     <p class="text-xs md:text-sm font-medium text-primary text-center md:text-left">Lihat data Dealer, lakukan perubahan jika datamu tidak sesuai</p>
                     <div class="flex items-center justify-center md:justify-between mt-4">
                         <div class="md:inline block"></div>
-                        <a href="profilku" class="text-primary bg-dark-purple hover:bg-violet-600 hover:font-semibold focus:ring-1 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs md:text-sm px-3 md:px-5 py-1.5 md:py-2.5 text-center">Lihat Dealer</a>
+                        <a href="data-dealer" class="text-primary bg-dark-purple hover:bg-violet-600 hover:font-semibold focus:ring-1 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs md:text-sm px-3 md:px-5 py-1.5 md:py-2.5 text-center">Lihat Dealer</a>
                     </div>
                 </div>
             </div>
@@ -27,7 +27,7 @@
                     <p class="text-xs md:text-sm font-medium text-primary text-center md:text-left">Tambah Data Dealer, apabila ada Dealer baru yang mendaftar</p>
                     <div class="flex items-center justify-center md:justify-between mt-4">
                         <div class="md:inline block"></div>
-                        <a href="antrian" class="text-primary bg-dark-purple hover:bg-violet-600 hover:font-semibold focus:ring-1 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs md:text-sm px-3 md:px-5 py-1.5 md:py-2.5 text-center">Tambah Dealer</a>
+                        <a href="tambah-dealer" class="text-primary bg-dark-purple hover:bg-violet-600 hover:font-semibold focus:ring-1 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs md:text-sm px-3 md:px-5 py-1.5 md:py-2.5 text-center">Tambah Dealer</a>
                     </div>
                 </div>
             </div>
