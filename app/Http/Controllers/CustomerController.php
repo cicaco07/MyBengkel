@@ -36,6 +36,16 @@ class CustomerController extends Controller
         return view('customer.servisku2');
     }
 
+    public function servisku3()
+    {
+        return view('customer.servisku3');
+    }
+
+    public function servisku4()
+    {
+        return view('customer.servisku4');
+    }
+
     public function form()
     {
         return view('customer.form');

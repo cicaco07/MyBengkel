@@ -1,4 +1,4 @@
-@extends('user.header')
+@extends('customer.header')
 
 @section('title', 'Yamaha - Dashboard')
 

@@ -1,6 +1,6 @@
 @extends('layouts.sidebar')
 
-@section('role', 'User')
+@section('role', 'customer')
 
 @section('list-menu')
 <div class="flex items-center justify-center flex-col">

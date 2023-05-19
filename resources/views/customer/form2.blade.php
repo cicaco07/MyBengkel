@@ -1,6 +1,6 @@
 @extends('customer.header')
 
-@section('title', 'user - Servisku')
+@section('title', 'customer - Servisku')
 
 @section('main-content')
 <div class="p-4 border-1 rounded-lg mt-14 bg-secondary">
