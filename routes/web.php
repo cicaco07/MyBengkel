@@ -16,6 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('auth.login');
 });
+
+ 
+
 Route::get('/login', [LoginController::class, 'login'])->name('login');
 
 Route::get('/register', [LoginController::class, 'register'])->name('register');
@@ -42,6 +45,14 @@ Route::prefix('dealer')->group(function() {
     Route::get('/transaksi', function () {
         return view('dealer.transaksi');
     });
+    Route::get('/transaksiall', function () {
+        return view('dealer.transaksiall');
+    });
+    Route::get('/transaksiservis', function () {
+        return view('dealer.transaksiservis');
+    });
+
+
 });
 
 Route::prefix('mechanic')->group(function() {
