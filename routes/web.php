@@ -68,4 +68,7 @@ Route::prefix('admin')->group(function() {
     Route::get('/tambah-dealer', function () {
         return view('admin.tambah');
     });
+    Route::get('/', function () {
+        return view('admin.dashboard');
+    });
 });
