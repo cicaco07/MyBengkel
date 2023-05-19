@@ -62,6 +62,8 @@ Route::middleware(['auth', 'role:customer'])->group(function () {
         Route::get('/suzuki', [CustomerController::class, 'suzuki']);
         Route::get('/servisku', [CustomerController::class, 'servisku']);
         Route::get('/servisku2', [CustomerController::class, 'servisku2']);
+        Route::get('/servisku3', [CustomerController::class, 'servisku3']);
+        Route::get('/servisku4', [CustomerController::class, 'servisku4']);
         Route::get('/form', [CustomerController::class, 'form']);
         Route::get('/form2', [CustomerController::class, 'form2']);
     });
@@ -78,7 +80,6 @@ Route::prefix('admin')->group(function() {
     Route::get('/tambah-dealer', function () {
         return view('admin.tambah');
     });
-<<<<<<< HEAD
 });
 
 Route::prefix('user')->group(function() {
@@ -112,6 +113,4 @@ Route::prefix('user')->group(function() {
     Route::get('/form2', function () {
         return view('user.form2');
     });
-=======
->>>>>>> f2255abaf9fe9183754d1e33f3cb6c46abeb3a40
 });
