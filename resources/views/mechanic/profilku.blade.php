@@ -8,27 +8,20 @@
     <div class="flex items-center justify-center">
         <img class="rounded-full w-36 md:w-48 h-36 md:h-48 bg-white mb-8" src="{{ asset('img/herta.jpg')}}">
     </div>
-    <div class="text-xs md:text-lg">
-        <div class="text-purple md:mx-8 my-4 flex ">
-            <span class="w-4/12 md:w-1/6">Nama Mekanik</span>
-            <span class="w-1/12 md:w-1/6 text-center">:</span>
-            <span class="w-7/12 md:w-4/6">Aryo Deva Saputra</span>
-        </div>
-        <div class="text-purple md:mx-8 my-4 flex">
-            <span class="w-4/12 md:w-1/6">Alamat</span>
-            <span class="w-1/12 md:w-1/6 text-center">:</span>
-            <span class="w-7/12 md:w-4/6">Jl. Kenangan No. 15, Kelurahan Cibaduyut, Kecamatan Bandung Wetan, Kota Bandung</span>
-        </div>
-        <div class="text-purple md:mx-8 my-4 flex">
-            <span class="w-4/12 md:w-1/6">No Telepon</span>
-            <span class="w-1/12 md:w-1/6 text-center">:</span>
-            <span class="w-7/12 md:w-4/6">089123123178</span>
-        </div>
-        <div class="text-purple md:mx-8 my-4 flex">
-            <span class="w-4/12 md:w-1/6">Username</span>
-            <span class="w-1/12 md:w-1/6 text-center">:</span>
-            <span class="w-7/12 md:w-4/6">cicaco07</span>
-        </div>
+    <div class="text-xs md:text-lg md:px-10">
+        <label for="name" class="block mb-2 text-sm font-medium text-purple">Nama Mekanik</label>
+        <input type="text" id="disabled-input" aria-label="disabled input" class="mb-4 bg-primary border border-secondary text-purple text-sm md:text-base rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 px-6" value="{{ $user->name }}" disabled>
+        
+        <label for="username" class="block mb-2 text-sm font-medium text-purple">Alamat</label>
+        <input type="text" id="disabled-input" aria-label="disabled input" class="mb-4 bg-primary border border-secondary text-purple text-sm md:text-base rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 px-4" value="{{ $user->address }}" disabled>
+    
+        <label for="username" class="block mb-2 text-sm font-medium text-purple">No Telepon</label>
+        <input type="text" id="disabled-input" aria-label="disabled input" class="mb-4 bg-primary border border-secondary text-purple text-sm md:text-base rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 px-4" value="{{ $user->phone_number }}" disabled>
+    
+        <label for="username" class="block mb-2 text-sm font-medium text-purple">Email</label>
+        <input type="text" id="disabled-input" aria-label="disabled input" class="mb-4 bg-primary border border-secondary text-purple text-sm md:text-base rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 px-4" value="{{ $user->email }}" disabled>
+    
+
     </div>
 
     <button data-modal-target="staticModal" data-modal-toggle="staticModal" class="block text-white bg-blue-700 md:mx-8 my-6 hover:bg-blue-800 focus:ring-1 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs md:text-sm px-5 py-2.5 text-center" type="button">
@@ -47,31 +40,33 @@
                 <div class="flex items-center justify-center">
                     <img class="rounded-full w-32 h-32 bg-white mb-8" src="{{ asset('img/herta.jpg')}}">
                 </div>
-                <form>
+                <form id="editProfileForm" action="{{ route('mechanic.update', $user->id_user)}}" method="POST">
+                    @csrf
+                    @method('PUT')
                     <div class="mb-6 mx-6">
-                        <label for="default-input" class="block mb-2 text-sm font-medium text-purple">Nama</label>
-                        <input type="text" id="default-input" class="bg-primary border border-secondary text-purple text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                        <label for="name" class="block mb-2 text-sm font-medium text-purple">Nama</label>
+                        <input type="text" id="name" name="name" value="{{ auth()->user()->name }}" class="bg-primary border border-secondary text-purple text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="{{ $user->name }}">
                     </div>
                     <div class="mb-6 mx-6">
-                        <label for="default-input" class="block mb-2 text-sm font-medium text-purple">Alamat</label>
-                        <input type="text" id="default-input" class="bg-primary border border-secondary text-purple text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                        <label for="address" class="block mb-2 text-sm font-medium text-purple">Alamat</label>
+                        <input type="text" id="address" name="address" value="{{ auth()->user()->address }}" class="bg-primary border border-secondary text-purple text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="{{ $user->address }}">
                     </div>
                     <div class="mb-6 mx-6">
-                        <label for="default-input" class="block mb-2 text-sm font-medium text-purple">No Telepon</label>
-                        <input type="text" id="default-input" class="bg-primary border border-secondary text-purple text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                        <label for="phone_number" class="block mb-2 text-sm font-medium text-purple">No Telepon</label>
+                        <input type="text" id="phone_number" name="phone_number" value="{{ auth()->user()->phone_number }}" class="bg-primary border border-secondary text-purple text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="{{ $user->phone_number }}">
                     </div>
                     <div class="mb-2 mx-6">
-                        <label for="default-input" class="block mb-2 text-sm font-medium text-purple">Username</label>
-                        <input type="text" id="default-input" class="bg-primary border border-secondary text-purple text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                        <label for="email" class="block mb-2 text-sm font-medium text-purple">Email</label>
+                        <input type="text" id="email" name="email" value="{{ auth()->user()->email }}" class="bg-primary border border-secondary text-purple text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="{{ $user->email }}">
                     </div>
-                </form>
-
-                <div class="flex items-center p-6 space-x-2 border-gray-200 rounded-b ">
-                    <button data-modal-hide="staticModal" type="button" class="text-primary bg-dark-purple hover:bg-violet-600 focus:ring-1 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Simpan</button>
-
-                </div>
+                    <div class="flex items-center p-6 space-x-2 border-gray-200 rounded-b ">
+                        <button data-modal-hide="staticModal" type="submit" class="text-primary bg-dark-purple hover:bg-violet-600 focus:ring-1 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Simpan</button>
+                    </div>
+                </form> 
             </div>
         </div>
     </div>
 </div>
+
+
 @endsection

@@ -9,19 +9,13 @@
             <h3 class="text-2xl font-medium font-sans text-purple text-center">Login</h3>
             @csrf
             <div>
-                <label for="email" class="block mb-2 text-sm font-medium text-purple">Email</label>
-                <input type="email" name="email" id="email" class="bg-transparent primary border-2 border-purple text-purple text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
+                <label for="username" class="block mb-2 text-sm font-medium text-purple">Username</label>
+                <input type="username" name="username" id="username" class="bg-transparent primary border-2 border-purple text-purple text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
             </div>
-            @error('email')
-                <small>{{ $message }}</small>
-            @enderror
             <div>
                 <label for="password" class="block mb-2 text-sm font-medium text-purple">Password</label>
                 <input type="password" name="password" id="password" class="bg-transparent border-2 border-purple text-purple text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
             </div>
-            @error('password')
-                <small>{{ $message }}</small>
-            @enderror
             <div class="flex items-start">
                 <div class="flex items-start">
                     <div class="flex items-center h-5">

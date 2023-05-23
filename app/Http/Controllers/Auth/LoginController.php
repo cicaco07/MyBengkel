@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 
@@ -21,17 +23,17 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
-        $this->validate($request, [
-            'email' => 'required|email',
-            'password' => 'required',
+        $request->validate([
+            'username' => 'required|string',
+            'password' => 'required|string',
         ]);
 
-        if (Auth::attempt($request->only('email', 'password'))) {
+        if (Auth::attempt($request->only('username', 'password'))) {
             return $this->sendLoginResponse($request);
         }
 
         throw ValidationException::withMessages([
-            'email' => [trans('auth.failed')],
+            'username' => [trans('auth.failed')],
         ]);
     }
 
@@ -48,27 +50,32 @@ class LoginController extends Controller
         return redirect()->back()
             ->withInput($request->only('email'))
             ->withErrors([
-                'email' => trans('auth.failed'),
+                'username' => trans('auth.failed'),
             ]);
     }
 
     protected function authenticated(Request $request, $user)
     {
-        if ($user->role === 'admin') {
-            return redirect()->route('admin.dashboard');
-        } elseif ($user->role === 'mechanic') {
-            return redirect()->route('mechanic.dashboard');
-        } elseif ($user->role === 'master_mechanic') {
-            return redirect()->route('mmechanic.dashboard');
-        } elseif ($user->role === 'dealer') {
-            return redirect()->route('dealer.dashboard');
-        } elseif ($user->role === 'customer') {
-            return redirect()->route('customer.dashboard');
+        $userData = User::find($user->id);
+
+        if ($userData->role === 'admin') {
+            return redirect()->route('admin.dashboard')->with('user', $userData);
+        } elseif ($userData->role === 'mechanic') {
+            return redirect()->route('mechanic.dashboard')->with('user', $userData);
+        } elseif ($userData->role === 'master_mechanic') {
+            return redirect()->route('mmechanic.dashboard')->with('user', $userData);
+        } elseif ($userData->role === 'dealer') {
+            return redirect()->route('dealer.dashboard')->with('user', $userData);
+        } elseif ($userData->role === 'customer') {
+            return redirect()->route('customer.dashboard')->with('user', $userData);
         }
     }
 
     public function logout()
     {
+        Session::flush();
+        Auth::logout();
+
         return redirect()->route('loginForm');
     }
 }

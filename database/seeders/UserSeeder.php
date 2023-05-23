@@ -17,8 +17,7 @@ class UserSeeder extends Seeder
         DB::table('users')->insert([
             [
                 'username'=>'aryo',
-                'first_name'=> 'Aryo', 
-                'last_name'=> 'Deva', 
+                'name'=> 'Aryo Deva',
                 'email'=> 'aryo@gmail.com',
                 'address' => 'Malang', 
                 'phone_number'=> '082333441678',
@@ -27,8 +26,7 @@ class UserSeeder extends Seeder
             ],
             [
                 'username'=>'bryan',
-                'first_name'=> 'Bryan',
-                'last_name'=> 'Tosin',
+                'name'=> 'Bryan Tosin',
                 'email'=> 'bryan@gmail.com',
                 'address' => 'Malang', 
                 'phone_number'=> '082333441671',
@@ -37,8 +35,7 @@ class UserSeeder extends Seeder
             ],
             [
                 'username'=>'desy',
-                'first_name'=> 'Desy',
-                'last_name'=> 'Ayu',
+                'name'=> 'Desy Ayu',
                 'email'=> 'desy@gmail.com',
                 'address' => 'Malang', 
                 'phone_number'=> '082333441672',
@@ -47,8 +44,7 @@ class UserSeeder extends Seeder
             ],
             [
                 'username'=>'dani',
-                'first_name'=> 'Febrian', 
-                'last_name'=> 'Dani', 
+                'name'=> 'Febrian Dani',  
                 'email'=> 'dani@gmail.com',
                 'address' => 'Malang', 
                 'phone_number'=> '082333441673',
@@ -57,8 +53,7 @@ class UserSeeder extends Seeder
             ],
             [
                 'username'=>'rafi',
-                'first_name'=> 'Rafi',
-                'last_name'=> 'Prabowo',
+                'name'=> 'Rafi Prabowo',
                 'email'=> 'rafi@gmail.com',
                 'address' => 'Malang', 
                 'phone_number'=> '082333441674',

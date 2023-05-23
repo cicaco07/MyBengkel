@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
-use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
@@ -21,10 +21,17 @@ class RegisterController extends Controller
 
     public function register(Request $request)
     {
+        $request->validate([
+            'name' => ['required','string','max:100'],
+            'email' => ['required','string','email','max:255','unique:users'],
+            'username' => ['required','string','max:100'],
+            'password' => ['required','string','min:8'],
+            'phone_number' => ['required','string','max:100'],
+            'address' => ['required','string','max:100'],
+        ]);
 
         $user = User::create([
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
+            'name' => $request->name,
             'username' => $request->username,
             'email' => $request->email,
             'password' => Hash::make($request->password),
@@ -32,6 +39,6 @@ class RegisterController extends Controller
             'address' => $request->address,
         ]);
 
-        return redirect()->route('customer.dashboard');
+        return redirect()->route('loginForm')->with('success', 'Registration successful. Please login.');
     }
 }

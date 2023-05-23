@@ -17,7 +17,7 @@ class UserRoleMiddleware
     public function handle(Request $request, Closure $next, ...$roles)
     {
         if (!Auth::check() || !in_array(Auth::user()->role, $roles)) {
-            abort(403, 'Unauthorized');
+            abort(403, "Sorry, you forbidden to access this page");
         }
 
         return $next($request);

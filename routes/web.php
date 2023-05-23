@@ -42,6 +42,7 @@ Route::middleware(['auth', 'role:mechanic'])->group(function () {
     Route::prefix('mechanic')->group(function(){
         Route::get('/dashboard', [MechanicController::class, 'dashboard'])->name('mechanic.dashboard');
         Route::get('/profilku', [MechanicController::class, 'profilku']);
+        Route::put('/profilku/update', [MechanicController::class, 'update'])->name('mechanic.update');
         Route::get('/antrian', [MechanicController::class, 'antrian']);
         Route::get('/servisku', [MechanicController::class, 'servisku']);
     });
