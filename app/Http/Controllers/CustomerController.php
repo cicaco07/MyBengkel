@@ -1,14 +1,16 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CustomerController extends Controller
 {
     public function dashboard()
     {
-        return view('customer.dashboard');
+        $user = Auth::user();
+        return view('customer.dashboard',compact('user'));
     }
 
     public function yamaha()
@@ -24,6 +26,12 @@ class CustomerController extends Controller
     public function suzuki()
     {
         return view('customer.suzuki');
+    }
+
+    public function profilku()
+    {
+        $user = Auth::user();
+        return view('customer.profilku',compact('user'));
     }
 
     public function servisku()
@@ -54,5 +62,26 @@ class CustomerController extends Controller
     public function form2()
     {
         return view('customer.form2');
+    }
+
+    public function update(Request $request)
+    {
+        $user = $request->user();
+
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'phone_number' => 'required',
+            'address' => 'required',
+        ]);
+
+        $user->update([
+            'name'=>$request->name,
+            'email' => $request->email,
+            'phone_number' => $request->phone_number,
+            'address' => $request->address,
+        ]);
+
+        return redirect()->back()->with('Success', 'Profile berhasil diubah');
     }
 }

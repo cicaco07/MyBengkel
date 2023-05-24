@@ -70,5 +70,7 @@ Route::middleware(['auth', 'role:customer'])->group(function () {
         Route::get('/servisku2', [CustomerController::class, 'servisku2']);
         Route::get('/form', [CustomerController::class, 'form']);
         Route::get('/form2', [CustomerController::class, 'form2']);
+        Route::get('/profilku', [CustomerController::class, 'profilku']);
+        Route::put('/profilku/update', [CustomerController::class, 'update'])->name('customer.update');
     });
 });
