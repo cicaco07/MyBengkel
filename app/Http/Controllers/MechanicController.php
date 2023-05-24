@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class MechanicController extends Controller
 {
@@ -16,7 +17,8 @@ class MechanicController extends Controller
 
     public function servisku()
     {
-        return view('mechanic.servisku');
+        $user = Auth::user();
+        return view('mechanic.servisku',compact('user'));
     }
 
     public function profilku()
@@ -27,7 +29,8 @@ class MechanicController extends Controller
 
     public function antrian()
     {
-        return view('mechanic.antrian');
+        $user = Auth::user();
+        return view('mechanic.antrian',compact('user'));
     }
 
     public function update(Request $request)
@@ -39,14 +42,21 @@ class MechanicController extends Controller
             'email' => 'required',
             'phone_number' => 'required',
             'address' => 'required',
+            'avatar' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
-        $user->update([
-            'name'=>$request->name,
-            'email' => $request->email,
-            'phone_number' => $request->phone_number,
-            'address' => $request->address,
-        ]);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->phone_number = $request->phone_number;
+        $user->address = $request->address;
+
+        if($user->avatar && file_exists(storage_path('app/public' . $user->avatar))){
+            Storage::delete('public/' . $user->avatar);
+        }
+        $image = $request->file('image')->store('images','public');
+        $user->avatar = $image;
+
+        $user->save();
 
         return redirect()->back()->with('Success', 'Profile berhasil diubah');
     }

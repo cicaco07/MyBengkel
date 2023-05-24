@@ -4,7 +4,11 @@
 
 @section('list-menu')
 <div class="flex items-center justify-center flex-col">
-   <img class="h-32 w-32 rounded-full" src="{{asset('img/herta.jpg')}}">
+   @if ($user->avatar)
+   <img class="h-32 w-32 rounded-full" src="{{ asset('storage/' . $user->avatar) }}">
+   @else
+   <img class="h-32 w-32 rounded-full" src="{{ asset('img/default user.png' . $user->avatar) }}">
+   @endif
    <div class="text-purple m-4 text-center">Jabatan : Mekanik Dealer Yamaha SIP BS</div>
 </div>
    <li>

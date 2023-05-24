@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('address');
             $table->string('phone_number');
+            $table->string('avatar')->nullable();
             $table->enum('role', ['admin','mechanic','master_mechanic','dealer','customer'])->default('customer');
         });
         

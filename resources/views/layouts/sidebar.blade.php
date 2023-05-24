@@ -22,16 +22,16 @@
               <div>
                 <button type="button" class="flex text-sm mr-6 bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300" aria-expanded="false" data-dropdown-toggle="dropdown-user">
                   <span class="sr-only">Open user menu</span>
-                  <img class="w-8 h-8 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="user photo">
+                  <img class="w-8 h-8 rounded-full" src="{{ asset('img/logout.png') }}" alt="user photo">
                 </button>
               </div>
               <div class="z-50 hidden my-4 text-base list-none bg-purple divide-y divide-gray-100 rounded" id="dropdown-user">
                 <div class="px-4 py-3" role="none">
                   <p class="text-sm text-primary" role="none">
-                    Neil Sims
+                    {{ $user->name }}
                   </p>
                   <p class="text-sm font-medium primary truncate" role="none">
-                    neil.sims@flowbite.com
+                    {{ $user->email }}
                   </p>
                 </div>
                 <ul class="bg-primary" role="none">
@@ -39,11 +39,13 @@
                     <a href="#" class="block px-4 py-2 text-sm text-purple hover:text-primary hover:bg-dark-purple" role="menuitem">Dashboard</a>
                   </li>
                   <li>
-                    <form action="{{ route('logout') }}" method="POST">
-                      @csrf
-                      <button type="submit" class="text-sm px-4 py-2 text-purple hover:text-primary hover:bg-dark-purple">Logout</button>
-                  </form>                  
+                    <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="block px-4 py-2 text-sm text-purple hover:text-primary hover:bg-dark-purple">
+                      <button>Logout</button>
+                    </a>      
                   </li>
+                  <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                  </form>
                 </ul>
               </div>
             </div>
@@ -51,7 +53,7 @@
       </div>
     </div>
   </nav>
-  
+
   <aside id="logo-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-primary border-r-2 border-secondary sm:translate-x-0" aria-label="Sidebar">
      <div class="h-full px-3 pb-4 overflow-y-auto bg-primary">
         <ul class="space-y-2 font-normal md:font-medium text-sm md:text-lg">
