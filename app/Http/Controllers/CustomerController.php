@@ -81,7 +81,7 @@ class CustomerController extends Controller
     public function update(Request $request)
     {
         $user = $request->user();
-
+    
         $request->validate([
             'name' => 'required',
             'email' => 'required',
@@ -89,20 +89,23 @@ class CustomerController extends Controller
             'address' => 'required',
             'avatar' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
-
+    
         $user->name = $request->name;
         $user->email = $request->email;
         $user->phone_number = $request->phone_number;
         $user->address = $request->address;
-
-        if($user->avatar && file_exists(storage_path('app/public' . $user->avatar))){
-            Storage::delete('public/' . $user->avatar);
+    
+        if ($request->hasFile('avatar')) {
+            if ($user->avatar && file_exists(storage_path('app/public' . $user->avatar))) {
+                Storage::delete('public/' . $user->avatar);
+            }
+            $image = $request->file('avatar')->store('images', 'public');
+            $user->avatar = $image;
         }
-        $image = $request->file('image')->store('images','public');
-        $user->avatar = $image;
-
+    
         $user->save();
-
+    
         return redirect()->back()->with('Success', 'Profile berhasil diubah');
     }
+    
 }
