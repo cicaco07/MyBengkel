@@ -50,12 +50,13 @@ class MechanicController extends Controller
         $user->phone_number = $request->phone_number;
         $user->address = $request->address;
 
-        if($user->avatar && file_exists(storage_path('app/public' . $user->avatar))){
-            Storage::delete('public/' . $user->avatar);
+        if ($request->hasFile('avatar')) {
+            if ($user->avatar && file_exists(storage_path('app/public' . $user->avatar))) {
+                Storage::delete('public/' . $user->avatar);
+            }
+            $image = $request->file('avatar')->store('images', 'public');
+            $user->avatar = $image;
         }
-        $image = $request->file('image')->store('images','public');
-        $user->avatar = $image;
-
         $user->save();
 
         return redirect()->back()->with('Success', 'Profile berhasil diubah');
