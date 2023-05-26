@@ -11,10 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('manufacture', function (Blueprint $table) {
+        Schema::create('dealer', function (Blueprint $table) {
             $table->id();
-            $table->string('brand');
+            $table->unsignedBigInteger('user_id');
+            $table->string('dealer_name');
+            $table->string('dealer_address');
+            $table->enum('company',['yamaha', 'honda', 'suzuki']);
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
@@ -23,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('manufacture');
+        Schema::dropIfExists('dealer');
     }
 };

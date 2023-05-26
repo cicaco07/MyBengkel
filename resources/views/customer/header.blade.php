@@ -1,11 +1,15 @@
 @extends('layouts.sidebar')
 
-@section('role', 'customer')
+@section('role', 'Customer')
 
 @section('list-menu')
 <div class="flex items-center justify-center flex-col">
-   <img class="h-32 w-32 rounded-full" src="{{asset('img/herta.jpg')}}">
-   <div class="text-purple m-4 text-center">test user</div>
+   @if ($user->avatar)
+      <img class="h-32 w-32 rounded-full" src="{{ asset('storage/' . $user->avatar) }}">
+   @else
+      <img class="h-32 w-32 rounded-full" src="{{ asset('img/default user.png' . $user->avatar) }}">
+   @endif
+   <div class="text-purple m-4 text-center">{{ $user->name }}</div>
 </div>
    <li>
        <a href="yamaha" class="text-sm flex items-center p-3 mb-2 text-purple rounded-lg hover:bg-dark-purple hover:text-primary hover:font-semibold">

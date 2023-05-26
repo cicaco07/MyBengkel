@@ -30,7 +30,7 @@ class UserSeeder extends Seeder
                 'email'=> 'bryan@gmail.com',
                 'address' => 'Malang', 
                 'phone_number'=> '082333441671',
-                'role'=> 'master_mechanic',
+                'role'=> 'dealer',
                 'password'=> Hash::make('password')
             ],
             [
@@ -58,6 +58,33 @@ class UserSeeder extends Seeder
                 'address' => 'Malang', 
                 'phone_number'=> '082333441674',
                 'role'=> 'customer',
+                'password'=> Hash::make('password')
+            ],
+            [
+                'username'=>'agung',
+                'name'=> 'Agung Malik',
+                'email'=> 'agung@gmail.com',
+                'address' => 'Bondowoso', 
+                'phone_number'=> '082333441671',
+                'role'=> 'dealer',
+                'password'=> Hash::make('password')
+            ],
+            [
+                'username'=>'aldin',
+                'name'=> 'Aldin Ariel',
+                'email'=> 'aldin@gmail.com',
+                'address' => 'Batu', 
+                'phone_number'=> '081332241671',
+                'role'=> 'dealer',
+                'password'=> Hash::make('password')
+            ],
+            [
+                'username'=>'yoga',
+                'name'=> 'Yofandra Arta',
+                'email'=> 'yoga@gmail.com',
+                'address' => 'Blitar', 
+                'phone_number'=> '082126641671',
+                'role'=> 'dealer',
                 'password'=> Hash::make('password')
             ],
         ]);

@@ -25,7 +25,6 @@
         <label for="username" class="block mb-2 text-sm font-medium text-purple">Email</label>
         <input type="text" id="disabled-input" aria-label="disabled input" class="mb-4 bg-primary border border-secondary text-purple text-sm md:text-base rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 px-6" value="{{ $user->email }}" disabled>
     
-
     </div>
 
     <button data-modal-target="staticModal" data-modal-toggle="staticModal" class="block text-white bg-blue-700 md:mx-8 my-6 hover:bg-blue-800 focus:ring-1 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs md:text-sm px-5 py-2.5 text-center" type="button">

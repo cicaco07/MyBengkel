@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 use App\Models\User;
+use App\Models\Dealer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class CustomerController extends Controller
 {
@@ -15,17 +17,23 @@ class CustomerController extends Controller
 
     public function yamaha()
     {
-        return view('customer.yamaha');
+        $user = Auth::user();
+        $dealer = Dealer::where('company', 'yamaha')->get();
+        return view('customer.yamaha',compact('user', 'dealer'));
     }
     
     public function honda()
     {
-        return view('customer.honda');
+        $user = Auth::user();
+        $dealer = Dealer::where('company', 'honda')->get();
+        return view('customer.honda',compact('user', 'dealer'));
     }
 
     public function suzuki()
     {
-        return view('customer.suzuki');
+        $user = Auth::user();
+        $dealer = Dealer::where('company', 'suzuki')->get();
+        return view('customer.suzuki',compact('user', 'dealer'));
     }
 
     public function profilku()
@@ -36,32 +44,38 @@ class CustomerController extends Controller
 
     public function servisku()
     {
-        return view('customer.servisku');
+        $user = Auth::user();
+        return view('customer.servisku',compact('user'));
     }
 
     public function servisku2()
     {
-        return view('customer.servisku2');
+        $user = Auth::user();
+        return view('customer.servisku2',compact('user'));
     }
 
     public function servisku3()
     {
-        return view('customer.servisku3');
+        $user = Auth::user();
+        return view('customer.servisku3',compact('user'));
     }
 
     public function servisku4()
     {
-        return view('customer.servisku4');
+        $user = Auth::user();
+        return view('customer.servisku4',compact('user'));
     }
 
     public function form()
     {
-        return view('customer.form');
+        $user = Auth::user();
+        return view('customer.form',compact('user'));
     }
 
     public function form2()
     {
-        return view('customer.form2');
+        $user = Auth::user();
+        return view('customer.form2',compact('user'));
     }
 
     public function update(Request $request)
@@ -73,14 +87,21 @@ class CustomerController extends Controller
             'email' => 'required',
             'phone_number' => 'required',
             'address' => 'required',
+            'avatar' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
-        $user->update([
-            'name'=>$request->name,
-            'email' => $request->email,
-            'phone_number' => $request->phone_number,
-            'address' => $request->address,
-        ]);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->phone_number = $request->phone_number;
+        $user->address = $request->address;
+
+        if($user->avatar && file_exists(storage_path('app/public' . $user->avatar))){
+            Storage::delete('public/' . $user->avatar);
+        }
+        $image = $request->file('image')->store('images','public');
+        $user->avatar = $image;
+
+        $user->save();
 
         return redirect()->back()->with('Success', 'Profile berhasil diubah');
     }
