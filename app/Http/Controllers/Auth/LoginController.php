@@ -24,8 +24,8 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         $request->validate([
-            'username' => 'required|string',
-            'password' => 'required|string',
+            'username' => 'required',
+            'password' => 'required',
         ]);
 
         if (Auth::attempt($request->only('username', 'password'))) {
@@ -48,7 +48,7 @@ class LoginController extends Controller
     protected function sendFailedLoginResponse(Request $request)
     {
         return redirect()->back()
-            ->withInput($request->only('email'))
+            ->withInput($request->only('username'))
             ->withErrors([
                 'username' => trans('auth.failed'),
             ]);

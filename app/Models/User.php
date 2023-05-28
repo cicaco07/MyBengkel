@@ -52,6 +52,11 @@ class User extends Authenticatable
     
     public function dealer()
     {
-        return $this->belongsTo(Dealer::class);
+        return $this->hasOne(Dealer::class);
+    }
+
+    public function mechanic()
+    {
+        return $this->hasOne(Mechanic::class);
     }
 }

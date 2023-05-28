@@ -3,42 +3,50 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DealerController extends Controller
 {
     public function dashboard()
     {
-        return view('dealer.dashboard');
+        $user = Auth::user();
+        return view('dealer.dashboard', compact('user'));
     }
 
     public function dealerku()
     {
-        return view('dealer.dealerku');
+        $user = Auth::user();
+        return view('dealer.dealerku', compact('user'));
     }
 
     public function pegawai()
     {
-        return view('dealer.pegawai');
+        $user = Auth::user();
+        return view('dealer.pegawai', compact('user'));
     }
 
     public function antrian()
     {
-        return view('dealer.antrian');
+        $user = Auth::user();
+        return view('dealer.antrian', compact('user'));
     }
     
     public function sparepart()
     {
-        return view('dealer.sparepart');
+        $user = Auth::user();
+        return view('dealer.sparepart', compact('user'));
     }
 
     public function servis()
     {
-        return view('dealer.servis');
+        $user = Auth::user();
+        return view('dealer.servis', compact('user'));
     }
 
     public function transaksi()
     {
-        return view('dealer.transaksi');
+        $user = Auth::user();
+        return view('dealer.transaksi', compact('user'));
     }
 
 }

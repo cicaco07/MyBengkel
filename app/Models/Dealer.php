@@ -18,4 +18,12 @@ class Dealer extends Model
         'dealer_address',
         'company',
     ];
+
+    public function user(){
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function mechanics(){
+        return $this->hasMany(Mechanic::class);
+    }
 }

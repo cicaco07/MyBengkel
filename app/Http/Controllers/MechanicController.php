@@ -12,25 +12,33 @@ class MechanicController extends Controller
     public function dashboard()
     {
         $user = Auth::user();
-        return view('mechanic.dashboard',compact('user'));
+        $mechanic = $user->mechanic;
+        $position = $mechanic->position;
+        return view('mechanic.dashboard',compact('user','position'));
     }
 
     public function servisku()
     {
         $user = Auth::user();
-        return view('mechanic.servisku',compact('user'));
+        $mechanic = $user->mechanic;
+        $position = $mechanic->position;
+        return view('mechanic.servisku',compact('user','position'));
     }
 
     public function profilku()
     {
         $user = Auth::user();
-        return view('mechanic.profilku',compact('user'));
+        $mechanic = $user->mechanic;
+        $position = $mechanic->position;
+        return view('mechanic.profilku',compact('user','position'));
     }
 
     public function antrian()
     {
         $user = Auth::user();
-        return view('mechanic.antrian',compact('user'));
+        $mechanic = $user->mechanic;
+        $position = $mechanic->position;
+        return view('mechanic.antrian',compact('user','position'));
     }
 
     public function update(Request $request)

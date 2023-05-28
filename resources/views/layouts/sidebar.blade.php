@@ -41,11 +41,11 @@
                   <li>
                     <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="block px-4 py-2 text-sm text-purple hover:text-primary hover:bg-dark-purple">
                       <button>Logout</button>
-                    </a>      
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                      @csrf
+                    </form>      
                   </li>
-                  <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                    @csrf
-                  </form>
                 </ul>
               </div>
             </div>
