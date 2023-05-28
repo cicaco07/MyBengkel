@@ -96,7 +96,7 @@ class CustomerController extends Controller
         $user->address = $request->address;
     
         if ($request->hasFile('avatar')) {
-            if ($user->avatar && file_exists(storage_path('app/public' . $user->avatar))) {
+            if ($user->avatar && file_exists(storage_path('app/public/' . $user->avatar))) {
                 Storage::delete('public/' . $user->avatar);
             }
             $image = $request->file('avatar')->store('images', 'public');

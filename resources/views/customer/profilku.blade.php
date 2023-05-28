@@ -69,7 +69,7 @@
                     </div>
                     <div class="mb-2 mx-6">
                         <label class="block mb-2 text-sm font-medium text-purple" for="image">Avatar</label>
-                        <input class="block w-full mb-5 text-sm text-purple rounded-lg cursor-pointer bg-primary border border-purple" id="avatar" type="file" name="image" value="{{auth()->user()->avatar}}">
+                        <input class="block w-full mb-5 text-sm text-purple rounded-lg cursor-pointer bg-primary border border-purple" id="avatar" type="file" name="avatar" value="{{auth()->user()->avatar}}">
                     </div>
                     <div class="flex items-center p-6 space-x-2 border-gray-200 rounded-b ">
                         <button data-modal-hide="staticModal" type="submit" class="text-primary bg-dark-purple hover:bg-violet-600 focus:ring-1 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Simpan</button>
