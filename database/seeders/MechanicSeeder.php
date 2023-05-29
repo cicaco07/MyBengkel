@@ -19,6 +19,31 @@ class MechanicSeeder extends Seeder
                 'dealer_id' => '1',
                 'position' => 'Kepala Mekanik'
             ],
+            [
+                'user_id' => '9',
+                'dealer_id' => '1',
+                'position' => 'Mekanik'
+            ],
+            [
+                'user_id' => '10',
+                'dealer_id' => '1',
+                'position' => 'Mekanik'
+            ],
+            [
+                'user_id' => '16',
+                'dealer_id' => '2',
+                'position' => 'Kepala Mekanik'
+            ],
+            [
+                'user_id' => '19',
+                'dealer_id' => '2',
+                'position' => 'Mekanik'
+            ],
+            [
+                'user_id' => '22',
+                'dealer_id' => '2',
+                'position' => 'Mekanik'
+            ],
         ]);
     }
 }
