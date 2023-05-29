@@ -44,6 +44,48 @@ class DealerSeeder extends Seeder
                 'dealer_address' => 'Jl. Raya Hayam Wuruk (utara Rsi), Malang',
                 'company' => 'Honda',
             ],
+            [
+                'user_id' => '12',
+                'dealer_name' => 'Hidayah Motor',
+                'dealer_address' => 'Mulyosari Rt 01 / Rw 01 Donomulyo, Malang',
+                'company' => 'Honda',
+            ],
+            [
+                'user_id' => '13',
+                'dealer_name' => 'Kartika Sari',
+                'dealer_address' => 'Jl. Jaksa Agung Suprapto 54, Malang',
+                'company' => 'Honda',
+            ],
+            [
+                'user_id' => '14',
+                'dealer_name' => 'Centratama',
+                'dealer_address' => 'Jl. Kol. Sugiono 154, Malang',
+                'company' => 'Honda',
+            ],
+            [
+                'user_id' => '15',
+                'dealer_name' => 'Cahaya Motor',
+                'dealer_address' => 'Jl. Raya Mandoroko Kav. 3, Malang',
+                'company' => 'Honda',
+            ],
+            [
+                'user_id' => '20',
+                'dealer_name' => 'Dau Motor',
+                'dealer_address' => 'Jl. Raya.mulyoagung 9 Jetis Dau, Malang',
+                'company' => 'Honda',
+            ],
+            [
+                'user_id' => '21',
+                'dealer_name' => 'Motor Galih',
+                'dealer_address' => 'Jl. Raya No. 66 Tumpang, Malang',
+                'company' => 'Honda',
+            ],
+            [
+                'user_id' => '23',
+                'dealer_name' => 'Dwimitra Malang',
+                'dealer_address' => 'Jl. Arif Margono No. 45, Malang',
+                'company' => 'Honda',
+            ],
 
         ]);
     }
