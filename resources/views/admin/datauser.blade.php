@@ -77,7 +77,7 @@
                                                 <span class="sr-only">Close modal</span>
                                             </button>
                                         </div>
-                                        <form action="{{ route('admin.update', $users->id) }}" method="POST">
+                                        <form action="{{ route('admin.updateUser', $users->id) }}" method="POST">
                                             @csrf
                                             @method('PUT')
                                             <div class="grid gap-4 mb-4 sm:grid-cols-2">

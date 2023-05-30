@@ -44,7 +44,7 @@ class AdminController extends Controller
         return view('admin.datauser', compact('user', 'data', 'message', 'searchQuery'));
     }
 
-    public function update(Request $request, $id)
+    public function updateUser(Request $request, $id)
     {
         $request->validate([
             'role' => 'required|in:mechanic,dealer,customer',
@@ -53,6 +53,23 @@ class AdminController extends Controller
         $user = User::findOrFail($id);
         $user->role = $request->role;
         $user->save();
+
+        return redirect()->back()->with('success', 'Role has been updated successfully.');
+    }
+
+    public function updateDealer(Request $request, $id)
+    {
+        $request->validate([
+            'dealer_name' => 'required',
+            'dealer_address' => 'required',
+            'company' => 'required|in:yamaha,suzuki,honda',
+        ]);
+
+        $dealer = Dealer::findOrFail($id);
+        $dealer->dealer_name = $request->dealer_name;
+        $dealer->dealer_address = $request->dealer_address;
+        $dealer->company = $request->company;
+        $dealer->save();
 
         return redirect()->back()->with('success', 'Role has been updated successfully.');
     }
@@ -108,7 +125,7 @@ class AdminController extends Controller
             ->orWhere('position', 'LIKE', "%$keyword%")
             ->paginate(5);
 
-        return view('admin.datamechanic', compact('user', 'mechanics', 'keyword'));
+        return view('admin.dataMechanic', compact('user', 'mechanics', 'keyword'));
     }
 
     public function createDealer(Request $request)

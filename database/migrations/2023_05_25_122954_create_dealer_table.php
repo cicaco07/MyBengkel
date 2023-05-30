@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('dealer', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('user_id')->unique();
             $table->string('dealer_name');
             $table->string('dealer_address');
             $table->enum('company',['yamaha', 'honda', 'suzuki']);
