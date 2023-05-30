@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             DealerSeeder::class,
             MechanicSeeder::class,
             ServiceSeeder::class,
+            BranchCompanySeeder::class,
         ]);
     }
 }
