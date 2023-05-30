@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\DealerController;
+use App\Models\User;
+use App\Models\Dealer;
 
 class DealerController extends Controller
 {
@@ -47,6 +50,13 @@ class DealerController extends Controller
     {
         $user = Auth::user();
         return view('dealer.transaksi', compact('user'));
+    }
+
+
+    public function show($id){
+        $user = Auth::user();
+        $dealer = Dealer::findOrFail($id);
+        return view('customer.detailYamaha', compact('dealer', 'user'));
     }
 
 }

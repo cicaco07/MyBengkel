@@ -71,6 +71,7 @@ Route::middleware(['auth', 'role:customer'])->group(function () {
     Route::prefix('customer')->group(function(){
         Route::get('/dashboard', [CustomerController::class, 'dashboard'])->name('customer.dashboard');
         Route::get('/yamaha', [CustomerController::class, 'yamaha']);
+        Route::get('/yamaha/{id}', [DealerController::class, 'show'])->name('dealer.show');
         Route::get('/honda', [CustomerController::class, 'honda']);
         Route::get('/suzuki', [CustomerController::class, 'suzuki']);
         Route::get('/servisku', [CustomerController::class, 'servisku']);
