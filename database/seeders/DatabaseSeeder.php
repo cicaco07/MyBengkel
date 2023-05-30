@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             DealerSeeder::class,
             MechanicSeeder::class,
-            ServiceSeeder::class,
+            // ServiceSeeder::class,
         ]);
     }
 }

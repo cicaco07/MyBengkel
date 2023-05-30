@@ -13,7 +13,7 @@
                     <p class="text-xs md:text-sm font-medium text-primary text-center md:text-left">{{ $dealer->dealer_address }}</p>
                     <div class="flex items-center justify-center md:justify-between mt-4">
                         <div class="md:inline block"></div>
-                        <a href="#" class="text-primary bg-dark-purple hover:bg-violet-600 hover:font-semibold focus:ring-1 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs md:text-sm px-3 md:px-5 py-1.5 md:py-2.5 text-center">Lihat Profil</a>
+                        <a href="{{ route('dealer.show', ['id' => $dealer->id])}}" class="text-primary bg-dark-purple hover:bg-violet-600 hover:font-semibold focus:ring-1 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs md:text-sm px-3 md:px-5 py-1.5 md:py-2.5 text-center">Lihat Profil</a>
                     </div>
                 </div>
             </div>
