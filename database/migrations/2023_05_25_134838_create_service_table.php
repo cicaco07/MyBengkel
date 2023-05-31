@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('dealer_id');
-            $table->string('problem');
+            $table->enum('problem',['Ganti Ban', 'Ganti Oli', 'Service Rutin', 'Lain-lain']);
             $table->string('plat_num');
 
             $table->string('recommended_service')->nullable();

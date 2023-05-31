@@ -26,4 +26,8 @@ class Dealer extends Model
     public function mechanics(){
         return $this->hasMany(Mechanic::class);
     }
+
+    public function services(){
+        return $this->hasMany(Service::class);
+    }
 }

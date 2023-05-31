@@ -70,10 +70,11 @@ Route::middleware(['auth', 'role:dealer'])->group(function () {
 Route::middleware(['auth', 'role:customer'])->group(function () {
     Route::prefix('customer')->group(function(){
         Route::get('/dashboard', [CustomerController::class, 'dashboard'])->name('customer.dashboard');
-        Route::get('/yamaha', [CustomerController::class, 'yamaha']);
+        Route::get('/yamaha', [CustomerController::class, 'yamaha'])->name('dealer.yamaha');
         Route::get('/yamaha/{id}', [DealerController::class, 'show'])->name('dealer.show');
-        Route::get('/honda', [CustomerController::class, 'honda']);
-        Route::get('/suzuki', [CustomerController::class, 'suzuki']);
+        Route::post('/datadealer/create', [CustomerController::class, 'createService'])->name('customer.createService');
+        Route::get('/honda', [CustomerController::class, 'honda'])->name('dealer.honda');
+        Route::get('/suzuki', [CustomerController::class, 'suzuki'])->name('dealer.suzuki');
         Route::get('/servisku', [CustomerController::class, 'servisku']);
         Route::get('/servisku2', [CustomerController::class, 'servisku2']);
         Route::get('/form', [CustomerController::class, 'form']);

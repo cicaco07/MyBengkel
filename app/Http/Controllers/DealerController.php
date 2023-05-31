@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\DealerController;
 use App\Models\User;
 use App\Models\Dealer;
+use App\Models\Service;
 
 class DealerController extends Controller
 {
@@ -52,11 +53,14 @@ class DealerController extends Controller
         return view('dealer.transaksi', compact('user'));
     }
 
-
-    public function show($id){
+    public function show($id)
+    {
         $user = Auth::user();
         $dealer = Dealer::findOrFail($id);
-        return view('customer.detailYamaha', compact('dealer', 'user'));
+
+        // $services = $dealer->services;
+        $services = Service::where('dealer_id', $dealer->id)->paginate(5);
+        return view('customer.detailDealer', compact('user', 'services', 'dealer'));
     }
 
 }
