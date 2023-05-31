@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class ServiceSeeder extends Seeder
 {
@@ -13,97 +14,88 @@ class ServiceSeeder extends Seeder
      */
     public function run(): void
     {
-        // DB::table('service')->insert([
-        //     [
-        //         'user_id' => '5',
-        //         'dealer_id' => '1',
-        //         'problem' => 'Ganti Oli',
-        //         'plat_num' => 'N 5678 LI',
-        //         'recommended_service' => '',
-        //         'plan_date' => '2018-10-29 15:00:00',
-        //         'price' => '100000',
-        //     ],
-        //     [
-        //         'user_id' => '11',
-        //         'dealer_id' => '1',
-        //         'problem' => 'Ganti Oli',
-        //         'plat_num' => 'N 5679 LX',
-        //         'recommended_service' => '',
-        //         'plan_date' => '2018-1-29 15:00:00',
-        //         'price' => '100000',
-        //     ],
-        //     [
-        //         'user_id' => '18',
-        //         'dealer_id' => '1',
-        //         'problem' => 'Ganti Oli',
-        //         'plat_num' => 'N 5680 LA',
-        //         'recommended_service' => '',
-        //         'plan_date' => '2018-2-29 15:00:00',
-        //         'price' => '100000',
-        //     ],
-        //     [
-        //         'user_id' => '24',
-        //         'dealer_id' => '1',
-        //         'problem' => 'Ganti Oli',
-        //         'plat_num' => 'N 5681 LI',
-        //         'recommended_service' => '',
-        //         'plan_date' => '2018-3-29 15:00:00',
-        //         'price' => '80000',
-        //     ],
-        //     [
-        //         'user_id' => '25',
-        //         'dealer_id' => '1',
-        //         'problem' => 'Ganti Roller',
-        //         'plat_num' => 'N 5682 LI',
-        //         'recommended_service' => '',
-        //         'plan_date' => '2018-4-29 15:00:00',
-        //         'price' => '50000',
-        //     ],
-        //     [
-        //         'user_id' => '26',
-        //         'dealer_id' => '1',
-        //         'problem' => 'Ganti Kampas Rem',
-        //         'plat_num' => 'N 5683 LI',
-        //         'recommended_service' => '',
-        //         'plan_date' => '2018-5-29 15:00:00',
-        //         'price' => '40000',
-        //     ],
-        //     [
-        //         'user_id' => '27',
-        //         'dealer_id' => '1',
-        //         'problem' => 'Ganti Roller',
-        //         'plat_num' => 'N 5684 LI',
-        //         'recommended_service' => '',
-        //         'plan_date' => '2018-6-29 15:00:00',
-        //         'price' => '50000',
-        //     ],
-        //     [
-        //         'user_id' => '28',
-        //         'dealer_id' => '1',
-        //         'problem' => 'Ganti Oli',
-        //         'plat_num' => 'N 5685 LI',
-        //         'recommended_service' => '',
-        //         'plan_date' => '2018-7-29 15:00:00',
-        //         'price' => '100000',
-        //     ],
-        //     [
-        //         'user_id' => '29',
-        //         'dealer_id' => '1',
-        //         'problem' => 'Ganti Oli',
-        //         'plat_num' => 'N 5686 LI',
-        //         'recommended_service' => '',
-        //         'plan_date' => '2018-8-29 15:00:00',
-        //         'price' => '100000',
-        //     ],
-        //     [
-        //         'user_id' => '30',
-        //         'dealer_id' => '1',
-        //         'problem' => 'Ganti Oli',
-        //         'plat_num' => 'N 5687 LI',
-        //         'recommended_service' => '',
-        //         'plan_date' => '2018-10-29 15:00:00',
-        //         'price' => '100000',
-        //     ],
-        // ]);
+        DB::table('service')->insert([
+            [
+                'user_id' => '5',
+                'dealer_id' => '1',
+                'vehicle_name'=> 'Mio 2002',
+                'problem' => 'Ganti Oli',
+                'plat_num' => 'N 5678 LI',
+                'recommended_service' => '',
+                'plan_date' => Carbon::parse('2018-10-29 15:00:00'),
+                'price' => '100000',
+            ],
+            [
+                'user_id' => '11',
+                'dealer_id' => '1',
+                'vehicle_name'=> 'Mio 2010',
+                'problem' => 'Ganti Oli',
+                'plat_num' => 'N 1234 LI',
+                'recommended_service' => '',
+                'plan_date' => Carbon::parse('2018-10-29 15:30:00'),
+                'price' => '100000',
+            ],
+            [
+                'user_id' => '18',
+                'dealer_id' => '1',
+                'vehicle_name'=> 'Mio 2002',
+                'problem' => 'Ganti Ban',
+                'plat_num' => 'N 0987 LI',
+                'recommended_service' => '',
+                'plan_date' => Carbon::parse('2018-10-29 16:00:00'),
+                'price' => '100000',
+            ],
+            [
+                'user_id' => '23',
+                'dealer_id' => '1',
+                'vehicle_name'=> 'Mio 2010',
+                'problem' => 'Ganti Ban',
+                'plat_num' => 'N 4321 LI',
+                'recommended_service' => '',
+                'plan_date' => Carbon::parse('2018-10-29 16:45:00'),
+                'price' => '100000',
+            ],
+            [
+                'user_id' => '24',
+                'dealer_id' => '1',
+                'vehicle_name'=> 'Mio 2002',
+                'problem' => 'Ganti Oli',
+                'plat_num' => 'N 7690 LI',
+                'recommended_service' => '',
+                'plan_date' => Carbon::parse('2018-10-30 08:00:00'),
+                'price' => '100000',
+            ],
+            [
+                'user_id' => '24',
+                'dealer_id' => '1',
+                'vehicle_name'=> 'Mio 2002',
+                'problem' => 'Ganti Oli',
+                'plat_num' => 'N 2232 LI',
+                'recommended_service' => '',
+                'plan_date' => Carbon::parse('2018-10-30 08:45:00'),
+                'price' => '100000',
+            ],
+            [
+                'user_id' => '25',
+                'dealer_id' => '6',
+                'vehicle_name'=> 'Mio 2005',
+                'problem' => 'Ganti Oli',
+                'plat_num' => 'N 5679 LX',
+                'recommended_service' => '',
+                'plan_date' => Carbon::parse('2018-10-30 16:00:00'),
+                'price' => '100000',
+            ],
+            [
+                'user_id' => '18',
+                'dealer_id' => '11',
+                'vehicle_name'=> 'Mio 2006',
+                'problem' => 'Ganti Ban',
+                'plat_num' => 'N 5680 LA',
+                'recommended_service' => '',
+                'plan_date' => Carbon::parse('2018-10-29 16:00:00'),
+                'price' => '100000',
+            ],
+
+        ]);
     }
 }
