@@ -24,7 +24,7 @@
                         <span class="sr-only">Close modal</span>
                     </button>
                 </div>
-                <form action="{{ route('customer.createService')}}" method="POST">
+                <form action="{{ route('customer.createService', ['id'=>$dealer->id])}}" method="POST">
                     @csrf
                     @method('POST')
                     <div>
@@ -39,10 +39,10 @@
                         <div class="mb-6 mx-2">
                             <label for="problem" class="block mb-2 text-sm font-medium text-purple">Keluhan</label>
                             <select id="problem" name="problem" class="bg-primary text-purple text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                                <option value="gantioli">Ganti Oli</option>
-                                <option value="gantiban" >Ganti Ban</option>
-                                <option value="servisrutin" >Servis Rutin</option>
-                                <option value="servisrutin" >Lain-lain</Lain-lain></option>
+                                <option value="Ganti Oli">Ganti Oli</option>
+                                <option value="Ganti Ban" >Ganti Ban</option>
+                                <option value="Service Rutin" >Servis Rutin</option>
+                                <option value="Lain-lain" >Lain-lain</Lain-lain></option>
                             </select>
                             
                         </div>
