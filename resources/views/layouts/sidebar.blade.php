@@ -36,7 +36,7 @@
                 </div>
                 <ul class="bg-primary" role="none">
                   <li>
-                    <a href="#" class="block px-4 py-2 text-sm text-purple hover:text-primary hover:bg-dark-purple" role="menuitem">Dashboard</a>
+                    <a href="dashboard" class="block px-4 py-2 text-sm text-purple hover:text-primary hover:bg-dark-purple" role="menuitem">Dashboard</a>
                   </li>
                   <li>
                     <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="block px-4 py-2 text-sm text-purple hover:text-primary hover:bg-dark-purple">

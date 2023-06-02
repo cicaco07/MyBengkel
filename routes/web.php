@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\MechanicController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ServiceController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -71,15 +72,17 @@ Route::middleware(['auth', 'role:customer'])->group(function () {
     Route::prefix('customer')->group(function(){
         Route::get('/dashboard', [CustomerController::class, 'dashboard'])->name('customer.dashboard');
         Route::get('/yamaha', [CustomerController::class, 'yamaha'])->name('dealer.yamaha');
-        Route::get('/yamaha/{id}', [DealerController::class, 'show'])->name('dealer.show');
-        Route::post('/datadealer/create', [CustomerController::class, 'createService'])->name('customer.createService');
+        Route::get('/detailDealer/{id}', [DealerController::class, 'show'])->name('dealer.show');
+        Route::post('/detailDealer/{id}/create', [ServiceController::class, 'create'])->name('customer.createService');
         Route::get('/honda', [CustomerController::class, 'honda'])->name('dealer.honda');
         Route::get('/suzuki', [CustomerController::class, 'suzuki'])->name('dealer.suzuki');
-        Route::get('/servisku', [CustomerController::class, 'servisku']);
+        Route::get('/servisku', [CustomerController::class, 'allservisku'])->name('customer.allservisku');
+        Route::get('/servisku/{id}', [CustomerController::class, 'servisku'])->name('customer.servisku');
         Route::get('/servisku2', [CustomerController::class, 'servisku2']);
         Route::get('/form', [CustomerController::class, 'form']);
         Route::get('/form2', [CustomerController::class, 'form2']);
         Route::get('/profilku', [CustomerController::class, 'profilku']);
         Route::put('/profilku/update', [CustomerController::class, 'update'])->name('customer.update');
+
     });
 });

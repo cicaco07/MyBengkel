@@ -42,10 +42,18 @@ class CustomerController extends Controller
         return view('customer.profilku',compact('user'));
     }
 
-    public function servisku()
+    public function servisku($id)
     {
         $user = Auth::user();
-        return view('customer.servisku',compact('user'));
+        $service = $user->service()->findOrFail($id);
+        return view('customer.servisku', compact('user','service'));
+    }
+
+    public function allservisku()
+    {
+        $user = Auth::user();
+        $services = $user->service()->get();
+        return view('customer.allservisku', compact('user','services'));
     }
 
     public function servisku2()
@@ -107,36 +115,5 @@ class CustomerController extends Controller
     
         return redirect()->back()->with('Success', 'Profile berhasil diubah');
     }
-
-    // public function createService(Request $request)
-    // {
-    //     $user = User::find($request->user_id);
-    //     $dealer = Dealer::find($request->dealer_id);
-
-    //     $request->validate([
-    //         'vehicle_name' => 'required',
-    //         'plat_num' => 'required',
-    //         'problem' => 'required|in:Ganti Oli,Ganti Ban,Servis Rutin, Lain-lain',
-    //     ]);
-
-    //     if ($user){
-    //         if ($user->dealer) {
-    //             return redirect()->back()->with('error', 'Error');
-    //         } else {
-    //         $service = new Service;
-    //         $service->vehicle_name=$request->get('vehicle_name');
-    //         $service->plat_num=$request->get('plat_num');
-    //         $service->problem=$request->get('problem');
-    //         $service->user_id = $user->id;
-    //         $service->dealer =$dealer->id;
-    //         $service->save();
-            
-    //         return redirect()->route('dealer.show')->with('success', 'Queue data has been created successfully');
-
-    //         }
-    //     } else {
-    //         return redirect()->back()->with('error', 'User not found');
-    //     }
-    // }
     
 }

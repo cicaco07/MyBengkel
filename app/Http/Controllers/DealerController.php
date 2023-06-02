@@ -58,7 +58,6 @@ class DealerController extends Controller
         $user = Auth::user();
         $dealer = Dealer::findOrFail($id);
 
-        // $services = $dealer->services;
         $services = Service::where('dealer_id', $dealer->id)->paginate(5);
         return view('customer.detailDealer', compact('user', 'services', 'dealer'));
     }
