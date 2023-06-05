@@ -10,7 +10,7 @@
         <thead class="text-xs text-purple uppercase bg-table-head">
             <tr>
                 <th scope="col" class="px-6 py-3">
-                    No
+                    No A
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Customer Name
