@@ -10,6 +10,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ServiceController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SparepartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,8 +62,11 @@ Route::middleware(['auth', 'role:dealer'])->group(function () {
         Route::get('/dashboard', [DealerController::class, 'dashboard'])->name('dealer.dashboard');
         Route::get('/dealerku', [DealerController::class, 'dealerku']);
         Route::get('/pegawai', [DealerController::class, 'pegawai']);
+        Route::get('/datapegawai', [DealerController::class, 'pegawai']);
         Route::get('/antrian', [DealerController::class, 'antrian']);
-        Route::get('/sparepart', [DealerController::class, 'sparepart']);
+        Route::get('/datasparepart', [DealerController::class, 'sparepart'])->name('dealer.sparepart');
+        Route::post('/datasparepart', [SparepartController::class, 'store'])->name('sparepart.store');
+        Route::delete('/sparepart/{id}', [SparepartController::class, 'delete'])->name('sparepart.delete');
         Route::get('/servis', [DealerController::class, 'servis']);
         Route::get('/transaksi', [DealerController::class, 'transaksi']);
     });
