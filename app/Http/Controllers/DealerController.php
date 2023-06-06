@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\DealerController;
 use App\Models\User;
+use App\Models\Mechanic;
 use App\Models\Dealer;
 use App\Models\Service;
-
+use Illuminate\Support\Facades\Storage;
+use App\Models\Sparepart;
 class DealerController extends Controller
 {
     public function dashboard()
@@ -26,8 +27,20 @@ class DealerController extends Controller
     public function pegawai()
     {
         $user = Auth::user();
-        return view('dealer.pegawai', compact('user'));
+        $mechanic = $user->mechanic;
+        $dealer = $user->dealer;
+        
+        $users = User::where('role', 'mechanic')->whereHas('mechanic', function ($query) use ($dealer) {
+            $query->where('dealer_id', $dealer->id);
+        })->get();
+    
+        // Mendapatkan posisi (position) dari mekanik yang sesuai dengan dealer_id
+        $positions = Mechanic::where('dealer_id', $dealer->id)->pluck('position');
+    
+        return view('dealer.pegawai', compact('user', 'users', 'positions'));
     }
+    
+
 
     public function antrian()
     {
@@ -38,7 +51,8 @@ class DealerController extends Controller
     public function sparepart()
     {
         $user = Auth::user();
-        return view('dealer.sparepart', compact('user'));
+        $spareparts = Sparepart::get();
+        return view('dealer.sparepart', compact('user', 'spareparts'));
     }
 
     public function servis()
@@ -61,5 +75,32 @@ class DealerController extends Controller
         $services = Service::where('dealer_id', $dealer->id)->paginate(5);
         return view('customer.detailDealer', compact('user', 'services', 'dealer'));
     }
+    public function update(Request $request)
+{
+    $user = $request->user();
+    $dealer = $user->dealer;
+    $request->validate([
+        'dealer_name' => 'required',
+        'dealer_address' => 'required',
+        'company' => 'required',
+        'avatar' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+    ]);
+
+    $dealer->dealer_name = $request->dealer_name;
+    $dealer->dealer_address = $request->dealer_address;
+    $dealer->company = $request->company;
+
+    if ($request->hasFile('avatar')) {
+        if ($dealer->avatar && file_exists(storage_path('app/public/' . $dealer->avatar))) {
+            Storage::delete('public/' . $dealer->avatar);
+        }
+        $image = $request->file('avatar')->store('images', 'public');
+        $dealer->avatar = $image;
+    }
+    $dealer->save();
+
+    return redirect()->back()->with('success', 'Profil berhasil diubah');
+}
+
 
 }

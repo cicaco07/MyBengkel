@@ -5,8 +5,8 @@
 @section('list-menu')
 <div class="flex items-center justify-center flex-col">
    <img class="h-32 w-32 rounded-full" src="{{asset('img/herta.jpg')}}">
-   <div class="text-sm text-gray-900 dark:text white text-purple m-4 text-center">Yamaha Dealer <br>
-    Jl. Tirtangga, Samaan.
+   <div class="text-sm text-gray-900 dark:text white text-purple m-4 text-center">{{ auth()->user()->dealer->company}} <br>
+      {{ auth()->user()->dealer->dealer_address}}
    </div>
 
 </div>
