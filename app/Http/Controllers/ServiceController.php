@@ -28,6 +28,14 @@ class ServiceController extends Controller
         $service->dealer_id = $dealer_id->id;
 
         $service->save();
-        return redirect()->route('customer.servisku', ['id'=>$service->id])->with('success', 'Data Servis berhasil dibuat');
+        return redirect()->route('customer.allservisku', ['id'=>$service->id])->with('success', 'Data Servis berhasil dibuat');
+    }
+
+    public function destroyService($id)
+    {
+        $user = Auth::user();
+        $servis = Service::findOrFail($id); 
+        $servis->delete();
+        return redirect()->back()->with('success', 'Queue has been deleted successfully.');
     }
 }
