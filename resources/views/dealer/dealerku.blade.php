@@ -4,7 +4,7 @@
 
 @section('main-content')
 <div class="p-4 border-1 rounded-lg mt-14 bg-secondary">
-    <div class="text-purple m-4 font-semibold text-2xl tracking-wide">Profilku</div>
+    <div class="text-purple m-4 font-semibold text-2xl tracking-wide">Profil Dealer Ku</div>
     {{-- <div class="flex items-center justify-center">
         @if ($user->avatar)
             <img src="{{ asset('storage/' . $user->avatar) }}" alt="avatar" class="rounded-full w-36 md:w-48 h-36 md:h-48 mb-8">
