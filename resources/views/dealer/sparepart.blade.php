@@ -166,29 +166,29 @@
 
     <div class="flex flex-col items-center mt-6">
         <span class="text-sm text-purple">
-        Showing <span class="font-semibold">{{ $spareparts->firstItem() }}</span> to <span class="font-semibold dark:text-white">{{ $spareparts->lastItem() }}</span> of <span class="font-semibold">{{ $spareparts->total() }}</span> Entries
+            Showing <span class="font-semibold">{{ $spareparts->firstItem() }}</span> to <span class="font-semibold dark:text-white">{{ $spareparts->lastItem() }}</span> of <span class="font-semibold">{{ $spareparts->total() }}</span> Entries
         </span>
         <div class="inline-flex mt-2 xs:mt-0">
-    @if ($spareparts->onFirstPage())
-        <button class="px-4 py-2 text-sm font-medium text-purple bg-gray-800 rounded-l cursor-not-allowed opacity-50" disabled>
-            Prev
-        </button>
-    @else
-        <a href="{{ $spareparts->previousPageUrl() }}" class="px-4 py-2 text-sm font-medium text-purple bg-gray-800 rounded-l hover:bg-primary">
-            Prev
-        </a>
-    @endif
+            @if ($spareparts->onFirstPage())
+            <button class="px-4 py-2 text-sm font-medium text-purple bg-gray-800 rounded-l cursor-not-allowed opacity-50" disabled>
+                Prev
+            </button>
+            @else
+            <a href="{{ $spareparts->appends(request()->query())->previousPageUrl() }}" class="px-4 py-2 text-sm font-medium text-purple bg-gray-800 rounded-l hover:bg-primary">
+                Prev
+            </a>
+            @endif
 
-    @if ($spareparts->hasMorePages())
-        <a href="{{ $spareparts->nextPageUrl() }}" class="px-4 py-2 text-sm font-medium text-purple bg-gray-800 border-0 border-l border-gray-700 rounded-r hover:bg-primary">
-            Next
-        </a>
-    @else
-        <button class="px-4 py-2 text-sm font-medium text-purple bg-gray-800 border-0 border-l border-gray-700 rounded-r cursor-not-allowed opacity-50" disabled>
-            Next
-        </button>
-    @endif
-</div>
+            @if ($spareparts->hasMorePages())
+            <a href="{{ $spareparts->appends(request()->query())->nextPageUrl() }}" class="px-4 py-2 text-sm font-medium text-purple bg-gray-800 border-0 border-l border-gray-700 rounded-r hover:bg-primary">
+                Next
+            </a>
+            @else
+            <button class="px-4 py-2 text-sm font-medium text-purple bg-gray-800 border-0 border-l border-gray-700 rounded-r cursor-not-allowed opacity-50" disabled>
+                Next
+            </button>
+            @endif
+        </div>
     </div>
 </div>
 </div>
