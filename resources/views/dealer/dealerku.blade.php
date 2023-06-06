@@ -5,13 +5,13 @@
 @section('main-content')
 <div class="p-4 border-1 rounded-lg mt-14 bg-secondary">
     <div class="text-purple m-4 font-semibold text-2xl tracking-wide">Profilku</div>
-    <div class="flex items-center justify-center">
+    {{-- <div class="flex items-center justify-center">
         @if ($user->avatar)
             <img src="{{ asset('storage/' . $user->avatar) }}" alt="avatar" class="rounded-full w-36 md:w-48 h-36 md:h-48 mb-8">
         @else
             <img class="rounded-full w-36 md:w-48 h-36 md:h-48 mb-8" src="{{ asset('img/default user.png' . $user->avatar) }}">
         @endif
-    </div>
+    </div> --}}
     <div class="text-xs md:text-lg md:px-10">
         <label for="dealer_name" class="block mb-2 text-sm font-medium text-purple">Nama Dealer</label>
         <input type="text" id="disabled-input" aria-label="disabled input" class="mb-4 bg-primary border border-secondary text-purple text-sm md:text-base rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 px-6" value="{{ $user->dealer->dealer_name }}" disabled>
@@ -38,14 +38,14 @@
                         </svg>
                     </button>
                 </div>
-                <div class="flex items-center justify-center">
+                {{-- <div class="flex items-center justify-center">
                     @if ($user->avatar)
                         <img src="{{ asset('storage/' . $user->avatar) }}" alt="avatar" class="rounded-full w-32 h-32 mb-8">
                     @else
                         <img class="rounded-full w-32 h-32 bg-white mb-8" src="{{ asset('img/default user.png' . $user->avatar) }}">
                     @endif
                     
-                </div>
+                </div> --}}
                 <form id="editProfileForm" action="{{ route('dealer.update', $user->id_user)}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
@@ -59,12 +59,17 @@
                     </div>
                     <div class="mb-6 mx-6">
                         <label for="company" class="block mb-2 text-sm font-medium text-purple">Company</label>
-                        <input type="text" id="company" name="company" value="{{ auth()->user()->dealer->company}}" class="bg-primary border border-secondary text-purple text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="{{ $user->dealer->company }}">
+                        <select id="company" name="company" value="{{ auth()->user()->dealer->company}}" class="bg-primary text-purple text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5" placeholder="{{ $user->dealer->dealer_address }}">
+                            <option selected="">{{ auth()->user()->dealer->company}}</option>
+                            <option value="yamaha">Yamaha</option>
+                            <option value="suzuki">Suzuki</option>
+                            <option value="honda">Honda</option>
+                        </select>
                     </div>
-                    <div class="mb-2 mx-6">
+                    {{-- <div class="mb-2 mx-6">
                         <label class="block mb-2 text-sm font-medium text-purple" for="image">Avatar</label>
                         <input class="block w-full mb-5 text-sm text-purple rounded-lg cursor-pointer bg-primary border border-purple" id="avatar" type="file" name="avatar" value="{{auth()->user()->avatar}}">
-                    </div>
+                    </div> --}}
                     <div class="flex items-center p-6 space-x-2 border-gray-200 rounded-b ">
                         <button data-modal-hide="staticModal" type="submit" class="text-primary bg-dark-purple hover:bg-violet-600 focus:ring-1 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Simpan</button>
                     </div>
