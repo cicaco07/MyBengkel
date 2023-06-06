@@ -2,43 +2,43 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Repositories\MechanicRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
 
 class MechanicController extends Controller
 {
+    protected $mechanicRepository;
+
+    public function __construct(MechanicRepository $mechanicRepository)
+    {
+        $this->mechanicRepository = $mechanicRepository;
+    }
+
     public function dashboard()
     {
-        $user = Auth::user();
-        $mechanic = $user->mechanic;
-        $position = $mechanic->position;
-        return view('mechanic.dashboard',compact('user','position'));
+        $data = $this->mechanicRepository->getMechanicData();
+        return view('mechanic.dashboard', $data);
     }
 
     public function servisku()
     {
-        $user = Auth::user();
-        $mechanic = $user->mechanic;
-        $position = $mechanic->position;
-        return view('mechanic.servisku',compact('user','position'));
+        $data = $this->mechanicRepository->getMechanicData();
+        return view('mechanic.servisku', $data);
     }
 
     public function profilku()
     {
-        $user = Auth::user();
-        $mechanic = $user->mechanic;
-        $position = $mechanic->position;
-        return view('mechanic.profilku',compact('user','position'));
+        $data = $this->mechanicRepository->getMechanicData();
+        return view('mechanic.profilku', $data);
     }
 
     public function antrian()
     {
         $user = Auth::user();
-        $mechanic = $user->mechanic;
-        $position = $mechanic->position;
-        return view('mechanic.antrian',compact('user','position'));
+        $data = $this->mechanicRepository->getMechanicData();
+        $data1 = $this->mechanicRepository->getDealerServis($user);
+        return view('mechanic.antrian', $data, $data1);
     }
 
     public function update(Request $request)
@@ -50,23 +50,25 @@ class MechanicController extends Controller
             'email' => 'required',
             'phone_number' => 'required',
             'address' => 'required',
-            'avatar' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'avatar' => 'nullable|image|mimes:jpeg,png,jpg',
         ]);
 
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->phone_number = $request->phone_number;
-        $user->address = $request->address;
+        $updatedUser = $this->mechanicRepository->updateProfile($user, $request->all());
 
-        if ($request->hasFile('avatar')) {
-            if ($user->avatar && file_exists(storage_path('app/public/' . $user->avatar))) {
-                Storage::delete('public/' . $user->avatar);
-            }
-            $image = $request->file('avatar')->store('images', 'public');
-            $user->avatar = $image;
+        if ($updatedUser == 'email_exists') {
+            return redirect()->back()->with('error', 'Email sudah terdaftar');
+        } elseif ($updatedUser) {
+            return redirect()->back()->with('success', 'Profile berhasil diubah');
+        } else {
+            return redirect()->back()->with('error1', 'Terjadi kesalahan saat mengupdate profil');
         }
-        $user->save();
-
-        return redirect()->back()->with('success', 'Profile berhasil diubah');
     }
+
+    public function updateStatus($id)
+    {
+        $service = $this->mechanicRepository->updateStatus($id);
+
+        return redirect()->back()->with('success', 'Status servis berhasil diubah');
+    }
+
 }

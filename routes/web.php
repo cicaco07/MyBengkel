@@ -53,6 +53,7 @@ Route::middleware(['auth', 'role:mechanic'])->group(function () {
         Route::get('/profilku', [MechanicController::class, 'profilku']);
         Route::put('/profilku/update', [MechanicController::class, 'update'])->name('mechanic.update');
         Route::get('/antrian', [MechanicController::class, 'antrian']);
+        Route::put('/update-status/{id}', [MechanicController::class, 'updateStatus'])->name('updateStatus');
         Route::get('/servisku', [MechanicController::class, 'servisku']);
     });
 });
@@ -64,8 +65,11 @@ Route::middleware(['auth', 'role:dealer'])->group(function () {
         Route::get('/pegawai', [DealerController::class, 'pegawai']);
         Route::get('/datapegawai', [DealerController::class, 'pegawai']);
         Route::get('/antrian', [DealerController::class, 'antrian']);
-        Route::get('/datasparepart', [DealerController::class, 'sparepart'])->name('dealer.sparepart');
+        Route::get('/datasparepart',  [SparePartController::class, 'index'])->name('spareparts.index');
         Route::post('/datasparepart', [SparepartController::class, 'store'])->name('sparepart.store');
+        Route::get('/spareparts/search', [SparePartController::class, 'search'])->name('spareparts.search');
+        Route::get('/spareparts/clear-search', [SparePartController::class, 'clearSearch'])->name('spareparts.clear-search');
+        Route::put('/datasparepart/update/{id}', [SparepartController::class, 'update'])->name('sparepart.update');
         Route::delete('/sparepart/{id}', [SparepartController::class, 'delete'])->name('sparepart.delete');
         Route::get('/servis', [DealerController::class, 'servis']);
         Route::get('/transaksi', [DealerController::class, 'transaksi']);

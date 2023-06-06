@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id')->unique();
             $table->string('dealer_name');
             $table->string('dealer_address');
-            $table->enum('company',['yamaha', 'honda', 'suzuki']);
+            $table->enum('company',['Yamaha', 'Honda', 'Suzuki']);
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');

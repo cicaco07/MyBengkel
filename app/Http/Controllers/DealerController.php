@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\Mechanic;
 use App\Models\Dealer;
 use App\Models\Service;
 use Illuminate\Support\Facades\Storage;
@@ -26,9 +27,20 @@ class DealerController extends Controller
     public function pegawai()
     {
         $user = Auth::user();
-        $users = User::whereNotIn('role', ['customer'])->get();
-        return view('dealer.pegawai', compact('user', 'users'));
+        $mechanic = $user->mechanic;
+        $dealer = $user->dealer;
+        
+        $users = User::where('role', 'mechanic')->whereHas('mechanic', function ($query) use ($dealer) {
+            $query->where('dealer_id', $dealer->id);
+        })->get();
+    
+        // Mendapatkan posisi (position) dari mekanik yang sesuai dengan dealer_id
+        $positions = Mechanic::where('dealer_id', $dealer->id)->pluck('position');
+    
+        return view('dealer.pegawai', compact('user', 'users', 'positions'));
     }
+    
+
 
     public function antrian()
     {
