@@ -69,6 +69,7 @@ Route::middleware(['auth', 'role:dealer'])->group(function () {
         Route::delete('/sparepart/{id}', [SparepartController::class, 'delete'])->name('sparepart.delete');
         Route::get('/servis', [DealerController::class, 'servis']);
         Route::get('/transaksi', [DealerController::class, 'transaksi']);
+        Route::put('/dealerku/update', [DealerController::class, 'update'])->name('dealer.update');
     });
 });
 

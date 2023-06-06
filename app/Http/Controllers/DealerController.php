@@ -7,8 +7,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Dealer;
 use App\Models\Service;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Sparepart;
-
 class DealerController extends Controller
 {
     public function dashboard()
@@ -63,5 +63,32 @@ class DealerController extends Controller
         $services = Service::where('dealer_id', $dealer->id)->paginate(5);
         return view('customer.detailDealer', compact('user', 'services', 'dealer'));
     }
+    public function update(Request $request)
+{
+    $user = $request->user();
+    $dealer = $user->dealer;
+    $request->validate([
+        'dealer_name' => 'required',
+        'dealer_address' => 'required',
+        'company' => 'required',
+        'avatar' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+    ]);
+
+    $dealer->dealer_name = $request->dealer_name;
+    $dealer->dealer_address = $request->dealer_address;
+    $dealer->company = $request->company;
+
+    if ($request->hasFile('avatar')) {
+        if ($dealer->avatar && file_exists(storage_path('app/public/' . $dealer->avatar))) {
+            Storage::delete('public/' . $dealer->avatar);
+        }
+        $image = $request->file('avatar')->store('images', 'public');
+        $dealer->avatar = $image;
+    }
+    $dealer->save();
+
+    return redirect()->back()->with('success', 'Profil berhasil diubah');
+}
+
 
 }
