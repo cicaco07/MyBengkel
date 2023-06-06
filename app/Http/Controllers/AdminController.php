@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Dealer;
 use App\Models\User;
 use App\Models\Mechanic;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\QueryException;
+
 
 class AdminController extends Controller
 {
@@ -22,7 +24,7 @@ class AdminController extends Controller
     {
         $user = Auth::user();
         $query = User::where('role', '!=', 'admin');
-    
+
         if ($request->has('search') && $request->filled('search')) {
             $keyword = $request->input('search');
             $query->where(function ($q) use ($keyword) {
@@ -31,8 +33,25 @@ class AdminController extends Controller
                     ->orWhere('name', 'LIKE', "%$keyword%");
             });
         }
-    
-        $data = $query->paginate(5);
+
+        $perPage = 5; // Jumlah item per halaman
+        $currentPage = $request->input('page', 1); // Halaman saat ini, default 1
+
+        // Ambil semua hasil yang cocok dengan query
+        $results = $query->get();
+
+        // Buat objek Collection dari hasil
+        $collection = collect($results);
+
+        // Buat objek LengthAwarePaginator dengan menggunakan Collection
+        $data = new LengthAwarePaginator(
+            $collection->forPage($currentPage, $perPage),
+            $collection->count(),
+            $perPage,
+            $currentPage,
+            ['path' => $request->url() . '?' . http_build_query($request->query())]
+        );
+
         $searchQuery = $request->input('search');
         $message = "Hasil pencarian dari : " . $searchQuery;
 
@@ -40,7 +59,7 @@ class AdminController extends Controller
             $message = "User not found.";
             return view('admin.datauser', compact('user', 'data', 'message', 'searchQuery'));
         }
-    
+
         return view('admin.datauser', compact('user', 'data', 'message', 'searchQuery'));
     }
 
@@ -89,21 +108,38 @@ class AdminController extends Controller
 
         return redirect()->back()->with('success', 'User has been deleted successfully.');
     }
-    
+
     public function dataDealer(Request $request)
     {
         $user = Auth::user();
         $keyword = $request->input('search');
-        
-        $users = DB::table('users')
+
+        $query = DB::table('users')
             ->join('dealer', 'users.id', '=', 'dealer.user_id')
-            ->select('dealer.id','dealer.dealer_name', 'dealer.dealer_address', 'dealer.company')
+            ->select('dealer.id', 'dealer.dealer_name', 'dealer.dealer_address', 'dealer.company')
             ->where(function ($query) use ($keyword) {
                 $query->where('dealer.dealer_name', 'like', "%$keyword%")
-                      ->orWhere('dealer.dealer_address', 'like', "%$keyword%")
-                      ->orWhere('dealer.company', 'like', "%$keyword%");
-            })
-            ->paginate(5);
+                    ->orWhere('dealer.dealer_address', 'like', "%$keyword%")
+                    ->orWhere('dealer.company', 'like', "%$keyword%");
+            });
+
+        $perPage = 5; // Jumlah item per halaman
+        $currentPage = $request->input('page', 1); // Halaman saat ini, default 1
+
+        // Ambil semua hasil yang cocok dengan query
+        $results = $query->get();
+
+        // Buat objek Collection dari hasil
+        $collection = collect($results);
+
+        // Buat objek LengthAwarePaginator dengan menggunakan Collection
+        $users = new LengthAwarePaginator(
+            $collection->forPage($currentPage, $perPage),
+            $collection->count(),
+            $perPage,
+            $currentPage,
+            ['path' => $request->url() . '?' . http_build_query($request->query())]
+        );
 
         return view('admin.dataDealer', compact('user', 'users', 'keyword'));
     }
@@ -113,15 +149,32 @@ class AdminController extends Controller
         $user = Auth::user();
         $keyword = $request->input('search');
 
-        $mechanics = Mechanic::with('user', 'dealer')
+        $query = Mechanic::with('user', 'dealer')
             ->whereHas('user', function ($query) use ($keyword) {
                 $query->where('name', 'LIKE', "%$keyword%");
             })
             ->orWhereHas('dealer', function ($query) use ($keyword) {
                 $query->where('dealer_name', 'LIKE', "%$keyword%");
             })
-            ->orWhere('position', 'LIKE', "%$keyword%")
-            ->paginate(5);
+            ->orWhere('position', 'LIKE', "%$keyword%");
+
+        $perPage = 5; // Jumlah item per halaman
+        $currentPage = $request->input('page', 1); // Halaman saat ini, default 1
+
+        // Ambil semua hasil yang cocok dengan query
+        $results = $query->get();
+
+        // Buat objek Collection dari hasil
+        $collection = collect($results);
+
+        // Buat objek LengthAwarePaginator dengan menggunakan Collection
+        $mechanics = new LengthAwarePaginator(
+            $collection->forPage($currentPage, $perPage),
+            $collection->count(),
+            $perPage,
+            $currentPage,
+            ['path' => $request->url() . '?' . http_build_query($request->query())]
+        );
 
         return view('admin.dataMechanic', compact('user', 'mechanics', 'keyword'));
     }
@@ -136,20 +189,19 @@ class AdminController extends Controller
             'company' => 'required|in:Yamaha,Suzuki,Honda',
         ]);
 
-        if ($user){
+        if ($user) {
             if ($user->dealer) {
                 return redirect()->back()->with('error', 'User already has a dealer record');
             } else {
-            $dealer = new Dealer;
-            $dealer->dealer_name=$request->get('dealer_name');
-            $dealer->dealer_address=$request->get('dealer_address');
-            $dealer->company=$request->get('company');
-            $dealer->user_id = $user->id;
-            $dealer->save();
-            
-            
-            return redirect()->route('admin.dataDealer')->with('success', 'Dealer data has been created successfully');
+                $dealer = new Dealer;
+                $dealer->dealer_name = $request->get('dealer_name');
+                $dealer->dealer_address = $request->get('dealer_address');
+                $dealer->company = $request->get('company');
+                $dealer->user_id = $user->id;
+                $dealer->save();
 
+
+                return redirect()->route('admin.dataDealer')->with('success', 'Dealer data has been created successfully');
             }
         } else {
             return redirect()->back()->with('error', 'User not found');
@@ -169,17 +221,17 @@ class AdminController extends Controller
             try {
                 // Pastikan mekanik belum terdaftar
                 $existingMechanic = Mechanic::where('user_id', $user->id)->first();
-    
+
                 if ($existingMechanic) {
                     return redirect()->back()->with('error', "Mechanic with ID {$existingMechanic->id} is already registered");
                 }
-    
+
                 $mechanic = new Mechanic;
                 $mechanic->position = $request->position;
                 $mechanic->user_id = $user->id;
                 $mechanic->dealer_id = $dealer->id;
                 $mechanic->save();
-    
+
                 return redirect()->route('admin.dataMechanic')->with('success', 'Mechanic data has been created successfully');
             } catch (QueryException $e) {
                 return redirect()->back()->with('error', 'Failed to create mechanic: ' . $e->getMessage());
