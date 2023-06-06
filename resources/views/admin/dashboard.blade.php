@@ -15,7 +15,7 @@
                     <p class="text-xs md:text-sm font-medium text-primary text-center md:text-left">Lihat data User, lakukan perubahan role jika datamu tidak sesuai</p>
                     <div class="flex items-center justify-center md:justify-between mt-4">
                         <div class="md:inline block"></div>
-                        <a href="datauser" class="text-primary bg-dark-purple hover:bg-violet-600 hover:font-semibold focus:ring-1 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs md:text-sm px-3 md:px-5 py-1.5 md:py-2.5 text-center">Lihat Data</a>
+                        <a href="{{route('admin.dataUser')}}" class="text-primary bg-dark-purple hover:bg-violet-600 hover:font-semibold focus:ring-1 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs md:text-sm px-3 md:px-5 py-1.5 md:py-2.5 text-center">Lihat Data</a>
                     </div>
                 </div>
             </div>
@@ -27,7 +27,7 @@
                     <p class="text-xs md:text-sm font-medium text-primary text-center md:text-left">Tambah Data Dealer, apabila ada Dealer baru yang mendaftar</p>
                     <div class="flex items-center justify-center md:justify-between mt-4">
                         <div class="md:inline block"></div>
-                        <a href="datadealer" class="text-primary bg-dark-purple hover:bg-violet-600 hover:font-semibold focus:ring-1 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs md:text-sm px-3 md:px-5 py-1.5 md:py-2.5 text-center">Tambah Dealer</a>
+                        <a href="{{route('admin.dataDealer')}}" class="text-primary bg-dark-purple hover:bg-violet-600 hover:font-semibold focus:ring-1 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs md:text-sm px-3 md:px-5 py-1.5 md:py-2.5 text-center">Tambah Dealer</a>
                     </div>
                 </div>
             </div>
@@ -39,7 +39,7 @@
                     <p class="text-xs md:text-sm font-medium text-primary text-center md:text-left">Tambah Data Mechanic, apabila ada Mechanic baru yang mendaftar</p>
                     <div class="flex items-center justify-center md:justify-between mt-4">
                         <div class="md:inline block"></div>
-                        <a href="datamechanic" class="text-primary bg-dark-purple hover:bg-violet-600 hover:font-semibold focus:ring-1 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs md:text-sm px-3 md:px-5 py-1.5 md:py-2.5 text-center">Tambah Mechanic</a>
+                        <a href="{{route('admin.dataMechanic')}}" class="text-primary bg-dark-purple hover:bg-violet-600 hover:font-semibold focus:ring-1 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs md:text-sm px-3 md:px-5 py-1.5 md:py-2.5 text-center">Tambah Mechanic</a>
                     </div>
                 </div>
             </div>

@@ -97,17 +97,15 @@ class AdminController extends Controller
         
         $users = DB::table('users')
             ->join('dealer', 'users.id', '=', 'dealer.user_id')
-            ->select('users.id','users.name', 'users.email', 'dealer.id','dealer.dealer_name', 'dealer.dealer_address', 'dealer.company')
+            ->select('dealer.id','dealer.dealer_name', 'dealer.dealer_address', 'dealer.company')
             ->where(function ($query) use ($keyword) {
-                $query->where('users.name', 'like', "%$keyword%")
-                      ->orWhere('users.email', 'like', "%$keyword%")
-                      ->orWhere('dealer.dealer_name', 'like', "%$keyword%")
+                $query->where('dealer.dealer_name', 'like', "%$keyword%")
                       ->orWhere('dealer.dealer_address', 'like', "%$keyword%")
                       ->orWhere('dealer.company', 'like', "%$keyword%");
             })
             ->paginate(5);
 
-        return view('admin.datadealer', compact('user', 'users', 'keyword'));
+        return view('admin.dataDealer', compact('user', 'users', 'keyword'));
     }
 
     public function dataMechanic(Request $request)
@@ -135,7 +133,7 @@ class AdminController extends Controller
         $request->validate([
             'dealer_name' => 'required',
             'dealer_address' => 'required',
-            'company' => 'required|in:yamaha,suzuki,honda',
+            'company' => 'required|in:Yamaha,Suzuki,Honda',
         ]);
 
         if ($user){
@@ -182,7 +180,7 @@ class AdminController extends Controller
                 $mechanic->dealer_id = $dealer->id;
                 $mechanic->save();
     
-                return redirect()->route('admin.datamechanic')->with('success', 'Mechanic data has been created successfully');
+                return redirect()->route('admin.dataMechanic')->with('success', 'Mechanic data has been created successfully');
             } catch (QueryException $e) {
                 return redirect()->back()->with('error', 'Failed to create mechanic: ' . $e->getMessage());
             }

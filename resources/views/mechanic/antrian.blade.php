@@ -3,8 +3,27 @@
 @section('title', 'Mekanik - Antrian')
 
 @section('main-content')
+    @if(session('success'))
+    <div class="flex justify-center fixed top-0 left-1/2 transform -translate-x-1/2 z-50 mt-6">
+        <div id="toast-success" class="flex items-center w-full max-w-xs p-4 mb-4 text-primary bg-success rounded-lg shadow" role="alert" role="alert">
+            <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-green-500 bg-green-100 rounded-lg">
+                <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                <span class="sr-only">Check icon</span>
+            </div>
+            <div class="mx-3 text-sm font-normal">{{ session('success') }}</div>
+            <button type="button" class="ml-auto -mx-1.5 -my-1.5 rounded-lg focus:ring-2 focus:ring-green-100 p-1.5 inline-flex h-8 w-8 text-green-500 hover:text-green-500 bg-green-100 hover:bg-green-300" data-dismiss-target="#toast-success" aria-label="Close">
+                <span class="sr-only">Close</span>
+                <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                </svg>
+            </button>
+        </div>
+    </div> 
+    @endif
 <div class="p-4 border-1 rounded-lg mt-14 bg-secondary">
-    
+    <div class="text-purple m-4 font-semibold text-2xl tracking-wide ">Data Antrian</div>
 <div class="relative overflow-x-auto shadow-md rounded-lg">
     <table class="w-full text-sm text-left text-gray-500">
         <thead class="text-xs text-purple uppercase bg-table-head">
@@ -13,79 +32,74 @@
                     No
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Customer Name
+                    Nama Customer
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Plat Number
+                    Tipe Kendaraan
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Plat Nomor
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Problem
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Status
                 </th>
+                <th scope="col" class="px-6 py-3">
+                    Action
+                </th>
             </tr>
         </thead>
         <tbody class="text-xs md:text-base">
-            <tr class="bg-primary border-b border-purple text-purple">
+            @foreach ($services as $servis)
+            <tr class="bg-primary border-b border-purple last:border-0 text-purple">
                 <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap dark:text-white">
-                    1.
+                    {{ $servis->id}}
                 </th>
                 <td class="px-6 py-4">
-                    Aryo Deva Saputra
+                    {{ $servis->user->name }}
                 </td>
                 <td class="px-6 py-4">
-                    N 3120 LU
+                    {{ $servis->vehicle_name }}
                 </td>
                 <td class="px-6 py-4">
-                    Dikerjakan
+                    {{ $servis->plat_num }}
                 </td>
-                
+                <td class="px-6 py-4">
+                    {{ $servis->problem }}
+                </td>
+                <td class="px-6 py-4">
+                    {{ $servis->status }}
+                </td>
+                <td class="">
+                    @if ($servis->status == 'waiting')
+                    <form action="{{ route('updateStatus', $servis->id) }}" method="POST">
+                        @csrf
+                        @method('PUT')
+                        <button type="submit" class="focus:outline-none text-primary bg-dark-purple hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-3 md:px-5 py-1 md:py-2.5 my-2 mx-2 md:mx-0">Proses</button>
+                    </form>
+                @endif
+                </td>
             </tr>
-            <tr class="bg-primary border-b border-purple text-purple">
-                <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap dark:text-white">
-                    2.
-                </th>
-                <td class="px-6 py-4">
-                    Bryan Tosin Saputro
-                </td>
-                <td class="px-6 py-4">
-                    Laptop PC
-                </td>
-                <td class="px-6 py-4">
-                    $1999
-                </td>
-                
-            </tr>
-            <tr class="bg-primary text-purple">
-                <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap dark:text-white">
-                    3.
-                </th>
-                <td class="px-6 py-4">
-                    Desy Ayurianti
-                </td>
-                <td class="px-6 py-4">
-                    Accessories
-                </td>
-                <td class="px-6 py-4">
-                    $99
-                </td>
-                
-            </tr>
+            @endforeach
         </tbody>
     </table>
 </div>
 
 <div class="flex flex-col items-center mt-6">
-    <span class="text-sm text-purple">
-        Showing <span class="font-semibold">1</span> to <span class="font-semibold dark:text-white">10</span> of <span class="font-semibold">100</span> Entries
-    </span>
-    <div class="inline-flex mt-2 xs:mt-0">
-        <button class="px-4 py-2 text-sm font-medium text-purple bg-gray-800 rounded-l hover:bg-primary">
-            Prev
-        </button>
-        <button class="px-4 py-2 text-sm font-medium text-purple bg-gray-800 border-0 border-l border-gray-700 rounded-r hover:bg-primary">
-            Next
-        </button>
+    <div class="mt-5 md:mt-0">
+        {{ $services->links('mechanic.pagination') }}
     </div>
   </div>
 </div>
-    
+<script>
+    setTimeout(function() {
+        var toastElement = document.getElementById('toast-success');
+        if (toastElement) {
+            toastElement.remove();
+        }
+    }, 3000);
+</script>
+
 @endsection
