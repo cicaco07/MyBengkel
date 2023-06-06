@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Dealer;
 use App\Models\Service;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Sparepart;
 class DealerController extends Controller
 {
     public function dashboard()
@@ -25,7 +26,8 @@ class DealerController extends Controller
     public function pegawai()
     {
         $user = Auth::user();
-        return view('dealer.pegawai', compact('user'));
+        $users = User::whereNotIn('role', ['customer'])->get();
+        return view('dealer.pegawai', compact('user', 'users'));
     }
 
     public function antrian()
@@ -37,7 +39,8 @@ class DealerController extends Controller
     public function sparepart()
     {
         $user = Auth::user();
-        return view('dealer.sparepart', compact('user'));
+        $spareparts = Sparepart::get();
+        return view('dealer.sparepart', compact('user', 'spareparts'));
     }
 
     public function servis()

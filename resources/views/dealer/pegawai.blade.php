@@ -48,66 +48,33 @@
             </div>
         </div>
     </div>
-
-<div class="flex border-1 rounded-lg bg-secondary">
+    
+<div class="flex border-1 rounded-lg bg-secondary grid grid-cols-2 md:grid-cols-4 gap-4">
+@foreach ($users as $user)
     <div class="mx-8 my-4 max-w-xs bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+        
         <a href="#">
             <img class="rounded-t-lg" src="{{ asset('img/Mekanik.jpg')}}" alt="" />
         </a>
+        
         <div class="px-6 py-4">
             <a href="#">
-                <h5 class=" text-base font-bold tracking-tight text-gray-900 dark:text-white">Panji Yudianto</h5>
+                <h5 class=" text-base font-bold tracking-tight text-gray-900 dark:text-white">{{ $user->name}}</h5>
             </a>
-            <p class="font-normal text-gray-700 dark:text-gray-400">Mekanik</p><br>
+            <p class="font-normal text-gray-700 dark:text-gray-400">{{ $user->role}}</p><br>
             <a data-modal-target="staticModal" data-modal-toggle="staticModal" href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                 Edit
             </a>
             <a href="#" class="hover:bg-yellow-500 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                 Hapus
             </a>
+            
         </div>
-    </div>
-
-    <div class="mx-8 my-4 max-w-xs bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-        <a href="#">
-            <img class="rounded-t-lg" src="{{ asset('img/Mekanik.jpg')}}" alt="" />
-        </a>
-        <div class="px-6 py-4">
-            <a href="#">
-                <h5 class=" text-base font-bold tracking-tight text-gray-900 dark:text-white">Panji Yudianto</h5>
-            </a>
-            <p class="font-normal text-gray-700 dark:text-gray-400">Mekanik</p><br>
-            <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                Edit
-            </a>
-            <a href="#" class="hover:bg-yellow-500 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                Hapus
-            </a>
-        </div>
-    </div>
-
-    
-    <div class="mx-8 my-4 max-w-xs bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-        <a href="#">
-            <img class="rounded-t-lg" src="{{ asset('img/Mekanik.jpg')}}" alt="" />
-        </a>
-        <div class="px-6 py-4">
-            <a href="#">
-                <h5 class=" text-base font-bold tracking-tight text-gray-900 dark:text-white">Panji Yudianto</h5>
-            </a>
-            <p class="font-normal text-gray-700 dark:text-gray-400">Mekanik</p><br>
-            <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                Edit
-            </a>
-            <a href="#" class="hover:bg-yellow-500 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                Hapus
-            </a>
-        </div>
-    </div>
-
+        
+    </div>   
+@endforeach 
     
 </div>
-
 
 
 </div>
