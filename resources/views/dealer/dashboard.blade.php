@@ -61,7 +61,7 @@
         <div>
             <div class="w-full max-w-sm bg-purple border border-purple rounded-lg shadow mt-10">
                 <div class="px-5 pb-5 mt-4">
-                    <h3 class="text-xl font-bold mb-4 text-center md:text-left">Data Antrian</h3>
+                    <h3 class="text-xl font-bold mb-4 text-center md:text-left">Data Spare Part</h3>
                     <p class="text-xs md:text-sm font-medium text-primary text-center md:text-left">Lihat data sparepart yang tersedia di dealer kamu</p>
                     <div class="flex items-center justify-center md:justify-between mt-4">
                         <div class="md:inline block"></div>

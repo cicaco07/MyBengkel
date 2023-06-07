@@ -57,7 +57,7 @@ class SparepartController extends Controller
         $sparepart->save();
     
         // Redirect ke halaman yang diinginkan setelah menyimpan data
-        return redirect()->route('dealer.sparepart')->with('success', 'Sparepart berhasil ditambahkan');
+        return redirect()->back()->with('success', 'Sparepart berhasil ditambahkan');
     }
 
     /**
@@ -102,7 +102,7 @@ class SparepartController extends Controller
         // You can customize this part based on your application's logic
 
     // Redirect back to the sparepart list or any other desired route
-    return redirect()->route('dealer.sparepart');
+    return redirect()->back();
     }
 
     /**
@@ -113,7 +113,7 @@ class SparepartController extends Controller
         $sparepart = Sparepart::findOrFail($id);
         $sparepart->delete();
 
-        return redirect()->route('dealer.sparepart')->with('success', 'Sparepart berhasil dihapus');
+        return redirect()->back()->with('success', 'Sparepart berhasil dihapus');
     }  
 
     public function clearSearch()
