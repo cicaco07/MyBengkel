@@ -113,7 +113,7 @@ class CustomerController extends Controller
     
         $user->save();
     
-        return redirect()->back()->with('Success', 'Profile berhasil diubah');
+        return redirect()->back()->with('success', 'Profile berhasil diubah');
     }
     
 }
