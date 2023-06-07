@@ -2,13 +2,15 @@
 
 namespace App\Repositories;
 
-use App\Models\Dealer;
+use App\Repositories\Interfaces\IMechanicRepository;
 use App\Models\User;
 use App\Models\Service;
+use App\Models\Mechanic;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
-class MechanicRepository
+class MechanicRepository implements IMechanicRepository
 {
     public function getMechanicData()
     {
@@ -75,4 +77,66 @@ class MechanicRepository
         $service->status = 'accept';
         $service->save();
     }
+
+    public function find($id)
+    {
+        return Mechanic::findOrFail($id);
+    }
+
+    public function findByUser($userId)
+    {
+        return Mechanic::where('user_id', $userId)->first();
+    }
+
+    public function create(array $data)
+    {
+        return Mechanic::create($data);
+    }
+
+    public function update($id, array $data)
+    {
+        $mechanic = $this->find($id);
+        $mechanic->update($data);
+
+        return $mechanic;
+    }
+
+    public function delete($id)
+    {
+        $mechanic = $this->find($id);
+        $mechanic->delete();
+    }
+
+    public function findByKeyword($keyword)
+    {
+        $query = Mechanic::with('user', 'dealer')
+            ->whereHas('user', function ($query) use ($keyword) {
+                $query->where('name', 'LIKE', "%$keyword%");
+                })
+            ->orWhereHas('dealer', function ($query) use ($keyword) {
+                $query->where('dealer_name', 'LIKE', "%$keyword%");
+            })
+            ->orWhere('position', 'LIKE', "%$keyword%");
+        
+            $perPage = 5; // Jumlah item per halaman
+            $currentPage = request()->input('page', 1); // Halaman saat ini, default 1
+    
+            // Ambil semua hasil yang cocok dengan query
+            $results = $query->get();
+    
+            // Buat objek Collection dari hasil
+            $collection = collect($results);
+    
+            // Buat objek LengthAwarePaginator dengan menggunakan Collection
+            $mechanics = new LengthAwarePaginator(
+                $collection->forPage($currentPage, $perPage),
+                $collection->count(),
+                $perPage,
+                $currentPage,
+                ['path' => request()->url() . '?' . http_build_query(request()->query())]
+            );
+    
+            return $mechanics;
+    }
+    
 }

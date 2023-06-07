@@ -21,14 +21,18 @@ class RegisterController extends Controller
 
     public function register(Request $request)
     {
-        $request->validate([
-            'name' => ['required','string','max:100'],
-            'email' => ['required','string','email','max:255','unique:users'],
-            'username' => ['required','string','max:100'],
-            'password' => ['required','string','min:8'],
-            'phone_number' => ['required','string','max:100'],
-            'address' => ['required','string','max:100'],
+        $validator = Validator::make($request->all(), [
+            'name' => ['required', 'string', 'max:100'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'username' => ['required', 'string', 'max:100'],
+            'password' => ['required', 'string', 'min:8'],
+            'phone_number' => ['required', 'string', 'max:100'],
+            'address' => ['required', 'string', 'max:100'],
         ]);
+    
+        if ($validator->fails()) {
+            return redirect()->route('registerForm')->withErrors($validator)->withInput();
+        }
 
         $user = User::create([
             'name' => $request->name,
@@ -38,6 +42,7 @@ class RegisterController extends Controller
             'phone_number' => $request->phone_number,
             'address' => $request->address,
         ]);
+        
 
         return redirect()->route('loginForm')->with('success', 'Registration successful. Please login.');
     }

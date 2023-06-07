@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class MechanicController extends Controller
 {
-    protected $mechanicRepository;
+    private $mechanicRepository;
 
     public function __construct(MechanicRepository $mechanicRepository)
     {
