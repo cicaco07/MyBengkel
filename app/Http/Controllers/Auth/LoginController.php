@@ -32,9 +32,7 @@ class LoginController extends Controller
             return $this->sendLoginResponse($request);
         }
 
-        throw ValidationException::withMessages([
-            'username' => [trans('auth.failed')],
-        ]);
+        return redirect()->route('loginForm')->withErrors(['username' => trans('auth.failed')])->withInput();
     }
 
     protected function sendLoginResponse(Request $request)

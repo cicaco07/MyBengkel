@@ -6,15 +6,25 @@ use App\Models\Sparepart;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreSparepartRequest;
 use App\Http\Requests\UpdateSparepartRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SparepartController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        //
+    public function index(Request $request){
+
+    $user = Auth::user();
+    $spareparts = Sparepart::get();
+    $searchQuery = $request->input('search');
+
+    $spareparts = Sparepart::when($searchQuery, function ($query, $searchQuery) {
+        return $query->where('namaitem', 'like', "%$searchQuery%");
+    })->paginate(10);
+
+    return view('dealer.sparepart', compact('user', 'spareparts'));
     }
 
     /**
@@ -47,7 +57,7 @@ class SparepartController extends Controller
         $sparepart->save();
     
         // Redirect ke halaman yang diinginkan setelah menyimpan data
-        return redirect()->route('dealer.sparepart')->with('success', 'Sparepart berhasil ditambahkan');
+        return redirect()->back()->with('success', 'Sparepart berhasil ditambahkan');
     }
 
     /**
@@ -69,9 +79,30 @@ class SparepartController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateSparepartRequest $request, Sparepart $sparepart)
+    public function update(UpdateSparepartRequest $request, $id)
     {
-        //
+        $request->validate([
+            'namaitem' => 'required',
+            'harga' => 'required|numeric',
+            'stok' => 'required|integer',
+        ]);
+    
+        // Retrieve the sparepart based on the provided $id
+        $sparepart = Sparepart::findOrFail($id);
+    
+        // Update the sparepart with the validated request data
+        $sparepart->namaitem = $request->namaitem;
+        $sparepart->harga = $request->harga;
+        $sparepart->stok = $request->stok;
+    
+        // Save the updated sparepart
+        $sparepart->save();
+    
+        // Redirect to the appropriate page or return a response
+        // You can customize this part based on your application's logic
+
+    // Redirect back to the sparepart list or any other desired route
+    return redirect()->back();
     }
 
     /**
@@ -82,6 +113,12 @@ class SparepartController extends Controller
         $sparepart = Sparepart::findOrFail($id);
         $sparepart->delete();
 
-        return redirect()->route('dealer.sparepart')->with('success', 'Sparepart berhasil dihapus');
+        return redirect()->back()->with('success', 'Sparepart berhasil dihapus');
     }  
+
+    public function clearSearch()
+{
+
+    return redirect()->route('spareparts.index');
+}
 }

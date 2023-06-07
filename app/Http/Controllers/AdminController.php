@@ -2,62 +2,60 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Dealer;
-use App\Models\User;
-use App\Models\Mechanic;
-use Illuminate\Support\Facades\DB;
+use App\Repositories\DealerRepository;
+use App\Repositories\MechanicRepository;
+use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\QueryException;
 
+
 class AdminController extends Controller
 {
+    private $userRepository;
+    private $dealerRepository;
+    private $mechanicRepository;
+
+    public function __construct(UserRepository $userRepository, DealerRepository $dealerRepository, MechanicRepository $mechanicRepository)
+    {
+        $this->userRepository = $userRepository;
+        $this->dealerRepository = $dealerRepository;
+        $this->mechanicRepository = $mechanicRepository;
+    }
+
     public function dashboard()
     {
         $user = Auth::user();
         return view('admin.dashboard', compact('user'));
     }
 
-    public function dataUser(Request $request)
+    public function dataUser(Request $request, UserRepository $userRepository)
     {
         $user = Auth::user();
-        $query = User::where('role', '!=', 'admin');
-    
-        if ($request->has('search') && $request->filled('search')) {
-            $keyword = $request->input('search');
-            $query->where(function ($q) use ($keyword) {
-                $q->where('username', 'LIKE', "%$keyword%")
-                    ->orWhere('email', 'LIKE', "%$keyword%")
-                    ->orWhere('name', 'LIKE', "%$keyword%");
-            });
-        }
-    
-        $data = $query->paginate(5);
-        $searchQuery = $request->input('search');
-        $message = "Hasil pencarian dari : " . $searchQuery;
+        $keyword = $request->input('search');
 
-        if ($data->isEmpty()) {
-            $message = "User not found.";
-            return view('admin.datauser', compact('user', 'data', 'message', 'searchQuery'));
-        }
-    
+        $result = $userRepository->findByKeyword($keyword);
+        $data = $result['data'];
+        $message = $result['message'];
+        $searchQuery = $result['searchQuery'];
+
         return view('admin.datauser', compact('user', 'data', 'message', 'searchQuery'));
     }
 
-    public function updateUser(Request $request, $id)
+    public function updateUser(Request $request, $id, UserRepository $userRepository)
     {
         $request->validate([
             'role' => 'required|in:mechanic,dealer,customer',
         ]);
-
-        $user = User::findOrFail($id);
+    
+        $user = $userRepository->find($id);
         $user->role = $request->role;
         $user->save();
-
+    
         return redirect()->back()->with('success', 'Role has been updated successfully.');
     }
 
-    public function updateDealer(Request $request, $id)
+    public function updateDealer(Request $request, $id, DealerRepository $dealerRepository)
     {
         $request->validate([
             'dealer_name' => 'required',
@@ -65,103 +63,87 @@ class AdminController extends Controller
             'company' => 'required|in:yamaha,suzuki,honda',
         ]);
 
-        $dealer = Dealer::findOrFail($id);
-        $dealer->dealer_name = $request->dealer_name;
-        $dealer->dealer_address = $request->dealer_address;
-        $dealer->company = $request->company;
-        $dealer->save();
+        $data = [
+            'dealer_name' => $request->dealer_name,
+            'dealer_address' => $request->dealer_address,
+            'company' => $request->company,
+        ];
 
-        return redirect()->back()->with('success', 'Role has been updated successfully.');
+        $dealer = $dealerRepository->update($id, $data);
+
+        return redirect()->back()->with('success', 'Dealer has been updated successfully.');
     }
 
-    public function destroyDealer($id)
-    {
-        $dealer = Dealer::findOrFail($id);
-        $dealer->delete();
 
-        return redirect()->back()->with('success', 'User has been deleted successfully.');
+    public function destroyDealer($id, DealerRepository $dealerRepository)
+    {
+        $dealerRepository->delete($id);
+
+        return redirect()->back()->with('success', 'Dealer has been deleted successfully.');
     }
 
-    public function destroyMechanic($id)
+    public function destroyMechanic($id, MechanicRepository $mechanicRepository)
     {
-        $mechanic = Mechanic::findOrFail($id);
-        $mechanic->delete();
+        $mechanicRepository->delete($id);
 
-        return redirect()->back()->with('success', 'User has been deleted successfully.');
+        return redirect()->back()->with('success', 'Mechanic has been deleted successfully.');
     }
     
-    public function dataDealer(Request $request)
+    public function dataDealer(Request $request, DealerRepository $dealerRepository)
     {
         $user = Auth::user();
         $keyword = $request->input('search');
-        
-        $users = DB::table('users')
-            ->join('dealer', 'users.id', '=', 'dealer.user_id')
-            ->select('users.id','users.name', 'users.email', 'dealer.id','dealer.dealer_name', 'dealer.dealer_address', 'dealer.company')
-            ->where(function ($query) use ($keyword) {
-                $query->where('users.name', 'like', "%$keyword%")
-                      ->orWhere('users.email', 'like', "%$keyword%")
-                      ->orWhere('dealer.dealer_name', 'like', "%$keyword%")
-                      ->orWhere('dealer.dealer_address', 'like', "%$keyword%")
-                      ->orWhere('dealer.company', 'like', "%$keyword%");
-            })
-            ->paginate(5);
+        $users = $dealerRepository->findByKeyword($keyword);
 
-        return view('admin.datadealer', compact('user', 'users', 'keyword'));
+        return view('admin.dataDealer', compact('user', 'users', 'keyword'));
     }
 
-    public function dataMechanic(Request $request)
+
+    public function dataMechanic(Request $request, MechanicRepository $mechanicRepository)
     {
         $user = Auth::user();
         $keyword = $request->input('search');
-
-        $mechanics = Mechanic::with('user', 'dealer')
-            ->whereHas('user', function ($query) use ($keyword) {
-                $query->where('name', 'LIKE', "%$keyword%");
-            })
-            ->orWhereHas('dealer', function ($query) use ($keyword) {
-                $query->where('dealer_name', 'LIKE', "%$keyword%");
-            })
-            ->orWhere('position', 'LIKE', "%$keyword%")
-            ->paginate(5);
+        $mechanics = $mechanicRepository->findByKeyword($keyword);
 
         return view('admin.dataMechanic', compact('user', 'mechanics', 'keyword'));
     }
 
-    public function createDealer(Request $request)
+
+    public function createDealer(Request $request, UserRepository $userRepository, DealerRepository $dealerRepository)
     {
-        $user = User::find($request->user_id);
+        $user = $userRepository->find($request->user_id);
 
         $request->validate([
             'dealer_name' => 'required',
             'dealer_address' => 'required',
-            'company' => 'required|in:yamaha,suzuki,honda',
+            'company' => 'required|in:Yamaha,Suzuki,Honda',
         ]);
 
-        if ($user){
+        if ($user) {
             if ($user->dealer) {
                 return redirect()->back()->with('error', 'User already has a dealer record');
             } else {
-            $dealer = new Dealer;
-            $dealer->dealer_name=$request->get('dealer_name');
-            $dealer->dealer_address=$request->get('dealer_address');
-            $dealer->company=$request->get('company');
-            $dealer->user_id = $user->id;
-            $dealer->save();
-            
-            
-            return redirect()->route('admin.dataDealer')->with('success', 'Dealer data has been created successfully');
+                $data = [
+                    'dealer_name' => $request->dealer_name,
+                    'dealer_address' => $request->dealer_address,
+                    'company' => $request->company,
+                    'user_id' => $user->id,
+                ];
 
+                $dealerRepository->create($data);
+
+                return redirect()->route('admin.dataDealer')->with('success', 'Dealer data has been created successfully');
             }
         } else {
             return redirect()->back()->with('error', 'User not found');
         }
     }
 
-    public function createMechanic(Request $request)
+
+    public function createMechanic(Request $request, UserRepository $userRepository, DealerRepository $dealerRepository, MechanicRepository $mechanicRepository)
     {
-        $user = User::find($request->user_id);
-        $dealer = Dealer::find($request->dealer_id);
+        $user = $userRepository->find($request->user_id);
+        $dealer = $dealerRepository->find($request->dealer_id);
 
         $request->validate([
             'position' => 'required',
@@ -169,20 +151,21 @@ class AdminController extends Controller
 
         if ($user && $dealer) {
             try {
-                // Pastikan mekanik belum terdaftar
-                $existingMechanic = Mechanic::where('user_id', $user->id)->first();
-    
+                $existingMechanic = $mechanicRepository->findByUser($user->id);
+
                 if ($existingMechanic) {
                     return redirect()->back()->with('error', "Mechanic with ID {$existingMechanic->id} is already registered");
                 }
-    
-                $mechanic = new Mechanic;
-                $mechanic->position = $request->position;
-                $mechanic->user_id = $user->id;
-                $mechanic->dealer_id = $dealer->id;
-                $mechanic->save();
-    
-                return redirect()->route('admin.datamechanic')->with('success', 'Mechanic data has been created successfully');
+
+                $data = [
+                    'position' => $request->position,
+                    'user_id' => $user->id,
+                    'dealer_id' => $dealer->id,
+                ];
+
+                $mechanicRepository->create($data);
+
+                return redirect()->route('admin.dataMechanic')->with('success', 'Mechanic data has been created successfully');
             } catch (QueryException $e) {
                 return redirect()->back()->with('error', 'Failed to create mechanic: ' . $e->getMessage());
             }
@@ -190,4 +173,5 @@ class AdminController extends Controller
             return redirect()->back()->with('error', 'User or dealer not found');
         }
     }
+
 }

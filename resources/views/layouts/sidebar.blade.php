@@ -20,9 +20,9 @@
         <div class="flex items-center">
             <div class="flex items-center ml-3">
               <div>
-                <button type="button" class="flex text-sm mr-6 bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300" aria-expanded="false" data-dropdown-toggle="dropdown-user">
+                <button type="button" class="flex text-sm mr-6 bg-gray-800 rounded-full focus:ring-2 focus:ring-purple" aria-expanded="false" data-dropdown-toggle="dropdown-user">
                   <span class="sr-only">Open user menu</span>
-                  <img class="w-8 h-8 rounded-full" src="{{ asset('img/logout.png') }}" alt="user photo">
+                  <img class="w-10 h-10 rounded-full" src="{{ asset('img/logout.png') }}" alt="user photo">
                 </button>
               </div>
               <div class="z-50 hidden my-4 text-base list-none bg-purple divide-y divide-gray-100 rounded" id="dropdown-user">
