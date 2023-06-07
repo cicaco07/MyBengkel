@@ -39,14 +39,18 @@ class DealerController extends Controller
     
         return view('dealer.pegawai', compact('user', 'users', 'positions'));
     }
-    
-
-
     public function antrian()
-    {
-        $user = Auth::user();
-        return view('dealer.antrian', compact('user'));
-    }
+{
+    $user = Auth::user();
+    $dealer = $user->dealer;
+
+    $services = Service::where('dealer_id', $dealer->id)
+        ->where('status', 'waiting')
+        ->get();
+
+    return view('dealer.antrian', compact('user','services'));
+}
+
     
     public function sparepart()
     {
@@ -130,8 +134,5 @@ public function deleteMekanik($id)
 
     return redirect()->back()->with('success', 'Mekanik berhasil dihapus');
 }
-
-
-
 
 }
