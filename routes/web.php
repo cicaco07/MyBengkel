@@ -63,6 +63,7 @@ Route::middleware(['auth', 'role:dealer'])->group(function () {
         Route::get('/dealerku', [DealerController::class, 'dealerku']);
         Route::get('/pegawai', [DealerController::class, 'pegawai']);
         Route::get('/datapegawai', [DealerController::class, 'pegawai']);
+        Route::put('/datapegawai/update/{id}', [DealerController::class, 'updateMekanik'])->name('dealer.updateMekanik');        
         Route::get('/antrian', [DealerController::class, 'antrian']);
         Route::get('/datasparepart', [DealerController::class, 'sparepart'])->name('dealer.sparepart');
         Route::post('/datasparepart', [SparepartController::class, 'store'])->name('sparepart.store');
@@ -70,6 +71,8 @@ Route::middleware(['auth', 'role:dealer'])->group(function () {
         Route::get('/servis', [DealerController::class, 'servis']);
         Route::get('/transaksi', [DealerController::class, 'transaksi']);
         Route::put('/dealerku/update', [DealerController::class, 'update'])->name('dealer.update');
+        Route::delete('/datapegawai/delete/{id}', [DealerController::class, 'deleteMekanik'])->name('dealer.deleteMekanik');
+
     });
 });
 

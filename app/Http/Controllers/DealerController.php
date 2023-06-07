@@ -101,6 +101,37 @@ class DealerController extends Controller
 
     return redirect()->back()->with('success', 'Profil berhasil diubah');
 }
+public function updateMekanik(Request $request, $id)
+{   
+    $user = User::findOrFail($id);
+    $mechanic = $user->mechanic;
+    
+    $request->validate([
+        'position' => 'required',
+    ]);
+    
+    $mechanic->position = $request->position;
+    $mechanic->update();
+    
+    // Tambahkan logika lain yang Anda perlukan
+    
+    return redirect()->back()->with('success', 'Mekanik berhasil diperbarui');
+}
+public function deleteMekanik($id)
+{
+    $user = User::findOrFail($id);
+    $mechanic = $user->mechanic;
+
+    // Tambahkan logika lain yang Anda perlukan sebelum menghapus mekanik
+
+    $mechanic->delete();
+
+    // Tambahkan logika lain yang Anda perlukan setelah menghapus mekanik
+
+    return redirect()->back()->with('success', 'Mekanik berhasil dihapus');
+}
+
+
 
 
 }
