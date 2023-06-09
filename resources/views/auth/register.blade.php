@@ -24,10 +24,10 @@
         </div>
     </div>
 @endif
-<div class="top-12 right-12 fixed">
+{{-- <div class="top-12 right-12 fixed">
         <input type="checkbox" id="toggle" class="hidden-checkbox">
         <label for="toggle" class="toggle"></label>
-    </div>
+    </div> --}}
 <div class="flex items-center justify-center h-screen">
     <div class="w-10/12 md:w-full max-w-2xl p-4 bg-purple dark:bg-secondary rounded-lg shadow sm:p-6 md:p-8 sm:m-6">
         <div class="text-center text-primary dark:text-purple text-2xl mb-6">Register</div>
