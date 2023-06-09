@@ -86,12 +86,14 @@ class DealerController extends Controller
     $request->validate([
         'dealer_name' => 'required',
         'dealer_address' => 'required',
+        'maps' => 'required',
         'company' => 'required',
         'avatar' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
     ]);
 
     $dealer->dealer_name = $request->dealer_name;
     $dealer->dealer_address = $request->dealer_address;
+    $dealer->maps = $request->maps;
     $dealer->company = $request->company;
 
     if ($request->hasFile('avatar')) {

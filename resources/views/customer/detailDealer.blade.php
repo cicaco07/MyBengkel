@@ -82,6 +82,17 @@
                         {{ $dealer->company}}
                     </td> 
                 </tr>
+                <tr class="bg-primary text-purple">
+                    <td class="px-6 py-4">
+                        Map
+                    </td>
+                    <td class="px-6 py-4 text-end">
+                        <div class="flex justify-end">
+                            <iframe src="{{ $dealer->maps }}" width="500" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                    </td> 
+                </tr>
+                
             </tbody>
         </table>
     </div>
