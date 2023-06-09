@@ -74,7 +74,7 @@ class MechanicRepository implements IMechanicRepository
     public function updateStatus($id)
     {
         $service = Service::findOrFail($id);
-        $service->status = 'accept';
+        // $service->status = 'accept';
         $service->save();
     }
 

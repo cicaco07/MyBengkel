@@ -32,13 +32,13 @@
 
 
 <div class="flex items-center justify-center h-screen">     
-    <div class="w-10/12 md:w-full max-w-sm p-4 bg-secondary rounded-lg shadow sm:p-6 md:p-8">
+    <div class="w-10/12 md:w-full max-w-sm p-4 bg-purple dark:bg-secondary rounded-lg shadow sm:p-6 md:p-8">
         <form action="{{ route('loginValidate') }}" method="post" class="space-y-6">
-            <h3 class="text-2xl font-medium font-sans text-purple text-center">Login</h3>
+            <h3 class="text-2xl font-medium font-sans text-primary dark:text-purple text-center">Login</h3>
             @csrf
             <div>
-                <label for="username" class="block mb-2 text-sm font-medium text-purple">Username</label>
-                <input type="username" name="username" id="username" autocomplete="off" class="bg-transparent border-2 border-purple text-purple text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
+                <label for="username" class="block mb-2 text-sm font-medium text-primary dark:text-purple">Username</label>
+                <input type="username" name="username" id="username" autocomplete="off" class="dark:bg-transparent border-2 border-purple text-primary dark:text-purple text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
                 @if($errors->has('username'))
                 <div class="text-sm text-purple">
                     {{ $errors->first('username') }}
@@ -47,20 +47,20 @@
             </div>
             
             <div>
-                <label for="password" class="block mb-2 text-sm font-medium text-purple">Password</label>
-                <input type="password" name="password" id="password" class="bg-transparent border-2 border-purple text-purple text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
+                <label for="password" class="block mb-2 text-sm font-medium dark:text-purple">Password</label>
+                <input type="password" name="password" id="password" class="dark:bg-transparent border-2 border-purple text-primary dark:text-purple text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required>
             </div>
             <div class="flex items-start">
                 <div class="flex items-start">
                     <div class="flex items-center h-5">
                         <input id="remember" type="checkbox" value="" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300">
                     </div>
-                    <label for="remember" class="ml-2 text-sm font-medium text-purple">Remember me</label>
+                    <label for="remember" class="ml-2 text-sm font-medium text-primary dark:text-purple">Remember me</label>
                 </div>
                 <a href="#" class="ml-auto text-sm text-blue-700 hover:underline">Forgot Password?</a>
             </div>
             <button type="submit" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Login to your account</button>
-            <div class="text-sm font-medium text-gray-500 text-center">
+            <div class="text-sm font-medium text-primary dark:text-gray-500 text-center">
                 Not registered? <a href="{{ route('registerForm') }}" class="text-blue-700 hover:underline">Create account</a>
             </div>
         </form>

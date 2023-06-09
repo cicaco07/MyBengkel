@@ -58,17 +58,12 @@
   </div>
 </nav>
 
-<aside id="logo-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-primary border-r-2 border-secondary sm:translate-x-0" aria-label="Sidebar">
-  <div class="h-full px-3 pb-4 overflow-y-auto bg-primary">
-    <ul class="space-y-2 font-normal md:font-medium text-sm md:text-lg">
-      @yield('list-menu')
-    </ul>
-  </div>
-</aside>
-
-<div class="p-4 sm:ml-64">
-  @yield('main')
-</div>
-</div>
+  <aside id="logo-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen pt-16 transition-transform -translate-x-full bg-primary border-r-2 border-purple dark:border-secondary sm:translate-x-0" aria-label="Sidebar">
+     <div class="h-full px-3 pb-4 overflow-y-auto bg-gray-100 dark:bg-primary">
+        <ul class="space-y-2 font-normal mt-4 md:font-medium text-sm md:text-lg">
+           @yield('list-menu')
+        </ul>
+     </div>
+  </aside>
 
 @endsection
