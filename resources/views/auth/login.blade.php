@@ -21,7 +21,9 @@
             </button>
         </div>
     </div>
-    @endif
+@endif
+
+
 <div class="flex items-center justify-center h-screen">     
     <div class="w-10/12 md:w-full max-w-sm p-4 bg-secondary rounded-lg shadow sm:p-6 md:p-8">
         <form action="{{ route('loginValidate') }}" method="post" class="space-y-6">
@@ -57,6 +59,7 @@
         </form>
     </div>
 </div>
+
 <script>
     setTimeout(function() {
         var toastElement = document.getElementById('toast-success');
