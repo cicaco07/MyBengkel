@@ -52,28 +52,31 @@
             </div>
         </div>
     </div>
+    
 
-    <div class="mx-4 my-4 max-w-xs bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-        <a href="#">
-            <img class="rounded-t-lg" src="{{ asset('img/Mekanik.jpg')}}" alt="" />
-        </a>
-        <div class="px-6 py-4">
+    <div class="grid grid-flow-col gap-1">
+        <div class="mx-4 my-4 max-w-xs bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
             <a href="#">
-                <h5 class="text-base font-bold tracking-tight text-gray-900 dark:text-white">{{ $user->name }}</h5>
+                <img class="rounded-t-lg" src="{{ asset('img/Mekanik.jpg')}}" alt="" />
             </a>
-            <p class="font-normal text-gray-700 dark:text-gray-400">{{ $user->mechanic->position }}</p><br>
-            <div class="flex gap-4">
-                
-                <a data-modal-target="staticModal-{{ $user->id }}" data-modal-toggle="staticModal-{{ $user->id }}"  class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                    Edit
+            <div class="px-6 py-4">
+                <a href="#">
+                    <h5 class="text-base font-bold tracking-tight text-gray-900 dark:text-white">{{ $user->name }}</h5>
                 </a>
-                <form action="{{ route('dealer.deleteMekanik', $user->id) }}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                        Hapus
-                    </button>
-                </form>
+                <p class="font-normal text-gray-700 dark:text-gray-400">{{ $user->mechanic->position }}</p><br>
+                <div class="flex gap-4">
+                    
+                    <a data-modal-target="staticModal-{{ $user->id }}" data-modal-toggle="staticModal-{{ $user->id }}"  class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                        Edit
+                    </a>
+                    <form action="{{ route('dealer.deleteMekanik', $user->id) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-600 rounded-lg hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                            Hapus
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
