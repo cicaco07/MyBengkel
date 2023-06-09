@@ -7,13 +7,13 @@
                     {!! __('pagination.previous') !!}
                 </span>
             @else
-                <a href="{{ $paginator->previousPageUrl() }}" rel="prev" class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-purple bg-primary leading-5 rounded-md hover:text-gray-500 focus:outline-none focus:ring ring-gray-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150">
+                <a href="{{ $paginator->previousPageUrl() }}" rel="prev" class="relative inline-flex items-center px-4 py-2 text-sm font-medium text-primary dark:ttext-purple bg-primary leading-5 rounded-md hover:text-gray-500 focus:outline-none focus:ring ring-gray-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150">
                     {!! __('pagination.previous') !!}
                 </a>
             @endif
 
             @if ($paginator->hasMorePages())
-                <a href="{{ $paginator->nextPageUrl() }}" rel="next" class="relative inline-flex items-center px-4 py-2 mx-2 text-sm font-medium text-purple bg-primary leading-5 rounded-md hover:text-gray-500 focus:outline-none focus:ring ring-blue-200 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150">
+                <a href="{{ $paginator->nextPageUrl() }}" rel="next" class="relative inline-flex items-center px-4 py-2 mx-2 text-sm font-medium text-primary dark:text-purple bg-primary leading-5 rounded-md hover:text-gray-500 focus:outline-none focus:ring ring-blue-200 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150">
                     {!! __('pagination.next') !!}
                 </a>
             @else
@@ -25,7 +25,7 @@
 
         <div class="hidden sm:flex sm:items-center">
             <div class="mx-4">
-                <p class="text-sm text-purple">
+                <p class="text-sm text-primary dark:text-purple">
                     Showing
                     <span class="font-medium">{{ $paginator->firstItem() }}</span>
                     to

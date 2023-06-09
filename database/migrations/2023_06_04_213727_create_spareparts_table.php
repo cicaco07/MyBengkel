@@ -15,7 +15,7 @@ return new class extends Migration
             $table->increments('id');
             $table->string('namaitem');
             $table->integer('stok');
-            $table->decimal('harga', 20, 2)->default(0.00);
+            $table->integer('harga');
             $table->timestamps();
         });
     }

@@ -205,7 +205,7 @@
 </div>
 <script>
     setTimeout(function() {
-        var toastElement = document.getElementById('toast-success');
+        var toastElements = document.querySelectorAll('#toast-success, #toast-warning, #toast-danger');
         if (toastElement) {
             toastElement.remove();
         }

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Service;
+use App\Models\Sparepart;
 use App\Repositories\MechanicRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -64,11 +66,13 @@ class MechanicController extends Controller
         }
     }
 
-    public function updateStatus($id)
+    public function updateService($id)
     {
-        $service = $this->mechanicRepository->updateStatus($id);
+        $data = $this->mechanicRepository->getMechanicData();
+        $antrian = Service::findOrFail($id);
+        $sparepart = Sparepart::all();
 
-        return redirect()->back()->with('success', 'Status servis berhasil diubah');
+        return view('mechanic.updateservice', $data, compact('antrian', 'sparepart'));
     }
 
 }
