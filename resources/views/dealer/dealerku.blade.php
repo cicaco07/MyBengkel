@@ -37,11 +37,11 @@
         
         <label for="dealer_address" class="block mb-2 text-sm font-medium text-purple">Alamat Dealer</label>
         <input type="text" id="disabled-input" aria-label="disabled input" class="mb-4 bg-primary border border-secondary text-purple text-sm md:text-base rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 px-6" value="{{ $user->dealer->dealer_address }}" disabled>
-    
+        <iframe src="{{ $user->dealer->maps }}" width="500" height="300" style="border:0;" allowfullscreen=""></iframe>
+        <br>
         <label for="company" class="block mb-2 text-sm font-medium text-purple">Company</label>
         <input type="text" id="disabled-input" aria-label="disabled input" class="mb-4 bg-primary border border-secondary text-purple text-sm md:text-base rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 px-6" value="{{ $user->dealer->company }}" disabled>
-    
-    
+        {{-- <label for="company" class="block mb-2 text-sm font-medium text-purple"></label> --}}
     </div>
 
     <button data-modal-target="staticModal" data-modal-toggle="staticModal" class="block text-white bg-blue-700 md:mx-8 my-6 hover:bg-blue-800 focus:ring-1 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs md:text-sm px-5 py-2.5 text-center" type="button">
@@ -75,6 +75,10 @@
                     <div class="mb-6 mx-6">
                         <label for="dealer_address" class="block mb-2 text-sm font-medium text-purple">Alamat Dealer</label>
                         <input type="text" id="dealer_address" name="dealer_address" value="{{ auth()->user()->dealer->dealer_address }}" class="bg-primary border border-secondary text-purple text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="{{ $user->dealer->dealer_address }}">
+                    </div>
+                    <div class="mb-6 mx-6">
+                        <label for="maps" class="block mb-2 text-sm font-medium text-purple">Link Maps</label>
+                        <input type="text" id="maps" name="maps" value="{{ auth()->user()->dealer->maps }}" class="bg-primary border border-secondary text-purple text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="{{ $user->dealer->maps}}">
                     </div>
                     <div class="mb-6 mx-6">
                         <label for="company" class="block mb-2 text-sm font-medium text-purple">Company</label>
