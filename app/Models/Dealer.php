@@ -16,6 +16,7 @@ class Dealer extends Model
         'user_id',
         'dealer_name',
         'dealer_address',
+        'maps',
         'company',
     ];
 

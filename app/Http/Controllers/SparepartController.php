@@ -102,7 +102,7 @@ class SparepartController extends Controller
         // You can customize this part based on your application's logic
 
     // Redirect back to the sparepart list or any other desired route
-    return redirect()->back();
+    return redirect()->back()->with('success', 'Sparepart telah diupdate');
     }
 
     /**

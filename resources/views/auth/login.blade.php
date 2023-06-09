@@ -4,6 +4,8 @@
     
 @section('content')
 @if(session('success'))
+
+
     <div class="flex justify-center fixed top-0 left-1/2 transform -translate-x-1/2 z-50 mt-6">
         <div id="toast-success" class="flex items-center w-full max-w-xs p-4 mb-4 text-primary bg-success rounded-lg shadow" role="alert" role="alert">
             <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-green-500 bg-green-100 rounded-lg">
@@ -21,7 +23,14 @@
             </button>
         </div>
     </div>
-    @endif
+@endif
+
+    <div class="top-12 right-12 fixed">
+        <input type="checkbox" id="toggle" class="hidden-checkbox">
+        <label for="toggle" class="toggle"></label>
+    </div>
+
+
 <div class="flex items-center justify-center h-screen">     
     <div class="w-10/12 md:w-full max-w-sm p-4 bg-purple dark:bg-secondary rounded-lg shadow sm:p-6 md:p-8">
         <form action="{{ route('loginValidate') }}" method="post" class="space-y-6">
@@ -57,6 +66,7 @@
         </form>
     </div>
 </div>
+
 <script>
     setTimeout(function() {
         var toastElement = document.getElementById('toast-success');

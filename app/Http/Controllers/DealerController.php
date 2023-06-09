@@ -39,14 +39,18 @@ class DealerController extends Controller
     
         return view('dealer.pegawai', compact('user', 'users', 'positions'));
     }
-    
-
-
     public function antrian()
-    {
-        $user = Auth::user();
-        return view('dealer.antrian', compact('user'));
-    }
+{
+    $user = Auth::user();
+    $dealer = $user->dealer;
+
+    $services = Service::where('dealer_id', $dealer->id)
+        ->where('status', 'waiting')
+        ->get();
+
+    return view('dealer.antrian', compact('user','services'));
+}
+
     
     public function sparepart()
     {
@@ -82,12 +86,14 @@ class DealerController extends Controller
     $request->validate([
         'dealer_name' => 'required',
         'dealer_address' => 'required',
+        'maps' => 'required',
         'company' => 'required',
         'avatar' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
     ]);
 
     $dealer->dealer_name = $request->dealer_name;
     $dealer->dealer_address = $request->dealer_address;
+    $dealer->maps = $request->maps;
     $dealer->company = $request->company;
 
     if ($request->hasFile('avatar')) {
@@ -101,6 +107,34 @@ class DealerController extends Controller
 
     return redirect()->back()->with('success', 'Profil berhasil diubah');
 }
+public function updateMekanik(Request $request, $id)
+{   
+    $user = User::findOrFail($id);
+    $mechanic = $user->mechanic;
+    
+    $request->validate([
+        'position' => 'required',
+    ]);
+    
+    $mechanic->position = $request->position;
+    $mechanic->update();
+    
+    // Tambahkan logika lain yang Anda perlukan
+    
+    return redirect()->back()->with('success', 'Mekanik berhasil diperbarui');
+}
+public function deleteMekanik($id)
+{
+    $user = User::findOrFail($id);
+    $mechanic = $user->mechanic;
 
+    // Tambahkan logika lain yang Anda perlukan sebelum menghapus mekanik
+
+    $mechanic->delete();
+
+    // Tambahkan logika lain yang Anda perlukan setelah menghapus mekanik
+
+    return redirect()->back()->with('success', 'Mekanik berhasil dihapus');
+}
 
 }
