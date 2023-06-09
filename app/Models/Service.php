@@ -32,4 +32,13 @@ class Service extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function mechanic()
+    {
+        return $this->belongsTo(Service::class);
+    }
+
+    // public function sparepart(){
+    //     return $this->hasMany(sparepart::class)
+    // }
 }

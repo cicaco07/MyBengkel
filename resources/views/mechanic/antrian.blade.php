@@ -74,11 +74,12 @@
                 </td>
                 <td class="">
                     @if ($servis->status == 'waiting')
-                    <form action="{{ route('updateStatus', $servis->id) }}" method="POST">
+                    {{-- <form action="{{ route('accAntrian', $servis->id) }}" method="POST">
                         @csrf
-                        @method('PUT')
-                        <button type="submit" class="focus:outline-none text-primary bg-dark-purple hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-3 md:px-5 py-1 md:py-2.5 my-2 mx-2 md:mx-0">Proses</button>
-                    </form>
+                        @method('PUT') --}}
+                        {{-- <button type="submit" action="{{ route('accAntrian', $servis->id) }}"class="focus:outline-none text-primary bg-dark-purple hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-3 md:px-5 py-1 md:py-2.5 my-2 mx-2 md:mx-0">Proses</button> --}}
+                        <a href="{{route('accAntrian', $servis->id)}}" class="text-primary bg-dark-purple hover:bg-violet-600 hover:font-semibold focus:ring-1 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs md:text-sm px-3 md:px-5 py-1.5 md:py-2.5 text-center">Process</a>
+                    {{-- </form> --}}
                 @endif
                 </td>
             </tr>

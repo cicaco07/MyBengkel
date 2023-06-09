@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Repositories\MechanicRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Service; 
+use App\Models\Sparepart; 
 
 class MechanicController extends Controller
 {
@@ -40,6 +42,7 @@ class MechanicController extends Controller
         $data1 = $this->mechanicRepository->getDealerServis($user);
         return view('mechanic.antrian', $data, $data1);
     }
+    
 
     public function update(Request $request)
     {
@@ -71,4 +74,18 @@ class MechanicController extends Controller
         return redirect()->back()->with('success', 'Status servis berhasil diubah');
     }
 
+    public function acceptQueue($id)
+    {
+        $data = $this->mechanicRepository->getMechanicData();
+        $antrian = Service::findorFail($id);
+        $spareparts = Sparepart::all();
+
+        return view('mechanic.accAntrian', $data, compact('antrian', 'spareparts'));
+    }
+
+    public function biaya($id){
+        $data = $this->mechanicRepository->getMechanicData();
+        $antrian = Service::findorFail($id);
+        return view('mechanic.biaya', $data, compact('antrian'));
+    }
 }

@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SparepartController;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -55,6 +56,8 @@ Route::middleware(['auth', 'role:mechanic'])->group(function () {
         Route::get('/antrian', [MechanicController::class, 'antrian']);
         Route::put('/update-status/{id}', [MechanicController::class, 'updateStatus'])->name('updateStatus');
         Route::get('/servisku', [MechanicController::class, 'servisku']);
+        Route::get('/accAntrian/{id}', [MechanicController::class, 'acceptQueue'])->name('accAntrian');
+        Route::get('/accAntrian/transaksi', [MechanicController::class, 'biaya'])->name('mechanic.biaya');
     });
 });
 
