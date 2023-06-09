@@ -25,10 +25,10 @@
     </div>
 @endif
 
-          <div class="top-12 right-12 fixed">
-            <input type="checkbox" id="toggle" class="hidden-checkbox">
-            <label for="toggle" class="toggle"></label>
-          </div>
+    <div class="top-12 right-12 fixed">
+        <input type="checkbox" id="toggle" class="hidden-checkbox">
+        <label for="toggle" class="toggle"></label>
+    </div>
 
 
 <div class="flex items-center justify-center h-screen">     
