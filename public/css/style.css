@@ -1,5 +1,5 @@
 
-label {
+.toggle {
     position: relative;
     width: 100px;
     height: 40px;
@@ -14,7 +14,7 @@ label {
     box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
 }
 
-label::after {
+.toggle::after {
     content: '';
     position: absolute;
     height: 25px;
@@ -28,7 +28,7 @@ label::after {
     box-shadow: 0·0 10px rgba(0, 0, 0, 0.2);
 }
 
-label::before {
+.toggle::before {
     content: "";
     position: absolute;
     height: 1px;
@@ -41,7 +41,7 @@ label::before {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.18);
 }
 
-input:checked~label::after {
+input:checked~.toggle::after {
     left: 93px;
     transform: translateX(-100%);
     background: url('/img/moon-cloudy-svgrepo-com.svg');
@@ -49,13 +49,13 @@ input:checked~label::after {
     filter: brightness(0) invert(1); /* Mengubah warna SVG menjadi putih */
 }
 
-input:checked~label::before {
+input:checked~.toggle::before {
     left: 95px;
     border: 15px solid rgba(56, 48, 87, 0.685);
     transform: translateX(-100%);
 }
 
-input:checked~label {
+input:checked~.toggle {
     background: url('/img/stars-night.gif');
     background-size: cover;
     background-position: center;
@@ -72,6 +72,6 @@ input {
     pointer-events: none;
 }
 
-.input:checked~label::after svg {
+.input:checked~.toggle::after svg {
     fill: white; /* Ubah warna SVG menjadi putih */
 }

@@ -3,9 +3,6 @@
 @section('title', 'Sidebar')
 
 @section('content')
-<head>
-<link href="{{ asset('css/style.css') }}" rel="stylesheet">
-</head>
 <nav class="fixed top-0 z-50 w-full bg-primary border-b-2 border-secondary">
   <div class="px-3 py-3 lg:px-5 lg:pl-3">
     <div class="flex items-center justify-between">
@@ -23,9 +20,8 @@
       <div class="flex items-center">
         <div class="flex items-center ml-3">
           <div class="pr-5">
-                <input type="checkbox" class="hidden-checkbox" id="dark-mode" />
-                <label for="dark-mode"></label>
-                <div class="background"></div>                
+            <input type="checkbox" id="toggle" class="hidden-checkbox">
+            <label for="toggle" class="toggle"></label>
           </div>
           <div>
             <button type="button" class="flex text-sm mr-6 bg-gray-800 rounded-full focus:ring-2 focus:ring-purple" aria-expanded="false" data-dropdown-toggle="dropdown-user">
@@ -76,4 +72,3 @@
 </div>
 
 @endsection
-
