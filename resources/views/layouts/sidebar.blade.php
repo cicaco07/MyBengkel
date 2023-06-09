@@ -3,7 +3,7 @@
 @section('title', 'Sidebar')
     
 @section('content')
-<nav class="fixed top-0 z-50 w-full bg-primary border-b-2 border-secondary">
+<nav class="fixed top-0 z-50 w-full bg-gray-200 dark:bg-primary border-b-2 border-purple dark:border-secondary">
     <div class="px-3 py-3 lg:px-5 lg:pl-3">
       <div class="flex items-center justify-between">
         <div class="flex items-center justify-start">
@@ -14,7 +14,7 @@
               </svg>
            </button>
           <a href="#" class="flex ml-2 md:mr-24">
-            <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap text-purple">@yield('role')</span>
+            <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap text-primary dark:text-purple">@yield('role')</span>
           </a>
         </div>
         <div class="flex items-center">
@@ -54,9 +54,9 @@
     </div>
   </nav>
 
-  <aside id="logo-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen pt-20 transition-transform -translate-x-full bg-primary border-r-2 border-secondary sm:translate-x-0" aria-label="Sidebar">
-     <div class="h-full px-3 pb-4 overflow-y-auto bg-primary">
-        <ul class="space-y-2 font-normal md:font-medium text-sm md:text-lg">
+  <aside id="logo-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen pt-16 transition-transform -translate-x-full bg-primary border-r-2 border-purple dark:border-secondary sm:translate-x-0" aria-label="Sidebar">
+     <div class="h-full px-3 pb-4 overflow-y-auto bg-gray-100 dark:bg-primary">
+        <ul class="space-y-2 font-normal mt-4 md:font-medium text-sm md:text-lg">
            @yield('list-menu')
         </ul>
      </div>
