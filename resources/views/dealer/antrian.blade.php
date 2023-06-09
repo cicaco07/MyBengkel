@@ -25,53 +25,25 @@
             </tr>
         </thead>
         <tbody class="text-xs md:text-base">
-            <tr class="bg-primary border-b border-purple text-purple">
-                <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap dark:text-white">
-                    1.
-                </th>
-                <td class="px-6 py-4">
-                    Aryo Deva Saputra
-                </td>
-                <td class="px-6 py-4">
-                    N 3120 LU
-                </td>
-                <td class="px-6 py-4">
-                    Selesai
-                </td>
-                
-            </tr>
-            <tr class="bg-primary border-b border-purple text-purple">
-                <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap dark:text-white">
-                    2.
-                </th>
-                <td class="px-6 py-4">
-                    Bryan Tosin Saputro
-                </td>
-                <td class="px-6 py-4">
-                    N 21234 AB
-                </td>
-                <td class="px-6 py-4">
-                    Dikerjakan
-                </td>
-                
-            </tr>
-            <tr class="bg-primary text-purple">
-                <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap dark:text-white">
-                    3.
-                </th>
-                <td class="px-6 py-4">
-                    Desy Ayurianti
-                </td>
-                <td class="px-6 py-4">
-                    N 5689 AU
-                </td>
-                <td class="px-6 py-4">
-                    Dikerjakan
-                </td>
-                
-            </tr>
+            @foreach ($services as $index => $service)
+                <tr class="bg-primary border-b border-purple text-purple">
+                    <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap dark:text-white">
+                        {{ $index + 1 }}
+                    </th>
+                    <td class="px-6 py-4">
+                        {{ $service->user->name }}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ $service->plat_num }}
+                    </td>
+                    <td class="px-6 py-4">
+                        {{ $service->status }}
+                    </td>
+                </tr>
+            @endforeach
         </tbody>
     </table>
+    
 </div>
 
 <div class="flex flex-col items-center mt-6">
