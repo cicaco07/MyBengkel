@@ -13,15 +13,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        DB::unprepared('
-            CREATE TRIGGER update_stok_masuk AFTER INSERT ON stok_masuk_spareparts
-            FOR EACH ROW
-            BEGIN
-                UPDATE spareparts
-                SET stok = stok + NEW.jumlah
-                WHERE id = NEW.sparepart_id;
-            END
-        ');
+        // DB::unprepared('
+        //     CREATE TRIGGER update_stok_masuk AFTER INSERT ON stok_masuk_spareparts
+        //     FOR EACH ROW
+        //     BEGIN
+        //         UPDATE spareparts
+        //         SET stok = stok + NEW.jumlah
+        //         WHERE id = NEW.sparepart_id;
+        //     END
+        // ');
     }
 
 

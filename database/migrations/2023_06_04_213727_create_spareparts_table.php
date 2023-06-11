@@ -12,10 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('spareparts', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('namaitem');
-            $table->integer('stok');
-            $table->integer('harga');
+            $table->id();
+            $table->string('item_name');
+            $table->string('image')->default('NULL');
+            $table->integer('quantity_left');
+            $table->integer('price');
             $table->timestamps();
         });
     }

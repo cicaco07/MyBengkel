@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('stok_masuk_spareparts', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedInteger('sparepart_id');
-            $table->integer('jumlah');
-            $table->timestamps();
+        // Schema::create('stok_masuk_spareparts', function (Blueprint $table) {
+        //     $table->id();
+        //     $table->unsignedInteger('sparepart_id');
+        //     $table->integer('jumlah');
+        //     $table->timestamps();
 
-            $table->foreign('sparepart_id')->references('id')->on('spareparts')->onDelete('cascade');
-        });
+        //     $table->foreign('sparepart_id')->references('id')->on('spareparts')->onDelete('cascade');
+        // });
     }
 
     /**

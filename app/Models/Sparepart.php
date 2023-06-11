@@ -11,11 +11,17 @@ class Sparepart extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'namaitem', 
-        'stok', 
-        'harga',
+        'item_name', 
+        'image', 
+        'quantity_left', 
+        'price',
     ];
 
     // Jika ada timestamp (created_at, updated_at), tambahkan property ini
     public $timestamps = false;
+
+    public function cart()
+    {
+        return $this->belongsTo(Cart::class);
+    }
 }
