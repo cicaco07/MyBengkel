@@ -22,11 +22,11 @@
         </div>
     </div> 
     @endif
-<div class="p-4 border-1 rounded-lg mt-14 bg-secondary">
-    <div class="text-purple m-4 font-semibold text-2xl tracking-wide ">Data Antrian</div>
+<div class="p-4 border border-purple dark:border-none rounded-lg mt-14 bg-gray-100 dark:bg-secondary">
+    <div class="text-primary dark:text-purple m-4 font-semibold text-2xl tracking-wide ">Data Antrian</div>
 <div class="relative overflow-x-auto shadow-md rounded-lg">
     <table class="w-full text-sm text-left text-gray-500">
-        <thead class="text-xs text-purple uppercase bg-table-head">
+        <thead class="text-xs text-primary dark:text-purple uppercase bg-purple dark:bg-table-head">
             <tr>
                 <th scope="col" class="px-6 py-3">
                     No 
@@ -53,7 +53,7 @@
         </thead>
         <tbody class="text-xs md:text-base">
             @foreach ($services as $servis)
-            <tr class="bg-primary border-b border-purple last:border-0 text-purple">
+            <tr class="bg-gray-100 dark:bg-primary border-b border-primary dark:border-purple last:border-0 text-primary dark:text-purple">
                 <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap dark:text-white">
                     {{ $servis->id}}
                 </th>
@@ -73,14 +73,9 @@
                     {{ $servis->status }}
                 </td>
                 <td class="">
-                    @if ($servis->status == 'waiting')
-                    {{-- <form action="{{ route('accAntrian', $servis->id) }}" method="POST">
-                        @csrf
-                        @method('PUT') --}}
-                        {{-- <button type="submit" action="{{ route('accAntrian', $servis->id) }}"class="focus:outline-none text-primary bg-dark-purple hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-3 md:px-5 py-1 md:py-2.5 my-2 mx-2 md:mx-0">Proses</button> --}}
-                        <a href="{{route('accAntrian', $servis->id)}}" class="text-primary bg-dark-purple hover:bg-violet-600 hover:font-semibold focus:ring-1 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs md:text-sm px-3 md:px-5 py-1.5 md:py-2.5 text-center">Process</a>
-                    {{-- </form> --}}
-                @endif
+                    <a href="{{ route('mechanic.updateService', ['id'=>$servis->id])}}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-2 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">
+                        Update
+                    </a>
                 </td>
             </tr>
             @endforeach
