@@ -14,7 +14,7 @@ class Cart extends Model
 
     protected $fillable = [
         'service_id',
-        'spareparts_id',
+        'sparepart_id',
         'quantity',
         'subtotal',
         'total',
@@ -22,7 +22,7 @@ class Cart extends Model
 
     public function sparepart()
     {
-        return $this->hasMany(Sparepart::class);
+        return $this->hasMany(Sparepart::class, 'sparepart_id');
     }
 
     public function service()

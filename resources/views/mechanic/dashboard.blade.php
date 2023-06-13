@@ -15,7 +15,7 @@
                     <p class="text-xs md:text-sm font-medium text-primary text-center md:text-left">Lihat data diri kamu, lakukan perubahan jika datamu tidak sesuai</p>
                     <div class="flex items-center justify-center md:justify-between mt-4">
                         <div class="md:inline block"></div>
-                        <a href="profilku" class="text-primary bg-dark-purple hover:bg-violet-600 hover:font-semibold focus:ring-1 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs md:text-sm px-3 md:px-5 py-1.5 md:py-2.5 text-center">Lihat Profil</a>
+                        <a href="{{route('mechanic.profilku')}}" class="text-primary bg-dark-purple hover:bg-violet-600 hover:font-semibold focus:ring-1 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs md:text-sm px-3 md:px-5 py-1.5 md:py-2.5 text-center">Lihat Profil</a>
                     </div>
                 </div>
             </div>
@@ -27,7 +27,7 @@
                     <p class="text-xs md:text-sm font-medium text-primary text-center md:text-left">List antrian yang sedang diproses, dikerjakan atau sudah selesai</p>
                     <div class="flex items-center justify-center md:justify-between mt-4">
                         <div class="md:inline block"></div>
-                        <a href="antrian" class="text-primary bg-dark-purple hover:bg-violet-600 hover:font-semibold focus:ring-1 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs md:text-sm px-3 md:px-5 py-1.5 md:py-2.5 text-center">Lihat Data</a>
+                        <a href="{{route('mechanic.antrian')}}" class="text-primary bg-dark-purple hover:bg-violet-600 hover:font-semibold focus:ring-1 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs md:text-sm px-3 md:px-5 py-1.5 md:py-2.5 text-center">Lihat Data</a>
                     </div>
                 </div>
             </div>
@@ -39,13 +39,10 @@
                     <p class="text-xs md:text-sm font-medium text-primary text-center md:text-left">Mekanik dapat mentukan kapan akan start servis dari list antrian</p>
                     <div class="flex items-center justify-center md:justify-between mt-4">
                         <div class="md:inline block"></div>
-                        <a href="servisku" class="text-primary bg-dark-purple hover:bg-violet-600 hover:font-semibold focus:ring-1 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs md:text-sm px-3 md:px-5 py-1.5 md:py-2.5 text-center">Lihat Data</a>
+                        <a href="{{route('mechanic.servisku')}}" class="text-primary bg-dark-purple hover:bg-violet-600 hover:font-semibold focus:ring-1 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs md:text-sm px-3 md:px-5 py-1.5 md:py-2.5 text-center">Lihat Data</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    
-
-
 @endsection

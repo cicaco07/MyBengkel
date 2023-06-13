@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Service;
 use App\Models\Sparepart;
+use App\Models\Cart;
 use App\Repositories\MechanicRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -74,8 +75,15 @@ class MechanicController extends Controller
         $data = $this->mechanicRepository->getMechanicData();
         $antrian = Service::findOrFail($id);
         $sparepart = Sparepart::all();
+        $carts = Cart::where('service_id', $antrian->id)
+                ->join('spareparts', 'carts.sparepart_id', '=', 'spareparts.id')
+                ->select('carts.*', 'spareparts.item_name')
+                ->get();
 
-        return view('mechanic.updateservice', $data, compact('antrian', 'sparepart'));
+        $totalSubtotal = $carts->sum('subtotal');
+        $total = $totalSubtotal + 20000 + 2000;
+
+        return view('mechanic.updateservice', $data, compact('antrian', 'sparepart', 'carts', 'total'));
     }
 
     public function acceptQueue($id)

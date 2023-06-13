@@ -14,14 +14,14 @@ return new class extends Migration
         Schema::create('carts', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('service_id');
-            $table->unsignedBigInteger('spareparts_id');
+            $table->unsignedBigInteger('sparepart_id');
             $table->integer('quantity');
-            $table->integer('subtotal');
-            $table->integer('total');
+            $table->integer('subtotal')->nullable();
+            $table->integer('total',)->nullable();
             $table->timestamps();
             
             $table->foreign('service_id')->references('id')->on('service');
-            $table->foreign('spareparts_id')->references('id')->on('spareparts');
+            $table->foreign('sparepart_id')->references('id')->on('spareparts');
         });
     }
 
