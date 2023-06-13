@@ -64,4 +64,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(Service::class);
     }
+    public function otp()
+    {
+        return $this->hasMany(Service::class);
+    }
 }
