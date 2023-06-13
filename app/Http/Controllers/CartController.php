@@ -86,7 +86,7 @@ class CartController extends Controller
         return redirect()->back()->with('success', 'Cart berhasil dikosongkan.');
     }
 
-    public function updateQuantity(Request $request, $sparepartId)
+    public function updateQuantity(Request $request, $id)
     {
         $quantity = $request->input('quantity');
 
@@ -94,10 +94,10 @@ class CartController extends Controller
             'quantity' => 'required|integer|min:1',
         ]);
 
-        $cart = Cart::find($sparepartId);
+        $cart = Cart::find($id);
 
         if ($cart) {
-            $sparepart = Sparepart::find($sparepartId);
+            $sparepart = Sparepart::find($id);
 
             if ($sparepart) {
                 if ($quantity > $sparepart->quantity_left) {
@@ -115,8 +115,6 @@ class CartController extends Controller
                 $subtotal = $sparepart->price * $quantity;
                 $cart->subtotal = $subtotal;
                 $cart->save();
-
-                // echo "<script>console.log($sparepartId)</script>";
 
                 return redirect()->back()->with('success', 'Quantity berhasil diperbarui.');
             } else {

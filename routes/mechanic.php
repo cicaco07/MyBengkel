@@ -14,7 +14,7 @@ Route::middleware(['auth', 'role:mechanic'])->group(function () {
         Route::put('/update-status/{id}', [MechanicController::class, 'updateStatus'])->name('mechanic.updateStatus');
         Route::get('/servisku', [MechanicController::class, 'servisku'])->name('mechanic.servisku');
         Route::post('/cart', [CartController::class, 'store'])->name('mechanic.cart');
-        Route::put('/updatequantity/{sparepart-id}', [CartController::class, 'updateQuantity'])->name('update-quantity');
+        Route::put('/cart/updatequantity/{id}', [CartController::class, 'updateQuantity'])->name('update-quantity');
         Route::delete('/cart/remove/{id}', [CartController::class, 'removeItem'])->name('remove-item');
         Route::delete('/cart/clear/{serviceId}', [CartController::class, 'clearCart'])->name('clear-cart');
 

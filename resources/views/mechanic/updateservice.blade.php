@@ -269,12 +269,8 @@
                                             <td class="py-2 text-center">
                                                 <input type="hidden" name="service_id" value="{{ $antrian->id }}">
                                                 <input type="hidden" name="sparepart_id[]" value="{{ $item->id }}">
-                                                {{-- <button type="submit" class="text-primary focus:outline-none bg-dark-purple hover:bg-purple-900 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-3 md:px-5 py-1 md:py-2.5 my-2 mx-2 md:mx-0">Tambah</button> --}}
-                                                @if ($item->in_cart)
-                                                    <span class="text-primary">Berada di dalam cart</span>
-                                                @else
-                                                    <button type="submit" class="text-primary focus:outline-none bg-dark-purple hover:bg-purple-900 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-3 md:px-5 py-1 md:py-2.5 my-2 mx-2 md:mx-0">Tambah</button>
-                                                @endif
+                                                <button type="submit" class="text-primary focus:outline-none bg-dark-purple hover:bg-purple-900 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-3 md:px-5 py-1 md:py-2.5 my-2 mx-2 md:mx-0">Tambah</button>
+                                                
                                             </td>
                                         </form>
                                         </tr> 
