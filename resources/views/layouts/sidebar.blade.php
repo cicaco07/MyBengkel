@@ -29,7 +29,7 @@
               <img class="w-10 h-10 rounded-full" src="{{ asset('img/logout.png') }}" alt="user photo">
             </button>
           </div>
-          <div class="z-50 hidden my-4 text-base list-none bg-purple divide-y divide-gray-100 rounded" id="dropdown-user">
+          <div class="z-50 hidden my-4 text-base list-none border border-purple bg-purple divide-y divide-gray-100 rounded" id="dropdown-user">
             <div class="px-4 py-3" role="none">
               <p class="text-sm text-primary" role="none">
                 {{ $user->name }}
@@ -38,15 +38,15 @@
                 {{ $user->email }}
               </p>
             </div>
-            <ul class="bg-primary" role="none">
+            <ul class="bg-gray-100 dark:bg-primary" role="none">
               <li>
-                <a href="dashboard" class="block px-4 py-2 text-sm text-purple hover:text-primary hover:bg-dark-purple" role="menuitem">Dashboard</a>
+                <a href="dashboard" class="block px-4 py-2 text-sm text-primary dark:text-purple dark:hover:text-primary hover:bg-dark-purple dark:hover:bg-dark-purple" role="menuitem">Dashboard</a>
               </li>
               <li>
-                <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="block px-4 py-2 text-sm text-purple hover:text-primary hover:bg-dark-purple">
+                <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="block px-4 py-2 text-sm text-primary dark:text-purple hover:text-primary hover:bg-dark-purple">
                   <button>Logout</button>
                 </a>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
                   @csrf
                 </form>
               </li>

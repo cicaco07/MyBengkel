@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Service;
-use App\Models\Sparepart;
 use App\Models\Cart;
 use App\Repositories\MechanicRepository;
 use Illuminate\Http\Request;
@@ -71,7 +70,6 @@ class MechanicController extends Controller
     {
         $data = $this->mechanicRepository->getMechanicData();
         $antrian = Service::findOrFail($id);
-        $sparepart = Sparepart::all();
         $carts = Cart::where('service_id', $antrian->id)
                 ->join('spareparts', 'carts.sparepart_id', '=', 'spareparts.id')
                 ->select('carts.*', 'spareparts.item_name')
@@ -79,8 +77,45 @@ class MechanicController extends Controller
 
         $totalSubtotal = $carts->sum('subtotal');
         $total = $totalSubtotal + 20000 + 2000;
-
-        return view('mechanic.updateservice', $data, compact('antrian', 'sparepart', 'carts', 'total'));
+        
+        return view('mechanic.updateservice', $data, compact('antrian', 'carts', 'total'));
     }
+
+    public function updateStatus(Request $request, $id)
+    {
+        $user = Auth::user();
+        $data = $this->mechanicRepository->getMechanicData();
+        $data1 = $this->mechanicRepository->getDealerServis($user);
+        $this->mechanicRepository->updateStatus($id);
+
+        $service = Service::find($id);
+
+        if ($service && $service->status == 'waiting') {
+            if ($request->has('update_price')) {
+                $totalPrice = $request->input('update_price');
+                $service->price = $totalPrice;
+                $service->save();
+            }
+        }
+        
+        return redirect()->route('mechanic.antrian', array_merge($data, $data1, ['service' => $service]))->with('success', 'Status servis berhasil diubah');
+    }
+
+
+    public function giveRecom(Request $request, $id)
+    {
+        $request->validate([
+            'message' => 'required',
+        ]);
+    
+        $message = $request->input('message');
+    
+        $service = Service::find($id);
+        $service->recommended_service = $message;
+        $service->save();
+    
+        return redirect()->back()->with('success', 'Recommended servis berhasil diperbarui');
+    }
+
 
 }

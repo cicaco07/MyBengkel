@@ -6,6 +6,7 @@ use App\Repositories\Interfaces\IMechanicRepository;
 use App\Models\User;
 use App\Models\Service;
 use App\Models\Mechanic;
+use App\Models\Sparepart;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -17,6 +18,7 @@ class MechanicRepository implements IMechanicRepository
         $user = Auth::user();
         $mechanic = $user->mechanic;
         $dealer = $mechanic->dealer;
+        $sparepart = $dealer->sparepart;
 
         if (!$mechanic) {
             return null;
@@ -26,7 +28,7 @@ class MechanicRepository implements IMechanicRepository
         $dealers = $dealer ? $dealer->dealer_name : null;
         $company = $dealer ? $dealer->company : null;
 
-        return compact('user', 'position', 'dealers', 'company');
+        return compact('user', 'position', 'dealers', 'company', 'sparepart');
     }
 
     public function getDealerServis($user)
@@ -74,7 +76,7 @@ class MechanicRepository implements IMechanicRepository
     public function updateStatus($id)
     {
         $service = Service::findOrFail($id);
-        // $service->status = 'accept';
+        $service->status = 'accept';
         $service->save();
     }
 
@@ -118,16 +120,11 @@ class MechanicRepository implements IMechanicRepository
             })
             ->orWhere('position', 'LIKE', "%$keyword%");
         
-            $perPage = 5; // Jumlah item per halaman
-            $currentPage = request()->input('page', 1); // Halaman saat ini, default 1
-    
-            // Ambil semua hasil yang cocok dengan query
+            $perPage = 5;
+            $currentPage = request()->input('page', 1);
             $results = $query->get();
-    
-            // Buat objek Collection dari hasil
             $collection = collect($results);
-    
-            // Buat objek LengthAwarePaginator dengan menggunakan Collection
+
             $mechanics = new LengthAwarePaginator(
                 $collection->forPage($currentPage, $perPage),
                 $collection->count(),

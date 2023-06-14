@@ -36,7 +36,7 @@ class SparepartSeeder extends Seeder
                 'price' => 125000,
             ],
             [
-                'dealer_id' => 2,
+                'dealer_id' => 1,
                 'item_name' => 'Filter Udara',
                 'image' => 'https://i0.wp.com/setia1heri.com/wp-content/uploads/2019/05/plus-minus-open-filter-pada-sepeda-motor.jpg?resize=700%2C700&ssl=1',
                 'quantity_left' => 50,
@@ -64,14 +64,14 @@ class SparepartSeeder extends Seeder
                 'price' => 50000,
             ],
             [
-                'dealer_id' => 1,
+                'dealer_id' => 2,
                 'item_name' => 'Gir Depan',
                 'image' => 'https://maniakmotor.com/images/APRIL2014/MINGGU4/AS%20GIR%20TK%20Racing%20Custom.jpg',
                 'quantity_left' => 1000,
                 'price' => 50000,
             ],
             [
-                'dealer_id' => 1,
+                'dealer_id' => 2,
                 'item_name' => 'Gir Belakang',
                 'image' => 'https://s4.bukalapak.com/img/4699470233/large/Gir_belakang_untuk_motor_JUPITER_MX___Rear_sporcket_428_41T_.jpeg',
                 'quantity_left' => 1000,
@@ -85,7 +85,7 @@ class SparepartSeeder extends Seeder
                 'price' => 150000,
             ],
             [
-                'dealer_id' => 2,
+                'dealer_id' => 3,
                 'item_name' => 'Ring Piston',
                 'image' => 'https://imgx.gridoto.com/crop/0x162:1024x822/700x465/photo/gridoto/2018/09/07/1252467113.jpg',
                 'quantity_left' => 300,

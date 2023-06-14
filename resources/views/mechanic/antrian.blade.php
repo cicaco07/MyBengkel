@@ -72,11 +72,13 @@
                 <td class="px-6 py-4">
                     {{ $servis->status }}
                 </td>
+                @if ($servis->status=='waiting')
                 <td class="">
                     <a href="{{ route('mechanic.updateService', ['id'=>$servis->id])}}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-2 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">
                         Update
                     </a>
                 </td>
+                @endif
             </tr>
             @endforeach
         </tbody>
