@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
@@ -10,6 +11,8 @@ use App\Models\Dealer;
 use App\Models\Service;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Sparepart;
+use App\Repositories\ServicesRepository;
+
 class DealerController extends Controller
 {
     public function dashboard()
@@ -45,11 +48,12 @@ class DealerController extends Controller
     $dealer = $user->dealer;
 
     $services = Service::where('dealer_id', $dealer->id)
-        ->where('status', 'waiting')
+        ->where('status', '!=', 'done') // Tambahkan kondisi untuk menghindari status "done"
         ->get();
 
-    return view('dealer.antrian', compact('user','services'));
+    return view('dealer.antrian', compact('user', 'services'));
 }
+
 
     
     public function sparepart()
@@ -136,5 +140,32 @@ public function deleteMekanik($id)
 
     return redirect()->back()->with('success', 'Mekanik berhasil dihapus');
 }
+public function search(Request $request)
+{
+    $user = Auth::user();
+    $keyword = $request->input('search');
+    $search = $keyword; // Simpan nilai $keyword ke dalam variabel $search
+
+    $dealer = $user->dealer;
+
+    $services = Service::where('dealer_id', $dealer->id)
+        ->where('status', '!=', 'done');
+
+    if (!empty($keyword)) {
+        $services->where(function ($query) use ($keyword) {
+            $query->whereHas('user', function ($query) use ($keyword) {
+                $query->where('name', 'LIKE', "%$keyword%");
+            })
+            ->orWhere('plat_num', 'LIKE', "%$keyword%")
+            ->orWhere('problem', 'LIKE', "%$keyword%");
+        });
+    }
+
+    $services = $services->get();
+
+    return view('dealer.antrian', compact('user', 'services', 'search'));
+}
+
+
 
 }
