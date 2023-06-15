@@ -86,19 +86,26 @@ class MechanicController extends Controller
         $user = Auth::user();
         $data = $this->mechanicRepository->getMechanicData();
         $data1 = $this->mechanicRepository->getDealerServis($user);
-        $this->mechanicRepository->updateStatus($id);
+        $service = $this->mechanicRepository->updateStatus($id);
 
-        $service = Service::find($id);
+        $request->validate([
+            'price' => 'required',
+        ]);
 
-        if ($service && $service->status == 'waiting') {
-            if ($request->has('update_price')) {
-                $totalPrice = $request->input('update_price');
-                $service->price = $totalPrice;
-                $service->save();
-            }
-        }
-        
-        return redirect()->route('mechanic.antrian', array_merge($data, $data1, ['service' => $service]))->with('success', 'Status servis berhasil diubah');
+        $price = $request->input('price');
+
+        $totalprice = Service::find($id);
+        $totalprice->price = $price;
+        $totalprice->save();
+
+        return redirect()
+            ->route('mechanic.antrian')
+            ->with([
+            'data' => $data,
+            'data1' => $data1,
+            'service' => $service,
+            'totalprice' => $totalprice
+        ])->with('success', 'Status servis berhasil diubah');
     }
 
 

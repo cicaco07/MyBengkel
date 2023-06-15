@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('recommended_service')->nullable();
             $table->dateTime('plan_date')->nullable();
             $table->string('price')->nullable();
-            $table->enum('status',['waiting', 'accept', 'done'])->default('waiting');
+            $table->enum('status',['waiting', 'accept', 'process', 'done'])->default('waiting');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');

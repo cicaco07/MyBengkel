@@ -322,7 +322,7 @@
                 <form action="{{ route('mechanic.updateStatus', ['id' => $antrian->id]) }}" method="POST">
                     @csrf
                     @method('PUT')
-                    <input type="hidden" name="update_price" value="{{$total}}">
+                    <input type="hidden" name="price" value="{{$total}}">
                     <button type="submit" class="focus:outline-none text-primary bg-dark-purple hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-3 md:px-5 py-1 md:py-2.5 my-2 mx-2 md:mx-0">Submit</button>
                 </form>
             @endif
