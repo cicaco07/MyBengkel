@@ -12,15 +12,15 @@ class Service extends Model
     protected $primaryKey = 'id';
 
     protected $fillable = [
-        'id',
         'user_id',
         'dealer_id',
         'vehicle_name',
         'problem',
         'plat_num',
         'recommended_service',
+        'price',
         'plan_date',
-        'service',
+        'status',
     ];
 
     public function dealer()
@@ -33,6 +33,7 @@ class Service extends Model
         return $this->belongsTo(User::class);
     }
 
+<<<<<<< HEAD
     public function mechanic()
     {
         return $this->belongsTo(Service::class);
@@ -41,4 +42,10 @@ class Service extends Model
     // public function sparepart(){
     //     return $this->hasMany(sparepart::class)
     // }
+=======
+    public function cart()
+    {
+        return $this->belongsTo(Cart::class, 'price');
+    }
+>>>>>>> 0196afe9b9b5613cb9232c9956cabe35f6a2d567
 }

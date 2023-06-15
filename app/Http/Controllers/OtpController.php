@@ -29,7 +29,7 @@ class OtpController extends Controller
 
     // Mengirim pesan WhatsApp menggunakan Twilio
     $sid = 'ACed6000105782f21d5a3222de4d0d5287';
-    $token = '4d28bf32af0c94b5f6d32f780055a8f8';
+    $token = '747758c8d2cc7c00fa2e33211c4d3cba';
     $twilioNumber = '+14155238886';
 
     $client = new Client($sid, $token);

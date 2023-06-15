@@ -24,4 +24,9 @@ class Sparepart extends Model
     {
         return $this->belongsTo(Cart::class);
     }
+
+    public function dealer()
+    {
+        return $this->belongsTo(Sparepart::class);
+    }
 }

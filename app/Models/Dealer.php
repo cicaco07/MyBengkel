@@ -20,15 +20,23 @@ class Dealer extends Model
         'company',
     ];
 
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function mechanics(){
+    public function mechanics()
+    {
         return $this->hasMany(Mechanic::class);
     }
 
-    public function services(){
+    public function services()
+    {
         return $this->hasMany(Service::class);
+    }
+    
+    public function sparepart()
+    {
+        return $this->hasMany(Sparepart::class);
     }
 }

@@ -23,7 +23,6 @@ class ServiceSeeder extends Seeder
                 'plat_num' => 'N 5678 LI',
                 'recommended_service' => '',
                 'plan_date' => Carbon::parse('2018-10-29 15:00:00'),
-                'price' => '100000',
             ],
             [
                 'user_id' => '11',
@@ -33,7 +32,6 @@ class ServiceSeeder extends Seeder
                 'plat_num' => 'N 1234 LI',
                 'recommended_service' => '',
                 'plan_date' => Carbon::parse('2018-10-29 15:30:00'),
-                'price' => '100000',
             ],
             [
                 'user_id' => '18',
@@ -43,7 +41,6 @@ class ServiceSeeder extends Seeder
                 'plat_num' => 'N 0987 LI',
                 'recommended_service' => '',
                 'plan_date' => Carbon::parse('2018-10-29 16:00:00'),
-                'price' => '100000',
             ],
             [
                 'user_id' => '23',
@@ -53,7 +50,6 @@ class ServiceSeeder extends Seeder
                 'plat_num' => 'N 4321 LI',
                 'recommended_service' => '',
                 'plan_date' => Carbon::parse('2018-10-29 16:45:00'),
-                'price' => '100000',
             ],
             [
                 'user_id' => '24',
@@ -63,7 +59,6 @@ class ServiceSeeder extends Seeder
                 'plat_num' => 'N 7690 LI',
                 'recommended_service' => '',
                 'plan_date' => Carbon::parse('2018-10-30 08:00:00'),
-                'price' => '100000',
             ],
             [
                 'user_id' => '24',
@@ -73,7 +68,6 @@ class ServiceSeeder extends Seeder
                 'plat_num' => 'N 2232 LI',
                 'recommended_service' => '',
                 'plan_date' => Carbon::parse('2018-10-30 08:45:00'),
-                'price' => '100000',
             ],
             [
                 'user_id' => '25',
@@ -83,7 +77,6 @@ class ServiceSeeder extends Seeder
                 'plat_num' => 'N 5679 LX',
                 'recommended_service' => '',
                 'plan_date' => Carbon::parse('2018-10-30 16:00:00'),
-                'price' => '100000',
             ],
             [
                 'user_id' => '18',
@@ -93,7 +86,6 @@ class ServiceSeeder extends Seeder
                 'plat_num' => 'N 5680 LA',
                 'recommended_service' => '',
                 'plan_date' => Carbon::parse('2018-10-29 16:00:00'),
-                'price' => '100000',
             ],
 
         ]);

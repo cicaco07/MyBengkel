@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Service;
-use App\Models\Sparepart;
 use App\Models\Cart;
 use App\Repositories\MechanicRepository;
 use Illuminate\Http\Request;
@@ -74,7 +73,6 @@ class MechanicController extends Controller
     {
         $data = $this->mechanicRepository->getMechanicData();
         $antrian = Service::findOrFail($id);
-        $sparepart = Sparepart::all();
         $carts = Cart::where('service_id', $antrian->id)
                 ->join('spareparts', 'carts.sparepart_id', '=', 'spareparts.id')
                 ->select('carts.*', 'spareparts.item_name')
@@ -82,10 +80,11 @@ class MechanicController extends Controller
 
         $totalSubtotal = $carts->sum('subtotal');
         $total = $totalSubtotal + 20000 + 2000;
-
-        return view('mechanic.updateservice', $data, compact('antrian', 'sparepart', 'carts', 'total'));
+        
+        return view('mechanic.updateservice', $data, compact('antrian', 'carts', 'total'));
     }
 
+<<<<<<< HEAD
     public function acceptQueue($id)
     {
         $data = $this->mechanicRepository->getMechanicData();
@@ -100,4 +99,50 @@ class MechanicController extends Controller
         $antrian = Service::findorFail($id);
         return view('mechanic.biaya', $data, compact('antrian'));
     }
+=======
+    public function updateStatus(Request $request, $id)
+    {
+        $user = Auth::user();
+        $data = $this->mechanicRepository->getMechanicData();
+        $data1 = $this->mechanicRepository->getDealerServis($user);
+        $service = $this->mechanicRepository->updateStatus($id);
+
+        $request->validate([
+            'price' => 'required',
+        ]);
+
+        $price = $request->input('price');
+
+        $totalprice = Service::find($id);
+        $totalprice->price = $price;
+        $totalprice->save();
+
+        return redirect()
+            ->route('mechanic.antrian')
+            ->with([
+            'data' => $data,
+            'data1' => $data1,
+            'service' => $service,
+            'totalprice' => $totalprice
+        ])->with('success', 'Status servis berhasil diubah');
+    }
+
+
+    public function giveRecom(Request $request, $id)
+    {
+        $request->validate([
+            'message' => 'required',
+        ]);
+    
+        $message = $request->input('message');
+    
+        $service = Service::find($id);
+        $service->recommended_service = $message;
+        $service->save();
+    
+        return redirect()->back()->with('success', 'Recommended servis berhasil diperbarui');
+    }
+
+
+>>>>>>> 0196afe9b9b5613cb9232c9956cabe35f6a2d567
 }

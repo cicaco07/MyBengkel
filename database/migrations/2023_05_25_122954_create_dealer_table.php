@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id')->unique();
             $table->string('dealer_name');
             $table->string('dealer_address');
+            $table->string('maps',2000)->nullable();
             $table->enum('company',['Yamaha', 'Honda', 'Suzuki']);
             $table->timestamps();
 

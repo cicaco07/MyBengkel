@@ -158,7 +158,7 @@
                                             <tbody class="text-xs md:text-base">
                                                 <form action="{{ route('update-quantity', $cart->id) }}" method="POST">
                                                     @csrf
-                                                    @method('POST')
+                                                    @method('PUT')
                                                     <tr class="text-primary dark:text-purple border border-primary dark:border-purple">
                                                         <td class="py-2 text-center">{{ $cart->sparepart_id }}</td>
                                                         <td class="py-2 text-center">{{ $cart->item_name }}</td>
@@ -204,8 +204,13 @@
     <div class="mx-10">
         
     </div> 
-    <div class="flex justify-between mx-10 mt-10">
-        <div class="ml-24">
+    <div class="flex justify-around mx-10 mt-10">
+        <div class="">
+            <a href="{{route('mechanic.antrian')}}" class="">
+                <button type="submit" class="focus:outline-none text-primary bg-dark-purple hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-3 md:px-5 py-1 md:py-2.5 my-2 mx-2 md:mx-0">Kembali</button>
+            </a>
+        </div>
+        <div class="flex items-center">
             <button data-modal-target="staticModal" data-modal-toggle="staticModal" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-2 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
                 Pilih sparepart
               </button>
@@ -270,7 +275,6 @@
                                                 <input type="hidden" name="service_id" value="{{ $antrian->id }}">
                                                 <input type="hidden" name="sparepart_id[]" value="{{ $item->id }}">
                                                 <button type="submit" class="text-primary focus:outline-none bg-dark-purple hover:bg-purple-900 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-3 md:px-5 py-1 md:py-2.5 my-2 mx-2 md:mx-0">Tambah</button>
-                                                
                                             </td>
                                         </form>
                                         </tr> 
@@ -282,18 +286,56 @@
                 </div>
             </div>
         </div>
-        <form action="{{ route('clear-cart', $antrian->id) }}" method="POST">
-            @csrf
-            @method('DELETE')
-            <button type="submit" class="bg-red-500 hover:bg-red-600 text-primary font-medium rounded-lg text-sm px-5 py-2.5 text-center">Hapus Semua Item</button>
-        </form>
-        {{-- @if($antrian->status == 'waiting')
-        <form action="{{ route('mechanic.updateStatus', $antrian->id) }}" method="POST">
-            @csrf
-            @method('PUT')
-            <button type="submit" class="focus:outline-none text-primary bg-dark-purple hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-3 md:px-5 py-1 md:py-2.5 my-2 mx-2 md:mx-0">Submit</button>
-        </form>
-        @endif --}}
+        @if ($antrian->recommended_service == '')
+        <div class="flex items-center">
+            <button data-modal-target="staticModal1" data-modal-toggle="staticModal1" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-2 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
+                Rekomendasi
+            </button>
+            <div id="staticModal1" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                <div class="relative w-full max-w-4xl max-h-full">
+                    <div class="relative bg-gray-100 dark:bg-primary rounded-lg shadow">
+                        <div class="flex items-start justify-between p-4 rounded-t">
+                            <h3 class="text-xl font-semibold text-primary dark:text-purple">
+                                Rekomendasi
+                            </h3>
+                            <button type="button" class="text-purple bg-transparent hover:bg-secondary hover:text-purple rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="staticModal1">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>  
+                            </button>
+                        </div>
+                        <form action="{{ route('mechanic.giveRecom', $antrian->id)}}" method="POST">
+                            @csrf
+                            @method('PUT')
+                            <div class="mx-4 pb-6">           
+                                <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Pesan</label>
+                                <textarea id="message" name="message" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your thoughts here..."></textarea>
+                                <button type="submit" class="focus:outline-none text-primary bg-dark-purple hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-3 md:px-5 py-1 md:py-2.5 my-2 mx-2 md:mx-0">Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endif
+        
+        <div class="">
+            @if($antrian->status == 'waiting')
+                <form action="{{ route('mechanic.updateStatus', ['id' => $antrian->id]) }}" method="POST">
+                    @csrf
+                    @method('PUT')
+                    <input type="hidden" name="price" value="{{$total}}">
+                    <button type="submit" class="focus:outline-none text-primary bg-dark-purple hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-3 md:px-5 py-1 md:py-2.5 my-2 mx-2 md:mx-0">Submit</button>
+                </form>
+            @endif
+        </div>
+        
+        
+        <div class="flex items-center">
+            <form action="{{ route('clear-cart', $antrian->id) }}" method="POST">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="bg-red-500 hover:bg-red-600 text-primary font-medium rounded-lg text-sm px-5 py-2.5 text-center">Hapus Semua Item</button>
+            </form>
+        </div>
 
     </div>
 </div>

@@ -5,11 +5,11 @@
 @section('main-content')
 <div class="p-4 border-1 rounded-lg mt-14 bg-secondary">
     <div class="text-purple mx-8 my-4 font-semibold text-2xl tracking-wide">Data Pegawai</div>
-    <div>
+    {{-- <div>
         <button data-modal-target="staticModal" data-modal-toggle="staticModal" class="block text-white bg-blue-700 mx-7 my-6 hover:bg-blue-800 focus:ring-1 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center" type="button">
             Tambah Pegawai
         </button>
-    </div>
+    </div> --}}
     @foreach ($users as $user) 
     <div id="staticModal-{{ $user->id }}" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
         <div class="relative w-full max-w-2xl max-h-full">
@@ -29,7 +29,7 @@
                     </div> --}}
                     <div class="mb-2 mx-6">
                         <label for="position" class="block mb-2 text-sm font-medium text-purple">Jabatan</label>
-                        <select type="text" name="position" id="position" value="{{ $user->mechanic->position }}" class="bg-primary border border-secondary text-purple text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                        <select type="text" name="position" id="position" value="{{$user->mechanic->position }}" class="bg-primary border border-secondary text-purple text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                             <option value="Kepala Mekanik">Kepala Mekanik</option>
                             <option value="Mekanik">Mekanik</option>
                         </select>

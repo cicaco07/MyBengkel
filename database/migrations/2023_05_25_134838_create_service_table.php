@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('dealer_id');
+            $table->string('vehicle_name');
             // $table->enum('problem',['Ganti Ban', 'Ganti Oli', 'Service Rutin', 'Lain-lain']);
             $table->string('problem', 50);
             $table->string('plat_num');
@@ -22,7 +23,7 @@ return new class extends Migration
             $table->string('recommended_service')->nullable();
             $table->dateTime('plan_date')->nullable();
             $table->string('price')->nullable();
-            $table->enum('status',['waiting', 'accept', 'done'])->default('waiting');
+            $table->enum('status',['waiting', 'accept', 'process', 'done'])->default('waiting');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
