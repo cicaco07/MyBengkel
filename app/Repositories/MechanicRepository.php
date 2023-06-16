@@ -45,6 +45,20 @@ class MechanicRepository implements IMechanicRepository
         return compact('user', 'services', 'dealer');
     }
 
+    public function getDataServis()
+    {
+        $user = Auth::user();
+        $mechanic = $user->mechanic;
+        $dealer = $mechanic->dealer;
+
+        if (!$mechanic) {
+            return null;
+        }
+    
+        $services = Service::where('dealer_id', $dealer->id)->paginate(5);
+
+        return compact('user', 'services', 'dealer');
+    }
 
     public function updateProfile($user, $request)
     {

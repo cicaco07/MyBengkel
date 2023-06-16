@@ -6,6 +6,8 @@ use App\Models\Dealer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Service; 
+use App\Models\Cart;
+use App\Models\Sparepart; 
 
 class CustomerController extends Controller
 {
@@ -54,6 +56,13 @@ class CustomerController extends Controller
         $user = Auth::user();
         $services = $user->service()->get();
         return view('customer.allservisku', compact('user','services'));
+    }
+
+    public function viewDetailService($id){
+        $user = Auth::user();
+        $service = Service::with('sparepart')->findOrFail($id);
+        $spareparts = $service->sparepart;
+        return view('customer.detailService', compact('user', 'service', 'spareparts'));
     }
 
     public function servisku2()
@@ -114,6 +123,19 @@ class CustomerController extends Controller
         $user->save();
     
         return redirect()->back()->with('success', 'Profile berhasil diubah');
+    }
+
+    public function updateStatus(Request $request, $id)
+    {
+        $user = Auth::user();
+        $service = Service::findOrFail($id);
+        $service->status = 'process';
+        $service->save();
+
+        $services = $user->service()->get();
+        return redirect()->route('customer.allservisku', ['id'=>$service->id])->with('success', 'Data Servis berhasil dibuat');
+
+    // Redirect or return response as needed
     }
     
 }

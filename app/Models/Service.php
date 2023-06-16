@@ -33,8 +33,34 @@ class Service extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function mechanic()
+    {
+        return $this->belongsTo(Service::class);
+    }
+
+    // public function sparepart(){
+    //     return $this->hasMany(sparepart::class)
+    // }
+    // public function cart()
+    // {
+    //     return $this->belongsTo(Cart::class, 'price');
+    // }
+
     public function cart()
     {
-        return $this->belongsTo(Cart::class, 'price');
+        // return $this->hasOne(Cart::class, 'service_id');
+        return $this->hasMany(Cart::class, 'service_id');
+    }
+
+    public function deleteWithCart()
+    {
+        $this->cart()->delete();
+        $this->delete();
+    }
+
+    public function sparepart()
+    {
+        return $this->belongsToMany(Sparepart::class, 'carts', 'service_id', 'sparepart_id')
+            ->withPivot('quantity', 'subtotal');
     }
 }

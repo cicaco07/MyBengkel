@@ -8,6 +8,7 @@ use App\Repositories\MechanicRepository;
 use Illuminate\Support\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Sparepart; 
 
 class MechanicController extends Controller
 {
@@ -45,6 +46,7 @@ class MechanicController extends Controller
         $data1 = $this->mechanicRepository->getDealerServis($user);
         return view('mechanic.antrian', $data, $data1);
     }
+    
 
     public function update(Request $request)
     {
