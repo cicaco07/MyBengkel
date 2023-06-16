@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Service;
 use App\Models\Cart;
 use App\Repositories\MechanicRepository;
+use Illuminate\Support\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -122,6 +123,24 @@ class MechanicController extends Controller
         $service->save();
     
         return redirect()->back()->with('success', 'Recommended servis berhasil diperbarui');
+    }
+
+    public function updateWaktu(Request $request, $id)
+    {
+        $request->validate([
+            'datepicker' => 'required',
+            'time' => 'required',
+        ]);
+
+        $planDate = $request->input('datepicker');
+        $time = $request->input('time');
+
+        $antrian = Service::find($id);
+        $antrian->plan_date = Carbon::createFromFormat('m/d/Y', $planDate)->format('Y-m-d');
+        $antrian->time = $time;
+        $antrian->save();
+
+        return redirect()->back()->with('success', 'Data berhasil diperbarui');
     }
 
 

@@ -12,6 +12,7 @@ Route::middleware(['auth', 'role:mechanic'])->group(function () {
         Route::get('/antrian', [MechanicController::class, 'antrian'])->name('mechanic.antrian');
         Route::get('/update-service/{id}', [MechanicController::class, 'updateService'])->name('mechanic.updateService');
         Route::put('/give-recom/{id}', [MechanicController::class, 'giveRecom'])->name('mechanic.giveRecom');
+        Route::put('/update-waktu/{id}', [MechanicController::class, 'updateWaktu'])->name('update-waktu');
         Route::put('/update-status/{id}', [MechanicController::class, 'updateStatus'])->name('mechanic.updateStatus');
         Route::get('/servisku', [MechanicController::class, 'servisku'])->name('mechanic.servisku');
         Route::post('/cart', [CartController::class, 'store'])->name('mechanic.cart');
