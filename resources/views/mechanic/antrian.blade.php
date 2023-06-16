@@ -53,6 +53,7 @@
         </thead>
         <tbody class="text-xs md:text-base">
             @foreach ($services as $servis)
+            @if ($servis->status=='waiting'||$servis->status=='accept')
             <tr class="bg-gray-100 dark:bg-primary border-b border-primary dark:border-purple last:border-0 text-primary dark:text-purple">
                 <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap dark:text-white">
                     {{ $servis->id}}
@@ -80,6 +81,7 @@
                     @endif
                 </td>
             </tr>
+            @endif
             @endforeach
         </tbody>
     </table>

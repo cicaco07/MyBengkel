@@ -26,8 +26,10 @@ class MechanicController extends Controller
 
     public function servisku()
     {
+        $user = Auth::user();
         $data = $this->mechanicRepository->getMechanicData();
-        return view('mechanic.servisku', $data);
+        $data1 = $this->mechanicRepository->getDealerServis($user);
+        return view('mechanic.servisku', $data, $data1);
     }
 
     public function profilku()
@@ -77,7 +79,7 @@ class MechanicController extends Controller
                 ->get();
 
         $totalSubtotal = $carts->sum('subtotal');
-        $total = $totalSubtotal + 20000 + 2000;
+        $total = $totalSubtotal;
         
         return view('mechanic.updateservice', $data, compact('antrian', 'carts', 'total'));
     }
@@ -143,5 +145,21 @@ class MechanicController extends Controller
         return redirect()->back()->with('success', 'Data berhasil diperbarui');
     }
 
+    public function updateStatus2($id)
+    {
+        $status = Service::findOrFail($id);
+        $status->status = 'repairing';
+        $status->save();
 
+        return redirect()->back()->with('success', 'Servis sedang dijalankan');
+    }
+
+    public function updateStatus3($id)
+    {
+        $status = Service::findOrFail($id);
+        $status->status = 'done';
+        $status->save();
+
+        return redirect()->back()->with('success', 'Servis telah selesai');
+    }
 }
