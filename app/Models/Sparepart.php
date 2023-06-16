@@ -22,7 +22,10 @@ class Sparepart extends Model
 
     public function cart()
     {
-        return $this->belongsTo(Cart::class);
+        // return $this->belongsTo(Cart::class);
+        return $this->hasMany(Cart::class, 'sparepart_id', 'id');
+        // return $this->belongsToMany(Cart::class, 'carts', 'sparepart_id', 'service_id')
+        // ->withPivot('quantity', 'subtotal');
     }
 
     public function dealer()

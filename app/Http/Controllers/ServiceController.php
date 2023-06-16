@@ -31,11 +31,13 @@ class ServiceController extends Controller
         return redirect()->route('customer.allservisku', ['id'=>$service->id])->with('success', 'Data Servis berhasil dibuat');
     }
 
+
     public function destroyService($id)
     {
         $user = Auth::user();
-        $servis = Service::findOrFail($id); 
-        $servis->delete();
+        // $servis = Service::findOrFail($id); 
+        $servis = Service::where('user_id', $user->id)->findOrFail($id);
+        $servis->deleteWithCart();
         return redirect()->back()->with('success', 'Queue has been deleted successfully.');
     }
 }
