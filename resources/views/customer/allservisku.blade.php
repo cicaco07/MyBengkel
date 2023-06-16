@@ -96,9 +96,12 @@
                         </div>
                     </div>
                 </div>
-                <button class="flex text-primary bg-dark-purple hover:bg-violet-600 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-3 md:px-2 py-2.5 mx-5 md:mx-0" type="button">
+                {{-- <button href="{{ route('customer.viewDetailService', ['id'=>$service->id])}}" class="flex text-primary bg-dark-purple hover:bg-violet-600 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-3 md:px-2 py-2.5 mx-5 md:mx-0" type="submit">
                     Cek Rekomendasi
-                </button>
+                </button> --}}
+                <a href="{{ route('customer.viewDetailService', ['id'=>$service->id])}}" class="flex text-primary bg-dark-purple hover:bg-violet-600 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-3 md:px-2 py-2.5 mx-5 md:mx-0">
+                    Cek Detail Servis
+                </a>
             </div>
     </div>
     @endforeach

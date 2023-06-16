@@ -22,11 +22,12 @@ class Cart extends Model
 
     public function sparepart()
     {
-        return $this->hasMany(Sparepart::class, 'sparepart_id');
+        // return $this->hasMany(Sparepart::class, 'sparepart_id');
+        return $this->belongsTo(Sparepart::class, 'sparepart_id', 'id');
     }
 
     public function service()
     {
-        return $this->hasMany(Service::class);
+        return $this->hasOne(Service::class, 'id', 'service_id');
     }
 }

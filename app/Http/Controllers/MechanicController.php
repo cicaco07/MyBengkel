@@ -7,7 +7,6 @@ use App\Models\Cart;
 use App\Repositories\MechanicRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Service; 
 use App\Models\Sparepart; 
 
 class MechanicController extends Controller
@@ -84,22 +83,6 @@ class MechanicController extends Controller
         return view('mechanic.updateservice', $data, compact('antrian', 'carts', 'total'));
     }
 
-<<<<<<< HEAD
-    public function acceptQueue($id)
-    {
-        $data = $this->mechanicRepository->getMechanicData();
-        $antrian = Service::findorFail($id);
-        $spareparts = Sparepart::all();
-
-        return view('mechanic.accAntrian', $data, compact('antrian', 'spareparts'));
-    }
-
-    public function biaya($id){
-        $data = $this->mechanicRepository->getMechanicData();
-        $antrian = Service::findorFail($id);
-        return view('mechanic.biaya', $data, compact('antrian'));
-    }
-=======
     public function updateStatus(Request $request, $id)
     {
         $user = Auth::user();
@@ -144,5 +127,4 @@ class MechanicController extends Controller
     }
 
 
->>>>>>> 0196afe9b9b5613cb9232c9956cabe35f6a2d567
 }
