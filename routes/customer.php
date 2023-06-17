@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\DealerController;
 use App\Http\Controllers\ServiceController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,6 +20,8 @@ Route::middleware(['auth', 'role:customer'])->group(function () {
         Route::get('/profilku', [CustomerController::class, 'profilku']);
         Route::put('/profilku/update', [CustomerController::class, 'update'])->name('customer.update');
         Route::delete('/servisku/delete/{id}', [ServiceController::class, 'destroyService'])->name('customer.destroyServisku');
+        Route::get('/servisku/detailServis/{id}', [CustomerController::class, 'viewDetailService'])->name('customer.viewDetailService');
+        Route::put('/servisku/update-service/{id}', [CustomerController::class, 'updateStatus'])->name('customer.updateStatus');
         
-    });
+    }); 
 });

@@ -5,11 +5,15 @@ Interface IMechanicRepository
 {
     public function getMechanicData();
 
-    public function getDealerServis($user);
+    public function getAllDealerServis($user);
 
     public function updateProfile($user, $request);
 
-    public function updateStatus($id);
+    public function updateStatus1($id);
+
+    public function updateStatus2($id);
+
+    public function updateStatus3($id);
 
     public function find($id);
 

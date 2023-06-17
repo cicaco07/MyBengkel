@@ -42,46 +42,46 @@
         <table class="w-xl text-sm text-left text-gray-500">
             <tbody class="text-xs md:text-base">
                 <tr class="text-primary dark:text-purple">
-                    <td class="px-6 py-2">
+                    <td class="px-6 py-4">
                         Id Service
                     </td>
-                    <td class="px-6 py-2">
+                    <td class="px-6 py-4">
                         :
                     </td>
-                    <td class="px-6 py-2">
+                    <td class="px-6 py-4">
                         {{ $antrian->id }}
                     </td>
                 </tr>
                 <tr class="text-primary dark:text-purple">
-                    <td class="px-6 py-2">
+                    <td class="px-6 py-4">
                         Jenis Motor
                     </td>
-                    <td class="px-6 py-2">
+                    <td class="px-6 py-4">
                         :
                     </td>
-                    <td class="px-6 py-2">
+                    <td class="px-6 py-4">
                         {{$antrian->vehicle_name}}
                     </td>
                 </tr>
                 <tr class="text-primary dark:text-purple">
-                    <td class="px-6 py-2">
+                    <td class="px-6 py-4">
                         Nama Customer
                     </td>
-                    <td class="px-6 py-2">
+                    <td class="px-6 py-4">
                         :
                     </td>
-                    <td class="px-6 py-2">
+                    <td class="px-6 py-4">
                         {{ $antrian->user->name }}
                     </td>
                 </tr>
                 <tr class="text-primary dark:text-purple">
-                    <td class="px-6 py-2">
+                    <td class="px-6 py-4">
                         Keluhan
                     </td>
-                    <td class="px-6 py-2">
+                    <td class="px-6 py-4">
                         :
                     </td>
-                    <td class="px-6 py-2">
+                    <td class="px-6 py-4">
                         {{ $antrian->problem }}
                     </td>
                 </tr>
@@ -92,15 +92,93 @@
                     <td class="px-6 py-2">
                         :
                     </td>
-                    <td class="px-6 py-2">
-                        02-09-2023 15:00:00
+                    <td class="px-6">
+                        <div class="flex items-center">
+                            <form id="update-form" action="{{ route('update-waktu', ['id' => $antrian->id]) }}" method="POST" class="flex text-center">
+                                @csrf
+                                @method('PUT')
+
+                                @if ($antrian->plan_date == null)
+                                <div class="flex items-center">
+                                    <div class="relative max-w-sm mr-4">
+                                        <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                            <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+                                        </div>
+                                        <input id="datepicker" name="datepicker" autocomplete="off" datepicker datepicker-buttons type="text" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date">
+                                    </div>
+                                </div>
+                                @else
+                                    {{$antrian->plan_date}}
+                                @endif
+
+                                @if ($antrian->time==null)
+                                <button data-modal-target="timepick" data-modal-toggle="timepick" class="block text-primary focus:outline-none bg-dark-purple hover:bg-purple-900 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-3 md:px-5 py-1 md:py-2.5 my-2 mx-2 md:mx-0" type="button">
+                                    Pilih waktu
+                                </button>
+                                <div id="timepick" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                                        <div class="relative w-full max-w-4xl max-h-full">
+                                            <div class="relative bg-gray-100 dark:bg-primary rounded-lg shadow">
+                                                <div class="flex items-start justify-between p-4 rounded-t">
+                                                    <h3 class="text-xl font-semibold text-primary dark:text-purple">
+                                                        Pilih waktu
+                                                    </h3>
+                                                    <button type="button" class="text-purple bg-transparent hover:bg-secondary hover:text-purple rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="timepick">
+                                                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>  
+                                                    </button>
+                                                </div>
+                                                <div class="mx-4">
+                                                    <h3 class="text-lg font-medium text-gray-900 dark:text-white">Pilih sesi</h3>
+                                                    <ul class="grid w-full gap-6 md:grid-cols-3 my-8">
+                                                        <li>
+                                                            <input type="checkbox" id="morning" name="session" value="morning" class="hidden peer">
+                                                            <label for="morning" class="inline-flex items-center justify-between w-full p-5 text-primary bg-blue-500 border-2 border-gray-200 rounded-lg cursor-pointer dark:hover:text-black dark:border-gray-700 peer-checked:border-blue-600 hover:text-white dark:peer-checked:text-gray-300 peer-checked:text-gray-600 hover:bg-blue-600 dark:text-white">                           
+                                                                <div class="block">
+                                                                    <div class="w-full text-2xl font-semibold">Sesi Pagi</div>
+                                                                </div>
+                                                            </label>
+                                                        </li>
+                                                        <li>
+                                                            <input type="checkbox" id="afternoon" name="session" value="afternoon" class="hidden peer">
+                                                            <label for="afternoon" class="inline-flex items-center justify-between w-full p-5 text-primary bg-orange-500 border-2 border-gray-200 rounded-lg cursor-pointer dark:hover:text-black dark:border-gray-700 peer-checked:border-blue-600 hover:text-white dark:peer-checked:text-gray-300 peer-checked:text-gray-600 hover:bg-orange-600 dark:text-white">
+                                                                <div class="block">
+                                                                    <div class="w-full text-2xl font-semibold">Sesi Siang</div>
+                                                                </div>
+                                                            </label>
+                                                        </li>
+                                                        <li>
+                                                            <input type="checkbox" id="evening" name="session" value="evening" class="hidden peer">
+                                                            <label for="evening" class="inline-flex items-center justify-between w-full p-5 text-primary bg-red-500 border-2 border-gray-200 rounded-lg cursor-pointer dark:hover:text-black dark:border-gray-700 peer-checked:border-blue-600 hover:text-white dark:peer-checked:text-gray-300 peer-checked:text-gray-600 hover:bg-red-600 dark:text-white">
+                                                                <div class="block">
+                                                                    <div class="w-full text-2xl font-semibold">Sesi Sore</div>
+                                                                </div>
+                                                            </label>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="mx-8 pb-4">
+                                                    <label for="session-dropdown" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Pilih waktu</label>
+                                                    <select id="session-dropdown" name="time" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                        <option>-- Pilih waktu --</option>
+                                                    </select>
+                                                    <button type="submit" class="block mt-4 text-primary focus:outline-none bg-dark-purple hover:bg-purple-900 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-3 md:px-5 py-1 md:py-2.5 my-2 mx-2 md:mx-0">
+                                                        Update Data
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @else
+                                    {{$antrian->time}}    
+                                @endif
+                            </form>
+                        </div>                     
                     </td>
                 </tr>
                 <tr class="text-primary dark:text-purple">
-                    <td class="px-6 py-2">
+                    <td class="px-6 py-4">
                         Detail Biaya Service
                     </td>
-                    <td class="px-6 py-2">
+                    <td class="px-6 py-4">
                         :
                     </td>
                 </tr>
@@ -108,14 +186,14 @@
         </table>
     </div>
     <div class="mx-28">
+        @if ($carts->isNotEmpty())
         <table class="w-full text-sm text-left">
             <thead class="text-base">
                 <tr class="text-primary dark:text-purple border-b border-primary dark:border-purple">
-                    <td class="py-3 text-center w-1/4">Biaya Sparepart</th>
+                    <td class="py-3 text-center w-1/4">Biaya Sparepart</td>
                     <td class="py-3 text-center w-1/4">Jumlah item</td>
                     <td class="py-3 text-center w-1/4">Subtotal</td>
                     <td class="py-3 text-center w-1/4">Action</td>
-
                 </tr>
                 @foreach ($carts as $index => $cart)
                 <tr class="text-primary dark:text-purple">
@@ -182,24 +260,17 @@
                     </td>
                 </tr>
                 @endforeach
-                
-                <tr class="text-primary dark:text-purple">
-                    <td class="py-3 text-center">Biaya Servis</td>
-                    <td class="py-3 pl-8 text-center"></th>
-                    <td class="py-3 text-center">20000</td>
-                </tr>
-                <tr class="text-primary dark:text-purple">
-                    <td class="py-3 text-center">Biaya Aplikasi</td>
-                    <td class="py-3 pl-8 text-center"></th>
-                    <td class="py-3 text-center">2000</td>
-                </tr>
                 <tr class="text-primary dark:text-purple">
                     <th class="py-3 text-center">Total Harga</th>
                     <td class="py-3 pl-8 text-center"></th>
                     <th class="py-3 text-center">Rp {{ $total }}</th>
                 </tr>
+                
             </thead>
         </table>
+        @else
+        <div class=""></div>
+        @endif
     </div>
     <div class="mx-10">
         
@@ -250,10 +321,10 @@
                                     </tr>
                                 </thead>
                                     <tbody class="text-xs md:text-base">
-                                        @foreach ($sparepart as $item)
+                                        @foreach ($sparepart as $index => $item)
                                         <tr class="text-primary dark:text-purple border border-primary dark:border-purple">
                                             <td class="py-2 text-center">
-                                                {{ $item->id}}
+                                                {{ $index+ 1}}
                                             </td>
                                             <td class="py-2 text-center">
                                                 {{ $item->item_name}}
@@ -349,5 +420,34 @@
             }
         });
     }, 3000);
+
+    const checkboxes = document.querySelectorAll('input[name="session"]');
+    const dropdown = document.getElementById('session-dropdown');
+
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', function() {
+            if (this.checked) {
+                const selectedSession = this.value;
+                dropdown.innerHTML = '<option>-- Pilih waktu --</option>';
+                
+                if (selectedSession === 'morning') {
+                    addOptions([' 07:30', ' 08:15', ' 09:15', ' 10:00']);
+                } else if (selectedSession === 'afternoon') {
+                    addOptions([' 11:30', ' 13:00', ' 13:45', ' 14:45']);
+                } else if (selectedSession === 'evening') {
+                    addOptions([' 15:30', ' 16:45', ' 18:15', ' 19:30']);
+                }
+            }
+        });
+    });
+
+    function addOptions(options) {
+        options.forEach(option => {
+            const selectedOption = document.createElement('option');
+            selectedOption.text = option;
+            dropdown.add(selectedOption);
+        });
+    }
+
 </script>
 @endsection

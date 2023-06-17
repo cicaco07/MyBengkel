@@ -31,7 +31,7 @@ class MechanicRepository implements IMechanicRepository
         return compact('user', 'position', 'dealers', 'company', 'sparepart');
     }
 
-    public function getDealerServis($user)
+    public function getAllDealerServis($user)
     {   
         $mechanic = $user->mechanic;
 
@@ -45,6 +45,20 @@ class MechanicRepository implements IMechanicRepository
         return compact('user', 'services', 'dealer');
     }
 
+    public function getDataServis()
+    {
+        $user = Auth::user();
+        $mechanic = $user->mechanic;
+        $dealer = $mechanic->dealer;
+
+        if (!$mechanic) {
+            return null;
+        }
+    
+        $services = Service::where('dealer_id', $dealer->id)->paginate(5);
+
+        return compact('user', 'services', 'dealer');
+    }
 
     public function updateProfile($user, $request)
     {
@@ -73,10 +87,24 @@ class MechanicRepository implements IMechanicRepository
         return $user;
     }
 
-    public function updateStatus($id)
+    public function updateStatus1($id)
     {
         $service = Service::findOrFail($id);
         $service->status = 'accept';
+        $service->save();
+    }
+
+    public function updateStatus2($id)
+    {
+        $service = Service::findOrFail($id);
+        $service->status = 'repairing';
+        $service->save();
+    }
+
+    public function updateStatus3($id)
+    {
+        $service = Service::findOrFail($id);
+        $service->status = 'done';
         $service->save();
     }
 

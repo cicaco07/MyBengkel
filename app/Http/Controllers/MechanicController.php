@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Service;
 use App\Models\Cart;
 use App\Repositories\MechanicRepository;
+use Illuminate\Support\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -25,8 +26,10 @@ class MechanicController extends Controller
 
     public function servisku()
     {
+        $user = Auth::user();
         $data = $this->mechanicRepository->getMechanicData();
-        return view('mechanic.servisku', $data);
+        $data1 = $this->mechanicRepository->getAllDealerServis($user);
+        return view('mechanic.servisku', $data, $data1);
     }
 
     public function profilku()
@@ -39,9 +42,10 @@ class MechanicController extends Controller
     {
         $user = Auth::user();
         $data = $this->mechanicRepository->getMechanicData();
-        $data1 = $this->mechanicRepository->getDealerServis($user);
+        $data1 = $this->mechanicRepository->getAllDealerServis($user);
         return view('mechanic.antrian', $data, $data1);
     }
+    
 
     public function update(Request $request)
     {
@@ -76,7 +80,7 @@ class MechanicController extends Controller
                 ->get();
 
         $totalSubtotal = $carts->sum('subtotal');
-        $total = $totalSubtotal + 20000 + 2000;
+        $total = $totalSubtotal;
         
         return view('mechanic.updateservice', $data, compact('antrian', 'carts', 'total'));
     }
@@ -85,8 +89,8 @@ class MechanicController extends Controller
     {
         $user = Auth::user();
         $data = $this->mechanicRepository->getMechanicData();
-        $data1 = $this->mechanicRepository->getDealerServis($user);
-        $service = $this->mechanicRepository->updateStatus($id);
+        $data1 = $this->mechanicRepository->getAllDealerServis($user);
+        $service = $this->mechanicRepository->updateStatus1($id);
 
         $request->validate([
             'price' => 'required',
@@ -108,6 +112,22 @@ class MechanicController extends Controller
         ])->with('success', 'Status servis berhasil diubah');
     }
 
+    public function updateStatus2($id)
+    {
+        $status = $this->mechanicRepository->updateStatus2($id);
+        return redirect()->back()
+            ->with($status)    
+            ->with('success', 'Servis sedang dijalankan');
+    }
+
+    public function updateStatus3($id)
+    {
+        $status = $this->mechanicRepository->updateStatus3($id);
+        return redirect()->back()
+            ->with($status)
+            ->with('success', 'Servis telah selesai');
+    }
+
 
     public function giveRecom(Request $request, $id)
     {
@@ -124,5 +144,23 @@ class MechanicController extends Controller
         return redirect()->back()->with('success', 'Recommended servis berhasil diperbarui');
     }
 
+    public function updateWaktu(Request $request, $id)
+    {
+        $request->validate([
+            'datepicker' => 'required',
+            'time' => 'required',
+        ]);
 
+        $planDate = $request->input('datepicker');
+        $time = $request->input('time');
+
+        $antrian = Service::find($id);
+        $antrian->plan_date = Carbon::createFromFormat('m/d/Y', $planDate)->format('Y-m-d');
+        $antrian->time = $time;
+        $antrian->save();
+
+        return redirect()->back()->with('success', 'Data berhasil diperbarui');
+    }
+
+    
 }
