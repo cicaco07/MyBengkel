@@ -45,38 +45,34 @@ class SparepartController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreSparepartRequest $request)
-    {
-        $dealerId = Auth::user()->id;
-
-        // Validasi inputan jika diperlukan
-        $validatedData = $request->validate([
-            'item_name' => 'required',
-            'price' => 'required|numeric',
-            'quantity_left' => 'required|integer',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-        ]);
     
-        // Buat instance model Sparepart dan isi dengan data dari request
-        $sparepart = new Sparepart;
-        $sparepart->item_name = $request->item_name;
-        $sparepart->price = $request->price;
-        $sparepart->quantity_left = $request->quantity_left;
-        $sparepart->dealer_id = $dealerId;
-
-        if ($request->hasFile('image')) {
-            $file = $request->file('image');
-            $fileName = $file->getClientOriginalName(); // Mengambil nama file asli
-            $imagePath = $file->storeAs('public/img', $fileName); // Menyimpan file dengan nama asli
-            $sparepart->image = str_replace('public/img/', '', $imagePath);
-        }
-    
-        // Simpan data ke database
-        $sparepart->save();
-    
-        // Redirect ke halaman yang diinginkan setelah menyimpan data
-        return redirect()->back()->with('success', 'Sparepart berhasil ditambahkan');
-    }
+     public function store(StoreSparepartRequest $request)
+     {
+         $dealerId = Auth::user()->id;
+ 
+         // Validasi inputan jika diperlukan
+         $validatedData = $request->validated();
+ 
+         // Buat instance model Sparepart dan isi dengan data dari request
+         $sparepart = new Sparepart;
+         $sparepart->item_name = $request->item_name;
+         $sparepart->price = $request->price;
+         $sparepart->quantity_left = $request->quantity_left;
+         $sparepart->dealer_id = $dealerId;
+ 
+         if ($request->hasFile('image')) {
+             $file = $request->file('image');
+             $fileName = $file->getClientOriginalName(); // Mengambil nama file asli
+             $filePath = $file->move(public_path('img'), $fileName); // Memindahkan file ke direktori public/image
+             $sparepart->image = '' . $fileName;
+         }
+ 
+         // Simpan data ke database
+         $sparepart->save();
+ 
+         // Redirect ke halaman yang diinginkan setelah menyimpan data
+         return redirect()->back()->with('success', 'Sparepart berhasil ditambahkan');
+     }
 
     /**
      * Display the specified resource.
@@ -120,11 +116,11 @@ class SparepartController extends Controller
     
             // Delete the existing image file if it exists
             if ($sparepart->image) {
-                Storage::delete('public/img/' . $sparepart->image);
+                File::delete(public_path('img/' . $sparepart->image));
             }
     
-            // Store the uploaded image with the original filename
-            $request->file('image')->storeAs('public/img', $originalFilename);
+            // Move the uploaded image to the public directory with the original filename
+            $request->file('image')->move(public_path('img'), $originalFilename);
     
             // Update the image field in the sparepart model
             $sparepart->image = $originalFilename;
@@ -150,7 +146,7 @@ class SparepartController extends Controller
     
         // Hapus gambar jika ada
         if ($sparepart->image) {
-            $imagePath = public_path('storage/img/' . $sparepart->image);
+            $imagePath = public_path('img/' . $sparepart->image);
     
             // Periksa apakah file gambar ada
             if (File::exists($imagePath)) {
