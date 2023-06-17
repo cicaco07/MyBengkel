@@ -8,7 +8,6 @@ use App\Repositories\MechanicRepository;
 use Illuminate\Support\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Sparepart; 
 
 class MechanicController extends Controller
 {
@@ -29,7 +28,7 @@ class MechanicController extends Controller
     {
         $user = Auth::user();
         $data = $this->mechanicRepository->getMechanicData();
-        $data1 = $this->mechanicRepository->getDealerServis($user);
+        $data1 = $this->mechanicRepository->getAllDealerServis($user);
         return view('mechanic.servisku', $data, $data1);
     }
 
@@ -43,7 +42,7 @@ class MechanicController extends Controller
     {
         $user = Auth::user();
         $data = $this->mechanicRepository->getMechanicData();
-        $data1 = $this->mechanicRepository->getDealerServis($user);
+        $data1 = $this->mechanicRepository->getAllDealerServis($user);
         return view('mechanic.antrian', $data, $data1);
     }
     
@@ -90,8 +89,8 @@ class MechanicController extends Controller
     {
         $user = Auth::user();
         $data = $this->mechanicRepository->getMechanicData();
-        $data1 = $this->mechanicRepository->getDealerServis($user);
-        $service = $this->mechanicRepository->updateStatus($id);
+        $data1 = $this->mechanicRepository->getAllDealerServis($user);
+        $service = $this->mechanicRepository->updateStatus1($id);
 
         $request->validate([
             'price' => 'required',
@@ -111,6 +110,22 @@ class MechanicController extends Controller
             'service' => $service,
             'totalprice' => $totalprice
         ])->with('success', 'Status servis berhasil diubah');
+    }
+
+    public function updateStatus2($id)
+    {
+        $status = $this->mechanicRepository->updateStatus2($id);
+        return redirect()->back()
+            ->with($status)    
+            ->with('success', 'Servis sedang dijalankan');
+    }
+
+    public function updateStatus3($id)
+    {
+        $status = $this->mechanicRepository->updateStatus3($id);
+        return redirect()->back()
+            ->with($status)
+            ->with('success', 'Servis telah selesai');
     }
 
 
@@ -147,21 +162,5 @@ class MechanicController extends Controller
         return redirect()->back()->with('success', 'Data berhasil diperbarui');
     }
 
-    public function updateStatus2($id)
-    {
-        $status = Service::findOrFail($id);
-        $status->status = 'repairing';
-        $status->save();
-
-        return redirect()->back()->with('success', 'Servis sedang dijalankan');
-    }
-
-    public function updateStatus3($id)
-    {
-        $status = Service::findOrFail($id);
-        $status->status = 'done';
-        $status->save();
-
-        return redirect()->back()->with('success', 'Servis telah selesai');
-    }
+    
 }

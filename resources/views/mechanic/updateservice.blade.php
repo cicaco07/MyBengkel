@@ -190,7 +190,7 @@
         <table class="w-full text-sm text-left">
             <thead class="text-base">
                 <tr class="text-primary dark:text-purple border-b border-primary dark:border-purple">
-                    <td class="py-3 text-center w-1/4">Biaya Sparepart</th>
+                    <td class="py-3 text-center w-1/4">Biaya Sparepart</td>
                     <td class="py-3 text-center w-1/4">Jumlah item</td>
                     <td class="py-3 text-center w-1/4">Subtotal</td>
                     <td class="py-3 text-center w-1/4">Action</td>
@@ -321,10 +321,10 @@
                                     </tr>
                                 </thead>
                                     <tbody class="text-xs md:text-base">
-                                        @foreach ($sparepart as $item)
+                                        @foreach ($sparepart as $index => $item)
                                         <tr class="text-primary dark:text-purple border border-primary dark:border-purple">
                                             <td class="py-2 text-center">
-                                                {{ $item->id}}
+                                                {{ $index+ 1}}
                                             </td>
                                             <td class="py-2 text-center">
                                                 {{ $item->item_name}}

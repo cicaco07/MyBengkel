@@ -93,7 +93,7 @@
                         :
                     </td>
                     <td class="px-6 py-2">
-                        02-09-2023 15:00:00
+                        <p> {{$service->plan_date }} {{ $service->time}}</p> 
                     </td>
                 </tr>
                 <tr class="text-primary dark:text-purple">
@@ -138,16 +138,6 @@
                 
                 </tr>
                 <tr class="text-primary dark:text-purple border-b border-primary dark:border-purple">
-                    <tr class="text-primary dark:text-purple">
-                        <td class="py-3">Biaya Servis</td>
-                        <td class="py-3 pl-8 text-center"></th>
-                        <td class="py-3 text-center">Rp 20000,-</td>
-                    </tr>
-                    <tr class="text-primary dark:text-purple">
-                        <td class="py-3">Biaya Aplikasi</td>
-                        <td class="py-3 pl-8 text-center"></th>
-                        <td class="py-3 text-center">Rp 2000,-</td>
-                    </tr>
                     <tr class="text-primary dark:text-purple">
                         <th class="py-3">Total Harga</th>
                         <td class="py-3 pl-8 text-center"></th>
