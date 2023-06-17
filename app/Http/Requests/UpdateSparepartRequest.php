@@ -22,9 +22,10 @@ class UpdateSparepartRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'namaitem' => 'required',
-            'harga' => 'required|numeric',
-            'stok' => 'required|numeric',
+            'item_name' => 'required',
+        'price' => 'required|numeric',
+        'quantity_left' => 'required|integer',
+        'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',           
         ];
     }
 }
