@@ -1,12 +1,12 @@
 <?php
 
 namespace App\Repositories;
-
+use App\Models\Service;
 use App\Models\Dealer;
 use App\Repositories\Interfaces\IDealerRepository;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Auth;
 class DealerRepository implements IDealerRepository
 {
     public function find($id)
@@ -64,4 +64,5 @@ class DealerRepository implements IDealerRepository
         $dealer = Dealer::findOrFail($id);
         $dealer->delete();
     }
+    
 }

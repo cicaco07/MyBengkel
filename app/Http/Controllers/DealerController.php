@@ -12,9 +12,16 @@ use App\Models\Service;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Sparepart;
 use App\Repositories\ServicesRepository;
+use App\Repositories\DealerRepository;
 
 class DealerController extends Controller
-{
+{   
+    private $dealerRepository;
+
+    public function __construct(DealerRepository $dealerRepository)
+    {
+        $this->dealerRepository = $dealerRepository;
+    }
     public function dashboard()
     {
         $user = Auth::user();
@@ -157,7 +164,8 @@ public function search(Request $request)
                 $query->where('name', 'LIKE', "%$keyword%");
             })
             ->orWhere('plat_num', 'LIKE', "%$keyword%")
-            ->orWhere('problem', 'LIKE', "%$keyword%");
+            ->orWhere('problem', 'LIKE', "%$keyword%")
+            ->orWhere('status', 'LIKE', "%$keyword%");
         });
     }
 
@@ -165,7 +173,45 @@ public function search(Request $request)
 
     return view('dealer.antrian', compact('user', 'services', 'search'));
 }
-
+public function dataservis()
+    {
+        $user = Auth::user();
+        $dealer = $user->dealer;
+    
+        $services = Service::where('dealer_id', $dealer->id)
+            ->where('status', '=', 'done') // Tambahkan kondisi untuk menghindari status "done"
+            ->get();
+    
+        return view('dealer.dataservis', compact('user', 'services'));
+    }
+    
+    public function search2(Request $request)
+    {
+        $user = Auth::user();
+        $keyword = $request->input('search');
+        $search = $keyword; // Simpan nilai $keyword ke dalam variabel $search
+    
+        $dealer = $user->dealer;
+    
+        $services = Service::where('dealer_id', $dealer->id)
+            ->where('status', '=', 'done');
+    
+        if (!empty($keyword)) {
+            $services->where(function ($query) use ($keyword) {
+                $query->whereHas('user', function ($query) use ($keyword) {
+                    $query->where('name', 'LIKE', "%$keyword%");
+                })
+                ->orWhere('plat_num', 'LIKE', "%$keyword%")
+                ->orWhere('problem', 'LIKE', "%$keyword%")
+                ->orWhere('status', 'LIKE', "%$keyword%")
+                ->orWhere('price', 'LIKE', "%$keyword%");
+            });
+        }
+    
+        $services = $services->get();
+    
+        return view('dealer.dataservis', compact('user', 'services', 'search'));
+    }
 
 
 }
