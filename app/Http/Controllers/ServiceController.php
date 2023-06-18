@@ -38,6 +38,6 @@ class ServiceController extends Controller
         // $servis = Service::findOrFail($id); 
         $servis = Service::where('user_id', $user->id)->findOrFail($id);
         $servis->deleteWithCart();
-        return redirect()->back()->with('success', 'Queue has been deleted successfully.');
+        return redirect()->back()->with('success', 'Antrian berhasil dibatalkan');
     }
 }
