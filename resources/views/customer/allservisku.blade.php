@@ -24,8 +24,8 @@
 
 <div class="p-4 border-1 rounded-lg mt-14 bg-secondary">
     <div class="text-purple m-4 font-semibold text-2xl tracking-wide">Servisku</div>
-    {{-- <div class="text-purple m-4 font-semibold text-1xl tracking-wide">Status Servisku</div> --}}
     @foreach ($services as $service)
+    @if($service->status=='waiting' || $service->status=='accept' || $service->status=='process' || $service->status=='repairing')
     <div class="p-4 border-1 rounded-lg md:mx-4 my-6 bg-purple"> 
         <div class="relative overflow-x-auto shadow-md rounded-lg">
             <table class="w-full rounded-lg text-sm text-left text-gray-500 ">
@@ -41,7 +41,10 @@
                             Plat Nomor
                         </th>
                         <th scope="col" class="text-center">
-                            Antrian
+                            Jadwal 
+                        </th>
+                        <th scope="col" class="text-center">
+                            Pukul 
                         </th>
                         <th scope="col" class="text-center">
                             Status
@@ -60,7 +63,11 @@
                                 {{ $service->plat_num }}
                             </td>
                             <td class="text-center">
-                                {{ $service->plan_data }}</td>
+                                {{ $service->plan_date }}
+                            </td>
+                            <td class="text-center">
+                                {{ $service->time }}
+                            </td>
                             <td class="text-center">
                                 {{ $service->status }}
                             </td>
@@ -68,8 +75,15 @@
                 </tbody>
             </table>
         </div>
-            <div class="mt-5 flex flex-col md:flex-row space-x-2">
-                <button type="submit" data-modal-target="popup-modal" data-modal-toggle="popup-modal" class="focus:outline-none text-primary bg-red-500 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-3 md:px-5 py-2.5 mx-5 md:mx-0" type="submit">
+        <div class="mt-5 flex flex-col md:flex-row space-x-2">
+            <a href="{{ route('customer.viewDetailService', ['id'=>$service->id])}}" class="flex text-primary bg-dark-purple hover:bg-violet-600 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-3 md:px-2 py-2.5 mx-5 md:mx-0">
+                    Cek Detail Servis
+                </a>
+                @if($service->status=='accept' || $service->status=='process' || $service->status=='reapiring')
+                <a href="{{ route('customer.cetakhistory', [$service->id]) }}" class="text-primary bg-warning hover:bg-yellow-500 hover:font-semibold focus:ring-1 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm md:px-5 px-3 md:py-2.5 py-2 text-center">Print</a> 
+                @endif
+                @if($service->status=='waiting' || $service->status=='accept' || $service->status=='process')
+                <button type="submit" data-modal-target="popup-modal" data-modal-toggle="popup-modal" class="text-primary bg-red-700 hover:bg-red-800 hover:font-semibold focus:ring-1 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm md:px-5 px-3 md:py-2.5 py-2 text-center" type="submit">
                     Batalkan Antrian 
                 </button>
                 <div id="popup-modal" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
@@ -96,14 +110,10 @@
                         </div>
                     </div>
                 </div>
-                {{-- <button href="{{ route('customer.viewDetailService', ['id'=>$service->id])}}" class="flex text-primary bg-dark-purple hover:bg-violet-600 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-3 md:px-2 py-2.5 mx-5 md:mx-0" type="submit">
-                    Cek Rekomendasi
-                </button> --}}
-                <a href="{{ route('customer.viewDetailService', ['id'=>$service->id])}}" class="flex text-primary bg-dark-purple hover:bg-violet-600 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-3 md:px-2 py-2.5 mx-5 md:mx-0">
-                    Cek Detail Servis
-                </a>
+                @endif
             </div>
     </div>
+    @endif
     @endforeach
     </div>
 </div>

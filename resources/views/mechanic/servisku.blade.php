@@ -197,15 +197,8 @@
                     </tr>
                     @endif
                 @endforeach
-                </tbody>
+            </tbody>
         </table>
     </div>
-
 </div>
-
-
-
-
-
-
 @endsection

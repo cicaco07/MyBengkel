@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Service; 
 use App\Models\Cart;
 use App\Models\Sparepart; 
+use Barryvdh\DomPDF\Facade\PDF;
+use Illuminate\Support\Facades\Storage;
 
 class CustomerController extends Controller
 {
@@ -65,6 +67,26 @@ class CustomerController extends Controller
         return view('customer.detailService', compact('user', 'service', 'spareparts'));
     }
 
+    public function historyservis()
+    {
+        $user = Auth::user();
+        $services = $user->service()->get();
+        return view('customer.history', compact('user','services'));
+    }
+
+    public function cetakhistory($id){
+        $user = Auth::user();
+        $service = Service::with('sparepart')->findOrFail($id);
+        $spareparts = $service->sparepart;
+        $pdf = PDF::loadview('customer.cetakhistory', compact('user', 'service', 'spareparts'))->setOptions(['defaultFont' => 'sans-serif']);
+        return $pdf->stream('');
+    }
+    public function panduan()
+    {
+        $user = Auth::user();
+        return view('customer.panduansistem',compact('user'));
+    }
+    
     public function servisku2()
     {
         $user = Auth::user();
@@ -134,8 +156,8 @@ class CustomerController extends Controller
 
         $services = $user->service()->get();
         return redirect()->route('customer.allservisku', ['id'=>$service->id])->with('success', 'Data Servis berhasil dibuat');
-
-    // Redirect or return response as needed
     }
+
+
     
 }

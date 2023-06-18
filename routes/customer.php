@@ -22,6 +22,8 @@ Route::middleware(['auth', 'role:customer'])->group(function () {
         Route::delete('/servisku/delete/{id}', [ServiceController::class, 'destroyService'])->name('customer.destroyServisku');
         Route::get('/servisku/detailServis/{id}', [CustomerController::class, 'viewDetailService'])->name('customer.viewDetailService');
         Route::put('/servisku/update-service/{id}', [CustomerController::class, 'updateStatus'])->name('customer.updateStatus');
-        
+        Route::get('/historyservis', [CustomerController::class, 'historyservis'])->name('customer.historyservis');
+        Route::get('/historyservis/cetakhistory/{id}', [CustomerController::class, 'cetakhistory'])->name('customer.cetakhistory');
+        Route::get('/panduansistem', [CustomerController::class, 'panduan'])->name('customer.panduansistem');
     }); 
 });
