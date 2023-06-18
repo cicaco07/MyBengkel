@@ -107,19 +107,35 @@
                         Plat Nomor
                     </th>
                     <th scope="col" class="text-center">
-                        Antrian
+                        Jadwal
+                    </th>
+                    <th scope="col" class="text-center">
+                        Pukul
+                    </th>
+                    <th scope="col" class="text-center">
+                        Status
                     </th>
                 </tr>
             </thead>
             <tbody class="text-xs md:text-base">
                 @foreach ($services as $data)
                     <tr class="bg-primary border-b border-purple text-purple last:border-none">
+                        @if($data->status=='process' || $data->status=='repairing')
                         <th scope="row" class="px-6 py-4 font-medium ">
                             {{ $data->plat_num }}
                         </th>
                         <th scope="row" class="px-6 py-4 font-medium">
                             {{ $data->plan_date }}
                         </th>
+                        <th scope="row" class="px-6 py-4 font-medium">
+                            {{ $data->time }}
+                        </th>
+                        
+                        <th scope="row" class="px-6 py-4 font-medium">
+                            {{ $data->status }}
+                            
+                        </th>
+                        @endif
                     </tr>
                 @endforeach
             </tbody>
