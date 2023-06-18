@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Models\Sparepart;
 use App\Repositories\ServicesRepository;
 use App\Repositories\DealerRepository;
+use Carbon\Carbon;
 
 class DealerController extends Controller
 {   
@@ -76,11 +77,17 @@ class DealerController extends Controller
         return view('dealer.servis', compact('user'));
     }
 
-    public function transaksi()
-    {
-        $user = Auth::user();
-        return view('dealer.transaksi', compact('user'));
-    }
+    public function transaksi($month)
+{
+    $user = Auth::user();
+    $dealer = $user->dealer;
+    $services = Service::where('dealer_id', $dealer->id)
+        ->where('status', '!=', 'done')
+        ->whereMonth('plan_date', $month)
+        ->get();
+
+    return view('dealer.transaksi', compact('services','user'));
+}
 
     public function show($id)
     {
