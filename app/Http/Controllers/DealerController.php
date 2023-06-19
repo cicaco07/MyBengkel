@@ -77,16 +77,39 @@ class DealerController extends Controller
         return view('dealer.servis', compact('user'));
     }
 
-    public function transaksi($month)
+    public function transaksi()
 {
     $user = Auth::user();
     $dealer = $user->dealer;
     $services = Service::where('dealer_id', $dealer->id)
-        ->where('status', '!=', 'done')
-        ->whereMonth('plan_date', $month)
+        ->where('status', '=', 'done')
         ->get();
 
     return view('dealer.transaksi', compact('services','user'));
+}
+public function servis6()
+{   
+    $month = 6;
+    $user = Auth::user();
+    $dealer = $user->dealer;
+    $services = Service::where('dealer_id', $dealer->id)
+    ->where('status', 'done')
+    ->whereBetween('plan_date', ['2023-06-01', '2023-06-30'])
+    ->get();
+
+    return view('dealer.data-transaksi', compact('services','user','month'));
+}
+public function servis7()
+{   
+    $month = 7;
+    $user = Auth::user();
+    $dealer = $user->dealer;
+    $services = Service::where('dealer_id', $dealer->id)
+    ->where('status', 'done')
+    ->whereBetween('plan_date', ['2023-07-01', '2023-07-31'])
+    ->get();
+
+    return view('dealer.data-transaksi', compact('services','user','month'));
 }
 
     public function show($id)
