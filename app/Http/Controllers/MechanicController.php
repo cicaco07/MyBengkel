@@ -28,7 +28,7 @@ class MechanicController extends Controller
     {
         $user = Auth::user();
         $data = $this->mechanicRepository->getMechanicData();
-        $data1 = $this->mechanicRepository->getAllDealerServis($user);
+        $data1 = $this->mechanicRepository->getAllDealerServis2($user);
         return view('mechanic.servisku', $data, $data1);
     }
 
@@ -42,7 +42,7 @@ class MechanicController extends Controller
     {
         $user = Auth::user();
         $data = $this->mechanicRepository->getMechanicData();
-        $data1 = $this->mechanicRepository->getAllDealerServis($user);
+        $data1 = $this->mechanicRepository->getAllDealerServis1($user);
         return view('mechanic.antrian', $data, $data1);
     }
     
@@ -89,7 +89,7 @@ class MechanicController extends Controller
     {
         $user = Auth::user();
         $data = $this->mechanicRepository->getMechanicData();
-        $data1 = $this->mechanicRepository->getAllDealerServis($user);
+        $data1 = $this->mechanicRepository->getAllDealerServis1($user);
         $service = $this->mechanicRepository->updateStatus1($id);
 
         $request->validate([

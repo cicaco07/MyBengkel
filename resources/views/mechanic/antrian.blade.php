@@ -28,34 +28,33 @@
     <table class="w-full text-sm text-left text-gray-500">
         <thead class="text-xs text-primary dark:text-purple uppercase bg-purple dark:bg-table-head">
             <tr>
-                <th scope="col" class="px-6 py-3">
+                <th scope="col" class="py-4 text-center">
                     No 
                 </th>
-                <th scope="col" class="px-6 py-3">
+                <th scope="col" class="text-center">
                     Nama Customer
                 </th>
-                <th scope="col" class="px-6 py-3">
+                <th scope="col" class="text-center">
                     Tipe Kendaraan
                 </th>
-                <th scope="col" class="px-6 py-3">
+                <th scope="col" class="text-center">
                     Plat Nomor
                 </th>
-                <th scope="col" class="px-6 py-3">
+                <th scope="col" class="text-center">
                     Problem
                 </th>
-                <th scope="col" class="px-6 py-3">
+                <th scope="col" class="text-center">
                     Status
                 </th>
-                <th scope="col" class="px-6 py-3">
+                <th scope="col" class="text-center">
                     Action
                 </th>
             </tr>
         </thead>
         <tbody class="text-xs md:text-base">
             @foreach ($services as $servis)
-            @if ($servis->status=='waiting'||$servis->status=='accept')
             <tr class="bg-gray-100 dark:bg-primary border-b border-primary dark:border-purple last:border-0 text-primary dark:text-purple">
-                <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap dark:text-white">
+                <th scope="row" class="text-center px-4 py-4 font-medium whitespace-nowrap dark:text-white">
                     {{ $servis->id}}
                 </th>
                 <td class="px-6 py-4">
@@ -81,17 +80,16 @@
                     @endif
                 </td>
             </tr>
-            @endif
             @endforeach
         </tbody>
     </table>
 </div>
 
-<div class="flex flex-col items-center mt-6">
-    <div class="mt-5 md:mt-0">
-        {{ $services->links('mechanic.pagination') }}
+    <div class="flex flex-col items-center mt-6">
+        <div class="mt-5 md:mt-0">
+            {{ $services->links('mechanic.pagination') }}
+        </div>
     </div>
-  </div>
 </div>
 <script>
     setTimeout(function() {

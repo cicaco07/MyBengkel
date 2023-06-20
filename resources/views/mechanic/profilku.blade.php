@@ -3,7 +3,7 @@
 @section('title', 'Mekanik - Profilku')
 
 @section('main-content')
-    @if(session('success'))
+@if(session('success'))
     <div class="flex justify-center fixed top-0 left-1/2 transform -translate-x-1/2 z-50 mt-6">
         <div id="toast-success" class="flex items-center w-full max-w-xs p-4 mb-4 text-primary bg-success rounded-lg shadow" role="alert" role="alert">
             <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-green-500 bg-green-100 rounded-lg">
@@ -21,7 +21,7 @@
             </button>
         </div>
     </div> 
-    @elseif(session('error1'))
+@elseif(session('error1'))
     <div class="flex justify-center fixed top-0 left-1/2 transform -translate-x-1/2 z-50 mt-6">
     <div id="toast-danger" class="flex items-center w-full max-w-xs p-4 mb-4 text-primary bg-red-500 rounded-lg shadow" role="alert">
         <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-red-500 bg-red-100 rounded-lg">
@@ -35,7 +35,7 @@
         </button>
     </div>
     </div>
-    @elseif(session('error'))
+@elseif(session('error'))
     <div class="flex justify-center fixed top-0 left-1/2 transform -translate-x-1/2 z-50 mt-6">
     <div id="toast-warning" class="flex items-center w-full max-w-xs p-4 text-primary bg-warning rounded-lg shadow dark:text-gray-400 dark:bg-gray-800" role="alert">
         <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-orange-500 bg-orange-100 rounded-lg dark:bg-orange-700 dark:text-orange-200">
@@ -49,7 +49,7 @@
         </button>
     </div>
     </div>
-    @endif
+@endif
 <div class="p-4 border border-purple dark:border-none rounded-lg mt-14 bg-gray-100 dark:bg-secondary shadow-lg">
     <div class="text-primary dark:text-purple m-4 font-semibold text-2xl tracking-wide">Profilku</div>
     <div class="flex items-center justify-center mt-4">

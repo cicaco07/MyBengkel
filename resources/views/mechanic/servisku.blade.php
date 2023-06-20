@@ -31,7 +31,6 @@
             </thead>
             <tbody class="text-xs md:text-base">
             @foreach ($services as $servis)
-                @if ($servis->status=='process'||$servis->status=='repairing')
                 <tr class="bg-gray-100 dark:bg-primary border-b border-primary dark:border-purple last:border-0 text-primary dark:text-purple">
                     <th scope="row" class="text-center py-4 font-medium whitespace-nowrap dark:text-white">
                         {{ $servis->id}}
@@ -67,11 +66,15 @@
                         </div>
                     </td>
                 </tr>
-                @endif
             @endforeach
             </tbody>
         </table>
     </div>
+    <div class="flex flex-col items-center mt-6">
+        <div class="mt-5 md:mt-0">
+            {{ $services->links('mechanic.pagination') }}
+        </div>
+      </div>
 </div>
 <div class="p-4 border border-purple dark:border-none shadow-md rounded-lg mt-6 bg-gray-100 dark:bg-secondary">
     <div class="text-primary dark:text-purple m-4 font-semibold text-2xl tracking-wide">List History Servis</div>
@@ -100,8 +103,7 @@
                 </tr>
             </thead>
             <tbody class="text-xs md:text-base">
-                @foreach ($services as $servis)
-                    @if ($servis->status=='done')
+                @foreach ($service as $servis)
                     <tr class="bg-gray-100 dark:bg-primary border-b border-primary dark:border-purple last:border-0 text-primary dark:text-purple">
                         <th scope="row" class="text-center py-4 font-medium whitespace-nowrap dark:text-white">
                             {{ $servis->id}}
@@ -195,10 +197,14 @@
                             
                         </td>
                     </tr>
-                    @endif
                 @endforeach
             </tbody>
         </table>
     </div>
+    <div class="flex flex-col items-center mt-6">
+        <div class="mt-5 md:mt-0">
+            {{ $service->links('mechanic.pagination') }}
+        </div>
+      </div>
 </div>
 @endsection
