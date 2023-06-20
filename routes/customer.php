@@ -17,7 +17,7 @@ Route::middleware(['auth', 'role:customer'])->group(function () {
         Route::get('/servisku2', [CustomerController::class, 'servisku2']);
         Route::get('/form', [CustomerController::class, 'form']);
         Route::get('/form2', [CustomerController::class, 'form2']);
-        Route::get('/profilku', [CustomerController::class, 'profilku']);
+        Route::get('/profilku', [CustomerController::class, 'profilku'])->name('customer.profilku');
         Route::put('/profilku/update', [CustomerController::class, 'update'])->name('customer.update');
         Route::delete('/servisku/delete/{id}', [ServiceController::class, 'destroyService'])->name('customer.destroyServisku');
         Route::get('/servisku/detailServis/{id}', [CustomerController::class, 'viewDetailService'])->name('customer.viewDetailService');
