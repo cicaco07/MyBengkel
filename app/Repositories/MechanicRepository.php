@@ -40,7 +40,7 @@ class MechanicRepository implements IMechanicRepository
         }
 
         $dealer = $mechanic->dealer;
-        $services = Service::where('dealer_id', $dealer->id)->paginate(5);
+        $services = Service::where('dealer_id', $dealer->id)->paginate(10);
 
         return compact('user', 'services', 'dealer');
     }
