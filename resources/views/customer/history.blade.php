@@ -26,7 +26,7 @@
     <div class="text-purple m-4 font-semibold text-2xl tracking-wide">History Servisku</div>
     @foreach ($services as $service)
     @if($service->status=='done')
-    <div class="w-full p-4 bg-primary border border-table-head-200 rounded-lg shadow sm:p-8 dark:bg-table-head-800 dark:border-table-head-700">
+    <div class="mb-5 w-full p-4 bg-primary border border-table-head-200 rounded-lg shadow sm:p-8 dark:bg-table-head-800 dark:border-table-head-700">
         <h5 class="mb-2 text-xl font-bold tracking-tight text-purple dark:text-white">{{$service->plat_num}} | {{$service->vehicle_name}}</h5>
         <h4 class="text-normal text-purple">Dealer {{$service->dealer->dealer_name}} / {{$service->plan_date}}</h4>
         <br>
@@ -102,8 +102,8 @@
             </div>
             {{-- <a href="{{route('customer.cetakhistory', ['id'=>$service->id])}}" class="text-primary bg-warning hover:bg-yellow-500 hover:font-semibold focus:ring-1 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm md:px-5 px-3 md:py-2.5 py-2 text-center">Print</a>     --}}
             <a href="{{ route('customer.cetakhistory', [$service->id]) }}" class="text-primary bg-warning hover:bg-yellow-500 hover:font-semibold focus:ring-1 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm md:px-5 px-3 md:py-2.5 py-2 text-center">Print</a>
-
         </div>
+    </div>
     @endif
     @endforeach
     </div>

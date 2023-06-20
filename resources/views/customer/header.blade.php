@@ -30,7 +30,7 @@
        </a>
     </li>
     <li>
-      <a href="profilku" class="text-sm flex items-center p-3 mb-2 text-purple rounded-lg hover:bg-dark-purple hover:text-primary hover:font-semibold">
+      <a href="{{ route('customer.profilku') }}" class="text-sm flex items-center p-3 mb-2 text-purple rounded-lg hover:bg-dark-purple hover:text-primary hover:font-semibold">
          <svg aria-hidden="true" class="text-sm flex-shrink-0 w-6 h-6 hover:text-primary transition duration-75  group-hover:text-primary " fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
          <span class="flex-1 ml-3 ">Profil Ku</span>
       </a>
