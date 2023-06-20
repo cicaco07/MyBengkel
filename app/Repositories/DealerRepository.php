@@ -7,6 +7,7 @@ use App\Repositories\Interfaces\IDealerRepository;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+
 class DealerRepository implements IDealerRepository
 {
     public function find($id)
@@ -25,16 +26,13 @@ class DealerRepository implements IDealerRepository
                     ->orWhere('dealer.company', 'like', "%$keyword%");
             });
     
-        $perPage = 5; // Jumlah item per halaman
-        $currentPage = request()->input('page', 1); // Halaman saat ini, default 1
+        $perPage = 5;
+        $currentPage = request()->input('page', 1); 
 
-        // Ambil semua hasil yang cocok dengan query
         $results = $query->get();
 
-        // Buat objek Collection dari hasil
         $collection = collect($results);
 
-        // Buat objek LengthAwarePaginator dengan menggunakan Collection
         $dealers = new LengthAwarePaginator(
             $collection->forPage($currentPage, $perPage),
             $collection->count(),

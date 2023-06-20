@@ -58,14 +58,14 @@ class AdminController extends Controller
     public function updateDealer(Request $request, $id, DealerRepository $dealerRepository)
     {
         $request->validate([
-            'dealer_name' => 'required',
-            'dealer_address' => 'required',
-            'company' => 'required|in:yamaha,suzuki,honda',
+            // 'dealer_name' => 'required',
+            // 'dealer_address' => 'required',
+            'company' => 'required|in:Yamaha,Suzuki,Honda',
         ]);
 
         $data = [
-            'dealer_name' => $request->dealer_name,
-            'dealer_address' => $request->dealer_address,
+            // 'dealer_name' => $request->dealer_name,
+            // 'dealer_address' => $request->dealer_address,
             'company' => $request->company,
         ];
 
@@ -120,19 +120,23 @@ class AdminController extends Controller
         ]);
 
         if ($user) {
-            if ($user->dealer) {
-                return redirect()->back()->with('error', 'User already has a dealer record');
+            if ($user->role == 'dealer') {
+                if ($user->dealer) {
+                    return redirect()->back()->with('error', 'User already has a dealer record');
+                } else {
+                    $data = [
+                        'dealer_name' => $request->dealer_name,
+                        'dealer_address' => $request->dealer_address,
+                        'company' => $request->company,
+                        'user_id' => $user->id,
+                    ];
+
+                    $dealerRepository->create($data);
+
+                    return redirect()->route('admin.dataDealer')->with('success', 'Dealer data has been created successfully');
+                }
             } else {
-                $data = [
-                    'dealer_name' => $request->dealer_name,
-                    'dealer_address' => $request->dealer_address,
-                    'company' => $request->company,
-                    'user_id' => $user->id,
-                ];
-
-                $dealerRepository->create($data);
-
-                return redirect()->route('admin.dataDealer')->with('success', 'Dealer data has been created successfully');
+                return redirect()->back()->with('error', 'User does not have dealer role');
             }
         } else {
             return redirect()->back()->with('error', 'User not found');
@@ -150,24 +154,28 @@ class AdminController extends Controller
         ]);
 
         if ($user && $dealer) {
-            try {
-                $existingMechanic = $mechanicRepository->findByUser($user->id);
+            if ($user->role == 'mechanic') {
+                try {
+                    $existingMechanic = $mechanicRepository->findByUser($user->id);
 
-                if ($existingMechanic) {
-                    return redirect()->back()->with('error', "Mechanic with ID {$existingMechanic->id} is already registered");
+                    if ($existingMechanic) {
+                        return redirect()->back()->with('error', "Mechanic with ID {$existingMechanic->id} is already registered");
+                    }
+
+                    $data = [
+                        'position' => $request->position,
+                        'user_id' => $user->id,
+                        'dealer_id' => $dealer->id,
+                    ];
+
+                    $mechanicRepository->create($data);
+
+                    return redirect()->route('admin.dataMechanic')->with('success', 'Mechanic data has been created successfully');
+                } catch (QueryException $e) {
+                    return redirect()->back()->with('error', 'Failed to create mechanic: ' . $e->getMessage());
                 }
-
-                $data = [
-                    'position' => $request->position,
-                    'user_id' => $user->id,
-                    'dealer_id' => $dealer->id,
-                ];
-
-                $mechanicRepository->create($data);
-
-                return redirect()->route('admin.dataMechanic')->with('success', 'Mechanic data has been created successfully');
-            } catch (QueryException $e) {
-                return redirect()->back()->with('error', 'Failed to create mechanic: ' . $e->getMessage());
+            } else {
+                return redirect()->back()->with('error', 'User does not have mechanic role');
             }
         } else {
             return redirect()->back()->with('error', 'User or dealer not found');
