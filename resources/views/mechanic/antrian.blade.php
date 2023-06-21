@@ -57,22 +57,22 @@
                 <th scope="row" class="text-center px-4 py-4 font-medium whitespace-nowrap dark:text-white">
                     {{ $servis->id}}
                 </th>
-                <td class="px-6 py-4">
+                <td class="text-center py-4">
                     {{ $servis->user->name }}
                 </td>
-                <td class="px-6 py-4">
+                <td class="text-center py-4">
                     {{ $servis->vehicle_name }}
                 </td>
-                <td class="px-6 py-4">
+                <td class="text-center py-4">
                     {{ $servis->plat_num }}
                 </td>
-                <td class="px-6 py-4">
+                <td class="text-center py-4">
                     {{ $servis->problem }}
                 </td>
-                <td class="px-6 py-4">
+                <td class="text-center py-4">
                     {{ $servis->status }}
                 </td>
-                <td class="">
+                <td class="text-center">
                     @if ($servis->status=='waiting')
                     <a href="{{ route('mechanic.updateService', ['id'=>$servis->id])}}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-2 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">
                         Update

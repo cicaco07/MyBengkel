@@ -22,16 +22,16 @@
     </div>
 @endif
 
-<div class="p-4 border-1 rounded-lg mt-14 bg-secondary">
-    <div class="text-purple m-4 font-semibold text-2xl tracking-wide">History Servisku</div>
+<div class="p-4 border border-purple dark:border-none shadow-md rounded-lg mt-14 bg-gray-100 dark:bg-secondary">
+    <div class="text-primary dark:text-purple m-4 font-semibold text-2xl tracking-wide">History Servisku</div>
     @foreach ($services as $service)
     @if($service->status=='done')
-    <div class="mb-5 w-full p-4 bg-primary border border-table-head-200 rounded-lg shadow sm:p-8 dark:bg-table-head-800 dark:border-table-head-700">
-        <h5 class="mb-2 text-xl font-bold tracking-tight text-purple dark:text-white">{{$service->plat_num}} | {{$service->vehicle_name}}</h5>
-        <h4 class="text-normal text-purple">Dealer {{$service->dealer->dealer_name}} / {{$service->plan_date}}</h4>
+    <div class="mb-5 w-full p-4 bg-blue-300 dark:bg-primary border border-table-head-200 rounded-lg shadow sm:p-8 dark:bg-table-head-800 dark:border-table-head-700">
+        <h5 class="mb-2 text-xl font-bold tracking-tight text-primary dark:text-white">{{$service->plat_num}} | {{$service->vehicle_name}}</h5>
+        <h4 class="text-normal text-primary dark:text-purple">Dealer {{$service->dealer->dealer_name}} / {{$service->plan_date}}</h4>
         <br>
         <div class="w-full md:mb-30">
-            <a data-modal-target="staticModal-{{$service->id}}" data-modal-toggle="staticModal-{{$service->id}}"class="text-primary bg-purple hover:bg-violet-600 hover:font-semibold focus:ring-1 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm md:px-5 px-3 md:py-2.5 py-2 text-center">Detail</a>    
+            <a data-modal-target="staticModal-{{$service->id}}" data-modal-toggle="staticModal-{{$service->id}}"class="text-primary bg-blue-500 hover:bg-blue-600 hover:font-semibold focus:ring-1 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm md:px-5 px-3 mr-6 md:py-2.5 py-2 text-center">Detail</a>    
             <div id="staticModal-{{$service->id}}" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
                 <div class="relative w-full max-w-4xl max-h-full">
                     <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">

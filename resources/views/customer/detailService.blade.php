@@ -36,7 +36,7 @@
     </div>
     </div>
     @endif
-<div class="p-4 border-1 rounded-lg mt-14 bg-gray-100 dark:bg-secondary">
+<div class="p-4 border-1 shadow-md rounded-lg mt-14 bg-gray-100 dark:bg-secondary">
     <div class="text-primary dark:text-purple m-4 font-semibold text-2xl tracking-wide">Detail Servis</div>
     <div class="relative overflow-x-auto rounded-lg">
         <table class="w-xl text-sm text-left text-gray-500">

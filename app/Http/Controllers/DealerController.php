@@ -117,7 +117,7 @@ public function servis7()
         $user = Auth::user();
         $dealer = Dealer::findOrFail($id);
 
-        $services = Service::where('dealer_id', $dealer->id)->paginate(5);
+        $services = Service::where('dealer_id', $dealer->id)->where('status', ['process', 'repairing'])->paginate(5);
         return view('customer.detailDealer', compact('user', 'services', 'dealer'));
     }
     public function update(Request $request)
