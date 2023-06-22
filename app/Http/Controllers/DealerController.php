@@ -9,11 +9,14 @@ use App\Models\User;
 use App\Models\Mechanic;
 use App\Models\Dealer;
 use App\Models\Service;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Sparepart;
 use App\Repositories\ServicesRepository;
 use App\Repositories\DealerRepository;
 use Carbon\Carbon;
+use Dompdf\Options;
+use Dompdf\Dompdf;
 
 class DealerController extends Controller
 {   
@@ -108,6 +111,7 @@ public function servis7()
     ->where('status', 'done')
     ->whereBetween('plan_date', ['2023-07-01', '2023-07-31'])
     ->get();
+
 
     return view('dealer.data-transaksi', compact('services','user','month'));
 }
@@ -243,5 +247,34 @@ public function dataservis()
         return view('dealer.dataservis', compact('user', 'services', 'search'));
     }
 
+    private function generatePDF($services, $month)
+{   
 
+    $view = view('dealer.PDF', compact('services', 'month'))->render();
+
+    $options = new Options();
+    $options->set('isRemoteEnabled', true);
+
+    $dompdf = new \Dompdf\Dompdf($options);
+    $dompdf->loadHtml($view);
+    $dompdf->setPaper('A4', 'landscape');
+    $dompdf->render();
+
+    return $dompdf;
+}
+public function print(Request $request)
+{
+    $month = $request->month;
+    $user = Auth::user();
+    $dealer = $user->dealer;
+    
+    $services = Service::where('dealer_id', $dealer->id)
+        ->where('status', 'done')
+        ->whereMonth('plan_date', $month)
+        ->get();
+    
+    // Menghasilkan file PDF
+    $pdf = $this->generatePDF($services, $month);
+    $pdf->stream('transaksi_servis_bulan_' . $month . '.pdf');
+}
 }
