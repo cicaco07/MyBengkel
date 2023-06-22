@@ -22,14 +22,14 @@
     </div>
 @endif
 
-<div class="p-4 border-1 rounded-lg mt-14 bg-secondary">
-    <div class="text-purple m-4 font-semibold text-2xl tracking-wide">Servisku</div>
+<div class="p-4 border border-purple dark:border-none rounded-lg mt-14 bg-gray-100 dark:bg-secondary shadow-lg">
+    <div class="text-primary dark:text-purple m-4 font-semibold text-2xl tracking-wide">Servisku</div>
     @foreach ($services as $service)
     @if($service->status=='waiting' || $service->status=='accept' || $service->status=='process' || $service->status=='repairing')
-    <div class="p-4 border-1 rounded-lg md:mx-4 my-6 bg-purple"> 
+    <div class="p-4 border-1 rounded-lg md:mx-4 my-6 bg-blue-400 dark:bg-purple shadow-md"> 
         <div class="relative overflow-x-auto shadow-md rounded-lg">
-            <table class="w-full rounded-lg text-sm text-left text-gray-500 ">
-                <thead class="text-xs text-purple uppercase bg-table-head">
+            <table class="w-full text-sm text-left text-gray-500">
+                <thead class="text-xs text-primary dark:text-purple uppercase bg-purple dark:bg-table-head">
                     <tr>
                         <th scope="col" class="px-6 py-4">
                             Dealer
@@ -52,7 +52,7 @@
                     </tr>
                 </thead>
                 <tbody class="text-xs md:text-base">
-                        <tr class="bg-primary border-b border-purple text-purple last:border-none">
+                        <tr class="bg-gray-100 dark:bg-primary border-b border-purple dark:text-purple last:border-none">
                             <td class="px-6 py-4">
                                 {{ $service->dealer->dealer_name }}
                             </td>
@@ -76,14 +76,14 @@
             </table>
         </div>
         <div class="mt-5 flex flex-col md:flex-row space-x-2">
-            <a href="{{ route('customer.viewDetailService', ['id'=>$service->id])}}" class="flex text-primary bg-dark-purple hover:bg-violet-600 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-3 md:px-2 py-2.5 mx-5 md:mx-0">
+            <a href="{{ route('customer.viewDetailService', ['id'=>$service->id])}}" class="flex text-white dark:text-primary bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-3 md:px-2 py-2.5 mx-5 md:mx-0">
                     Cek Detail Servis
                 </a>
-                @if($service->status=='accept' || $service->status=='process' || $service->status=='reapiring')
+                @if($service->status=='accept' || $service->status=='process' || $service->status=='repairing')
                 <a href="{{ route('customer.cetakhistory', [$service->id]) }}" class="text-primary bg-warning hover:bg-yellow-500 hover:font-semibold focus:ring-1 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm md:px-5 px-3 md:py-2.5 py-2 text-center">Print</a> 
                 @endif
-                @if($service->status=='waiting' || $service->status=='accept' || $service->status=='process')
-                <button type="submit" data-modal-target="popup-modal" data-modal-toggle="popup-modal" class="text-primary bg-red-700 hover:bg-red-800 hover:font-semibold focus:ring-1 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm md:px-5 px-3 md:py-2.5 py-2 text-center" type="submit">
+                @if($service->status=='waiting' || $service->status=='accept')
+                <button type="submit" data-modal-target="popup-modal" data-modal-toggle="popup-modal" class="text-white dark:text-primary bg-red-700 hover:bg-red-800 hover:font-semibold focus:ring-1 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm md:px-5 px-3 md:py-2.5 py-2 text-center" type="submit">
                     Batalkan Antrian 
                 </button>
                 <div id="popup-modal" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">

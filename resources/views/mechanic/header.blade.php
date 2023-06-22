@@ -5,11 +5,10 @@
 @section('list-menu')
 <div class="flex items-center justify-center flex-col">
    @if ($user->avatar)
-   <img class="h-32 w-32 rounded-full" src="{{ asset('storage/' . $user->avatar) }}">
+      <img class="h-32 w-32 rounded-full" src="{{ asset('storage/' . $user->avatar) }}">
    @else
-   <img class="h-32 w-32 rounded-full" src="{{ asset('img/default user.png' . $user->avatar) }}">
+      <img class="h-32 w-32 rounded-full" src="{{ asset('img/default user.png' . $user->avatar) }}">
    @endif
-
    <div class="text-primary dark:text-purple mt-2 text-center">{{ $position }}</div>
    <div class="text-primary dark:text-purple mb-4 text-center">Dealer {{ $company }} {{ $dealers }}</div>
 </div>

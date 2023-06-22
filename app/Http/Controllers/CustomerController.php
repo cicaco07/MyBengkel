@@ -155,7 +155,7 @@ class CustomerController extends Controller
         $service->save();
 
         $services = $user->service()->get();
-        return redirect()->route('customer.allservisku', ['id'=>$service->id])->with('success', 'Data Servis berhasil dibuat');
+        return redirect()->route('customer.allservisku', ['id'=>$service->id])->with('success', 'Status servis berhasil diubah');
     }
 
 

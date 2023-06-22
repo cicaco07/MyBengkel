@@ -3,7 +3,7 @@
 @section('title', 'Mekanik - Profilku')
 
 @section('main-content')
-    @if(session('success'))
+@if(session('success'))
     <div class="flex justify-center fixed top-0 left-1/2 transform -translate-x-1/2 z-50 mt-6">
         <div id="toast-success" class="flex items-center w-full max-w-xs p-4 mb-4 text-primary bg-success rounded-lg shadow" role="alert" role="alert">
             <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-green-500 bg-green-100 rounded-lg">
@@ -21,7 +21,7 @@
             </button>
         </div>
     </div> 
-    @elseif(session('error1'))
+@elseif(session('error1'))
     <div class="flex justify-center fixed top-0 left-1/2 transform -translate-x-1/2 z-50 mt-6">
     <div id="toast-danger" class="flex items-center w-full max-w-xs p-4 mb-4 text-primary bg-red-500 rounded-lg shadow" role="alert">
         <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-red-500 bg-red-100 rounded-lg">
@@ -35,7 +35,7 @@
         </button>
     </div>
     </div>
-    @elseif(session('error'))
+@elseif(session('error'))
     <div class="flex justify-center fixed top-0 left-1/2 transform -translate-x-1/2 z-50 mt-6">
     <div id="toast-warning" class="flex items-center w-full max-w-xs p-4 text-primary bg-warning rounded-lg shadow dark:text-gray-400 dark:bg-gray-800" role="alert">
         <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-orange-500 bg-orange-100 rounded-lg dark:bg-orange-700 dark:text-orange-200">
@@ -49,7 +49,7 @@
         </button>
     </div>
     </div>
-    @endif
+@endif
 <div class="p-4 border border-purple dark:border-none rounded-lg mt-14 bg-gray-100 dark:bg-secondary shadow-lg">
     <div class="text-primary dark:text-purple m-4 font-semibold text-2xl tracking-wide">Profilku</div>
     <div class="flex items-center justify-center mt-4">
@@ -80,7 +80,7 @@
         <div class="relative w-full max-w-2xl max-h-full">
             <div class="relative bg-gray-100 dark:bg-secondary rounded-lg shadow">
                 <div class="flex items-start justify-between p-4 rounded-t ">
-                    <button type="button" class="text-gray-400 bg-transparent hover:bg-primary hover:text-purple rounded-lg text-sm p-1.5 ml-auto inline-flex items-center" data-modal-hide="staticModal">
+                    <<button type="button" class="text-gray-400 bg-transparent hover:bg-gray-400 dark:hover:bg-primary hover:text-purple rounded-lg text-sm p-1.5 ml-auto inline-flex items-center" data-modal-hide="staticModal">
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
                         </svg>

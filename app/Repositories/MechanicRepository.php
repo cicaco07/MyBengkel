@@ -31,7 +31,7 @@ class MechanicRepository implements IMechanicRepository
         return compact('user', 'position', 'dealers', 'company', 'sparepart');
     }
 
-    public function getAllDealerServis($user)
+    public function getAllDealerServis1($user)
     {   
         $mechanic = $user->mechanic;
 
@@ -40,9 +40,37 @@ class MechanicRepository implements IMechanicRepository
         }
 
         $dealer = $mechanic->dealer;
-        $services = Service::where('dealer_id', $dealer->id)->paginate(5);
+        $services = Service::where('dealer_id', $dealer->id)
+                ->whereIn('status', ['waiting', 'accept'])
+                ->paginate(5);
 
         return compact('user', 'services', 'dealer');
+    }
+
+    public function getAllDealerServis2($user)
+    {
+        $mechanic = $user->mechanic;
+
+        if (!$mechanic) {
+            return null;
+        }
+
+        $dealer = $mechanic->dealer;
+
+        $servicesPage = request()->get('services_page', 1);
+        $services = Service::where('dealer_id', $dealer->id)
+            ->whereIn('status', ['process', 'repairing'])
+            ->paginate(5, ['*'], 'services_page', $servicesPage);
+
+        $servicePage = request()->get('service_page', 1);
+        $service = Service::where('dealer_id', $dealer->id)
+            ->where('status', 'done')
+            ->paginate(5, ['*'], 'service_page', $servicePage);
+
+        $services->appends(['services_page' => $servicesPage]);
+        $service->appends(['service_page' => $servicePage]);
+
+        return compact('user', 'services', 'service', 'dealer');
     }
 
     public function getDataServis()

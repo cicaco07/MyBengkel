@@ -25,11 +25,11 @@ class OtpController extends Controller
     $otp = $verificationCode->otp;
     $user_id = $verificationCode->user_id;
 
-    $message = "Your OTP To Login is - " . $otp;
+    $message = "Kode OTP MyBengkel adalah : " . $otp;
 
     // Mengirim pesan WhatsApp menggunakan Twilio
     $sid = 'ACed6000105782f21d5a3222de4d0d5287';
-    $token = '747758c8d2cc7c00fa2e33211c4d3cba';
+    $token = '087e788c99f0009fd0cfa3b37c782e3c';
     $twilioNumber = '+14155238886';
 
     $client = new Client($sid, $token);
@@ -61,7 +61,7 @@ class OtpController extends Controller
         return otp::create([
             'user_id' => $user->id,
             'otp' => rand(123456, 999999),
-            'exp' => Carbon::now()->addMinutes(10)
+            'exp' => Carbon::now()->addMinutes(1)
         ]);
     }
 
@@ -73,38 +73,37 @@ class OtpController extends Controller
     }
 
     public function loginWithOtp(Request $request)
-    {
-        #Validation
-        $request->validate([
-            'user_id' => 'required|exists:users,id',
-            'otp' => 'required'
-        ]);
+{
+    // Validasi
+    $request->validate([
+        'user_id' => 'required|exists:users,id',
+        'otp' => 'required'
+    ]);
 
-        #Validation Logic
-        $verificationCode   = otp::where('user_id', $request->user_id)->where('otp', $request->otp)->first();
+    // Logika Validasi
+    $verificationCode = otp::where('user_id', $request->user_id)
+        ->where('otp', $request->otp)
+        ->where('exp', '>=', Carbon::now()) // Periksa apakah waktu kedaluwarsa belum tercapai
+        ->first();
 
-        $now = Carbon::now();
-        if (!$verificationCode) {
-            return redirect()->back()->with('error', 'Your OTP is not correct');
-        }elseif($verificationCode && $now->isAfter($verificationCode->expire_at)){
-            return redirect()->route('showView')->with('error', 'Your OTP has been expired');
-        }
-
-        $user = User::whereId($request->user_id)->first();
-
-        if($user){
-            // Expire The OTP
-            $verificationCode->update([
-                'exp' => Carbon::now()
-            ]);
-
-            Auth::login($user);
-            
-            return $this->sendLoginResponse($request);
-        }
-
-        return redirect()->route('showView')->with('error', 'Your Otp is not correct');
+    if (!$verificationCode) {
+        return redirect()->back()->withErrors(['otp' => 'OTP yang Anda masukkan tidak sesuai'])->withInput();
     }
+
+    $user = User::find($request->user_id);
+
+    if ($user) {
+        // Hapus OTP dari database
+        $verificationCode->delete();
+
+        Auth::login($user);
+
+        return $this->sendLoginResponse($request);
+    }
+
+    return redirect()->route('showView')->with('error', 'OTP Anda tidak benar');
+}
+
     protected function sendLoginResponse(Request $request)
     {
         $request->session()->regenerate();

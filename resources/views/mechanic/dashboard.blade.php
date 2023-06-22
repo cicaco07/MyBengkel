@@ -4,7 +4,7 @@
 
 @section('main-content')
 <div class="text-primary dark:text-purple mt-20 font-semibold text-2xl tracking-wide">Dashboard</div>
-    <div class="p-4 rounded-lg mt-6 bg-gray-100 dark:bg-secondary shadow-lg">
+<div class="p-4 rounded-lg mt-6 bg-gray-100 border border-purple dark:border-none shadow-md dark:bg-secondary">
         <div class="text-primary dark:text-purple m-4 font-semibold text-lg md:text-2xl tracking-wide">Selamat Datang, {{ $user->name }}</div>
     </div>
     <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
