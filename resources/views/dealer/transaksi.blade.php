@@ -14,7 +14,7 @@
             <!-- Tautan Transaksi Servis -->
             <a href="{{ route('dealer.servis6') }}" class="text-primary bg-warning hover:bg-yellow-500 hover:font-semibold focus:ring-1 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm md:px-5 px-3 md:py-2.5 py-2 text-center">Transaksi Servis</a>
             <!-- Tautan Transaksi Sparepart -->
-            <a href="/dealer/transaksisparepart" class="text-primary bg-warning hover:bg-yellow-500 hover:font-semibold focus:ring-1 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm md:px-5 px-3 md:py-2.5 py-2 text-center">Transaksi Sparepart</a>
+            <a href="{{ route('dealer.transaksisparepart') }}" class="text-primary bg-warning hover:bg-yellow-500 hover:font-semibold focus:ring-1 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm md:px-5 px-3 md:py-2.5 py-2 text-center">Transaksi Sparepart</a>
         </div>
     </div>
 
@@ -27,7 +27,7 @@
             <!-- Tautan Transaksi Servis -->
             <a href="{{ route('dealer.servis7') }}" class="text-primary bg-warning hover:bg-yellow-500 hover:font-semibold focus:ring-1 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm md:px-5 px-3 md:py-2.5 py-2 text-center">Transaksi Servis</a>
             <!-- Tautan Transaksi Sparepart -->
-            <a href="#" class="text-primary bg-warning hover:bg-yellow-500 hover:font-semibold focus:ring-1 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm md:px-5 px-3 md:py-2.5 py-2 text-center">Transaksi Sparepart</a>
+            <a href="{{ route('dealer.transaksisparepart7') }}" class="text-primary bg-warning hover:bg-yellow-500 hover:font-semibold focus:ring-1 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm md:px-5 px-3 md:py-2.5 py-2 text-center">Transaksi Sparepart</a>
         </div>
     </div>
 </div>

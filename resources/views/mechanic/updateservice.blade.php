@@ -350,7 +350,7 @@
                                                 {{ $item->item_name}}
                                             </td>
                                             <td class="flex justify-center my-2">
-                                                <img src="{{ $item->image }}" alt="" class="w-32 h-24 md:w-48 md:h-32 border-2 border-primary dark:border-purple items-center">
+                                                <img src="{{ asset('/img/'.$item->image) }}" alt="" class="w-32 h-24 md:w-48 md:h-32 border-2 border-primary dark:border-purple items-center">
                                             </td>
                                             <form action="{{ route('mechanic.cart') }}" method="POST">
                                                 @csrf

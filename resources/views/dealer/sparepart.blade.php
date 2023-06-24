@@ -130,14 +130,13 @@
             </thead>
             <tbody class=" text-xs md:text-base">
                 @foreach ($spareparts as $sparepart)
-                @if ($sparepart->dealer_id == Auth::user()->id)
                 <tr class="bg-primary border-purple last:border-none text-purple">
 
                     <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap dark:text-white">
                         {{ $sparepart->id}}
                     </th>
                     <td class="px-6 py-4 ">
-                        <img class="w-auto max-h-[100px] object-cover" src="{{ asset('/img/' . $sparepart->image) }}" alt="Sparepart Image">
+                        <img class="w-auto max-h-[100px] object-cover" src="{{ asset('/img/'. $sparepart->image) }}" alt="Sparepart Image">
                     </td>
                     <td class="px-6 py-4">
                         {{ $sparepart->item_name}}
@@ -218,7 +217,6 @@
                                 </div>
                     </td>
                 </tr>
-                @endif
                 @endforeach
             </tbody>
         </table>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -115,6 +116,43 @@ public function servis7()
 
     return view('dealer.data-transaksi', compact('services','user','month'));
 }
+
+public function transaksisparepart()
+{
+    $month = 6;
+    $user = Auth::user();
+    $dealer = $user->dealer;
+
+    $carts = Cart::whereHas('service', function ($query) use ($dealer) {
+            $query->where('dealer_id', $dealer->id)
+                ->where('status', 'done')
+                ->whereBetween('plan_date', ['2023-06-01', '2023-06-30']);
+        })
+        ->with('service.user')
+        ->with('sparepart')
+        ->get();
+
+    return view('dealer.transaksisparepart', compact('carts', 'user', 'month'));
+}
+
+public function transaksisparepart7()
+{
+    $month = 7;
+    $user = Auth::user();
+    $dealer = $user->dealer;
+
+    $carts = Cart::whereHas('service', function ($query) use ($dealer) {
+            $query->where('dealer_id', $dealer->id)
+                ->where('status', 'done')
+                ->whereBetween('plan_date', ['2023-07-01', '2023-07-30']);
+        })
+        ->with('service.user')
+        ->with('sparepart')
+        ->get();
+
+    return view('dealer.transaksisparepart', compact('carts', 'user', 'month'));
+}
+
 
     public function show($id)
     {
@@ -247,10 +285,10 @@ public function dataservis()
         return view('dealer.dataservis', compact('user', 'services', 'search'));
     }
 
-    private function generatePDF($services, $month)
+    private function generatePDF($services, $carts, $month)
 {   
 
-    $view = view('dealer.PDF', compact('services', 'month'))->render();
+    $view = view('dealer.PDF', compact('services', 'carts', 'month'))->render();
 
     $options = new Options();
     $options->set('isRemoteEnabled', true);
@@ -264,17 +302,35 @@ public function dataservis()
 }
 public function print(Request $request)
 {
-    $month = $request->month;
     $user = Auth::user();
     $dealer = $user->dealer;
+    
+    $month = $request->month; // Simpan nilai bulan
     
     $services = Service::where('dealer_id', $dealer->id)
         ->where('status', 'done')
         ->whereMonth('plan_date', $month)
         ->get();
+
+    // Mengambil data carts
+    $carts = Cart::whereHas('service', function ($query) use ($dealer, $month) {
+            $query->where('dealer_id', $dealer->id)
+                ->where('status', 'done')
+                ->whereMonth('plan_date', $month);
+        })
+        ->with('service.user')
+        ->with('sparepart')
+        ->get();
+
+    // Inisialisasi variabel total
+    $total = 0;
     
     // Menghasilkan file PDF
-    $pdf = $this->generatePDF($services, $month);
+    $pdf = $this->generatePDF($services, $carts, $month);
     $pdf->stream('transaksi_servis_bulan_' . $month . '.pdf');
 }
+
+
+
+
 }
