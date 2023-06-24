@@ -61,7 +61,7 @@ class DealerController extends Controller
 
     $services = Service::where('dealer_id', $dealer->id)
         ->where('status', '!=', 'done') // Tambahkan kondisi untuk menghindari status "done"
-        ->get();
+        ->paginate(10);
 
     return view('dealer.antrian', compact('user', 'services'));
 }
@@ -99,7 +99,7 @@ public function servis6()
     $services = Service::where('dealer_id', $dealer->id)
     ->where('status', 'done')
     ->whereBetween('plan_date', ['2023-06-01', '2023-06-30'])
-    ->get();
+    ->paginate(10);
 
     return view('dealer.data-transaksi', compact('services','user','month'));
 }
@@ -111,7 +111,7 @@ public function servis7()
     $services = Service::where('dealer_id', $dealer->id)
     ->where('status', 'done')
     ->whereBetween('plan_date', ['2023-07-01', '2023-07-31'])
-    ->get();
+    ->paginate(10);
 
 
     return view('dealer.data-transaksi', compact('services','user','month'));
@@ -130,7 +130,7 @@ public function transaksisparepart()
         })
         ->with('service.user')
         ->with('sparepart')
-        ->get();
+        ->paginate(10);
 
     return view('dealer.transaksisparepart', compact('carts', 'user', 'month'));
 }
@@ -148,7 +148,7 @@ public function transaksisparepart7()
         })
         ->with('service.user')
         ->with('sparepart')
-        ->get();
+        ->paginate(10);
 
     return view('dealer.transaksisparepart', compact('carts', 'user', 'month'));
 }
@@ -252,7 +252,7 @@ public function dataservis()
     
         $services = Service::where('dealer_id', $dealer->id)
             ->where('status', '=', 'done') // Tambahkan kondisi untuk menghindari status "done"
-            ->get();
+            ->paginate(10);
     
         return view('dealer.dataservis', compact('user', 'services'));
     }
