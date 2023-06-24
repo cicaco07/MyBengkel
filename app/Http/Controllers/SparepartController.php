@@ -17,22 +17,24 @@ class SparepartController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request){
-
-    $user = Auth::user();
-    $spareparts = Sparepart::all();
-    $searchQuery = $request->input('search');
-
-    foreach ($spareparts as $sparepart) {
-        $sparepart->image = Storage::url('img/' . $sparepart->image);
+    public function index(Request $request)
+    {
+        $user = Auth::user();
+        $dealerId = $user->dealer->id;
+    
+        $searchQuery = $request->input('search');
+    
+        $spareparts = Sparepart::where('dealer_id', $dealerId)
+            ->when($searchQuery, function ($query, $searchQuery) {
+                return $query->where('item_name', 'like', "%$searchQuery%");
+            })
+            ->paginate(10);
+    
+        $allSpareparts = Sparepart::where('dealer_id', $dealerId)->get();
+    
+        return view('dealer.sparepart', compact('user', 'spareparts', 'allSpareparts'));
     }
-
-    $spareparts = Sparepart::when($searchQuery, function ($query, $searchQuery) {
-        return $query->where('item_name', 'like', "%$searchQuery%");
-    })->paginate(10);
-
-    return view('dealer.sparepart', compact('user', 'spareparts'));
-    }
+    
 
     /**
      * Show the form for creating a new resource.
