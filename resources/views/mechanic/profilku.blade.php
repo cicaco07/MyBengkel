@@ -63,6 +63,9 @@
         <label for="name" class="block mb-2 text-sm font-medium text-primary dark:text-purple">Nama Mekanik</label>
         <input type="text" id="disabled-input" aria-label="disabled input" class="mb-4 bg-gray-100 dark:bg-primary border border-primary text-primary dark:text-purple text-sm md:text-base rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 px-6" value="{{ $user->name }}" disabled>
         
+        <label for="dealer_id" class="block mb-2 text-sm font-medium text-primary dark:text-purple">Nama Perusahaan</label>
+        <input type="text" id="disabled-input" aria-label="disabled input" class="mb-4 bg-gray-100 dark:bg-primary border border-primary text-primary dark:text-purple text-sm md:text-base rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 px-6" value="{{ $dealers }}" disabled>
+        
         <label for="username" class="block mb-2 text-sm font-medium text-primary dark:text-purple">Alamat</label>
         <input type="text" id="disabled-input" aria-label="disabled input" class="mb-4 bg-gray-100 dark:bg-primary border border-primary text-primary dark:text-purple text-sm md:text-base rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 px-6" value="{{ $user->address }}" disabled>
     

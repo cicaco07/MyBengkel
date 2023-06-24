@@ -46,13 +46,6 @@ class CustomerController extends Controller
         return view('customer.profilku',compact('user'));
     }
 
-    public function servisku($id)
-    {
-        $user = Auth::user();
-        $service = $user->service()->findOrFail($id);
-        return view('customer.servisku', compact('user','service'));
-    }
-
     public function allservisku()
     {
         $user = Auth::user();
@@ -85,36 +78,6 @@ class CustomerController extends Controller
     {
         $user = Auth::user();
         return view('customer.panduansistem',compact('user'));
-    }
-    
-    public function servisku2()
-    {
-        $user = Auth::user();
-        return view('customer.servisku2',compact('user'));
-    }
-
-    public function servisku3()
-    {
-        $user = Auth::user();
-        return view('customer.servisku3',compact('user'));
-    }
-
-    public function servisku4()
-    {
-        $user = Auth::user();
-        return view('customer.servisku4',compact('user'));
-    }
-
-    public function form()
-    {
-        $user = Auth::user();
-        return view('customer.form',compact('user'));
-    }
-
-    public function form2()
-    {
-        $user = Auth::user();
-        return view('customer.form2',compact('user'));
     }
 
     public function update(Request $request)
@@ -156,8 +119,5 @@ class CustomerController extends Controller
 
         $services = $user->service()->get();
         return redirect()->route('customer.allservisku', ['id'=>$service->id])->with('success', 'Status servis berhasil diubah');
-    }
-
-
-    
+    }   
 }

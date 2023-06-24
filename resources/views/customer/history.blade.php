@@ -1,6 +1,6 @@
 @extends('customer.header')
 
-@section('title', 'customer - History Servis')
+@section('title', 'Customer - History Servis')
 @section('main-content')
 @if(session('success'))
     <div class="flex justify-center fixed top-0 left-1/2 transform -translate-x-1/2 z-50 mt-6">

@@ -1,29 +1,10 @@
 <?php
 
-use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\DealerController;
 use App\Http\Controllers\OtpController;
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\CustomerController;
-use App\Http\Controllers\MechanicController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\ServiceController;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\SparepartController;
 
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
 Route::redirect('/', '/login');
 
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('registerForm');

@@ -6,7 +6,7 @@
 <div class="p-4 border border-purple mt-14 dark:border-none shadow-md rounded-lg bg-gray-100 dark:bg-secondary">
     <div class="text-primary dark:text-purple m-4 font-semibold text-2xl tracking-wide">List Antrian</div>
     <div class="relative overflow-x-auto shadow-md rounded-lg md:mx-20">
-        <table class="w-full text-sm text-left">
+        <table class="w-full text-sm">
             <thead class="text-xs text-primary dark:text-purple uppercase bg-purple dark:bg-table-head">
                 <tr>
                     <th scope="col" class="px-6 py-3">
@@ -30,6 +30,13 @@
                 </tr>
             </thead>
             <tbody class="text-xs md:text-base">
+            @if ($services->isEmpty())
+                <tr>
+                    <td colspan="6" class="dark:bg-primary text-center py-4 text-primary dark:text-purple">
+                        List Antrian Kosong
+                    </td>
+                </tr>
+            @else
             @foreach ($services as $servis)
                 <tr class="bg-gray-100 dark:bg-primary border-b border-primary dark:border-purple last:border-0 text-primary dark:text-purple">
                     <th scope="row" class="text-center py-4 font-medium whitespace-nowrap dark:text-white">
@@ -45,7 +52,13 @@
                         {{ $servis->vehicle_name }}
                     </td>
                     <td class="text-center py-4">
-                        {{ $servis->problem }}
+                        <?php
+                        $problem = $servis->problem;
+                        if (strlen($problem) > 15) {
+                            $problem = substr($problem, 0, 15) . "....";
+                        }
+                        echo $problem;
+                        ?>
                     </td>
                     <td class="">
                         <div class="flex justify-around text-center">
@@ -56,7 +69,7 @@
                                 <button class="text-primary bg-warning px-6 py-2 rounded-lg" type="submit">Start</button>
                             </form>
                             @elseif($servis->status=='repairing')
-                                <button class="text-primary bg-warning px-6 py-2 rounded-lg" disabled type="submit">Processing</button>
+                                <button class="text-primary dark:text-purple px-6 py-2 rounded-lg" disabled type="submit">Processing ....</button>
                                 <form action="{{route('mechanic.updateStatus3', $servis->id)}}" method="POST">
                                     @csrf
                                     @method('PUT')
@@ -67,6 +80,7 @@
                     </td>
                 </tr>
             @endforeach
+            @endif
             </tbody>
         </table>
     </div>
@@ -76,6 +90,7 @@
         </div>
       </div>
 </div>
+
 <div class="p-4 border border-purple dark:border-none shadow-md rounded-lg mt-6 bg-gray-100 dark:bg-secondary">
     <div class="text-primary dark:text-purple m-4 font-semibold text-2xl tracking-wide">List History Servis</div>
     <div class="relative overflow-x-auto shadow-md rounded-lg md:mx-20">
@@ -103,6 +118,13 @@
                 </tr>
             </thead>
             <tbody class="text-xs md:text-base">
+                @if ($service->isEmpty())
+                <tr>
+                    <td colspan="6" class="dark:bg-primary text-center py-4 text-primary dark:text-purple">
+                        List History Servis Kosong
+                    </td>
+                </tr>
+                @else
                 @foreach ($service as $servis)
                     <tr class="bg-gray-100 dark:bg-primary border-b border-primary dark:border-purple last:border-0 text-primary dark:text-purple">
                         <th scope="row" class="text-center py-4 font-medium whitespace-nowrap dark:text-white">
@@ -118,7 +140,13 @@
                             {{ $servis->vehicle_name }}
                         </td>
                         <td class="text-center py-4">
-                            {{ $servis->problem }}
+                            <?php
+                            $problem = $servis->problem;
+                            if (strlen($problem) > 20) {
+                                $problem = substr($problem, 0, 20) . "....";
+                            }
+                            echo $problem;
+                            ?>
                         </td>
                         <td class="">
                             <div class="flex justify-center text-center">
@@ -198,6 +226,7 @@
                         </td>
                     </tr>
                 @endforeach
+                @endif
             </tbody>
         </table>
     </div>

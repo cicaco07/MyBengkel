@@ -39,9 +39,21 @@
               </p>
             </div>
             <ul class="bg-gray-100 dark:bg-primary" role="none">
+              {{-- @if ($user->role=='customer')
               <li>
-                <a href="dashboard" class="block px-4 py-2 text-sm text-primary dark:text-purple dark:hover:text-primary hover:bg-dark-purple dark:hover:bg-dark-purple" role="menuitem">Dashboard</a>
+                <a href="{{route(customer.dashboard)}}" class="block px-4 py-2 text-sm text-primary dark:text-purple dark:hover:text-primary hover:bg-dark-purple dark:hover:bg-dark-purple" role="menuitem">Dashboard</a>
               </li>
+              @elseif($user->role=='dealer')
+              <li>
+                <a href="{{route(dealer.dashboard)}}" class="block px-4 py-2 text-sm text-primary dark:text-purple dark:hover:text-primary hover:bg-dark-purple dark:hover:bg-dark-purple" role="menuitem">Dashboard</a>
+              </li>
+              @elseif($user->role=='mechanic')
+              <li>
+                <a href="{{route(mechanic.dashboard)}}" class="block px-4 py-2 text-sm text-primary dark:text-purple dark:hover:text-primary hover:bg-dark-purple dark:hover:bg-dark-purple" role="menuitem">Dashboard</a>
+              </li>
+              @endif --}}
+          
+              
               <li>
                 <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="block px-4 py-2 text-sm text-primary dark:text-purple hover:text-primary hover:bg-dark-purple">
                   <button>Logout</button>

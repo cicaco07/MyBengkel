@@ -46,12 +46,21 @@
                 <th scope="col" class="text-center">
                     Status
                 </th>
+                @if ($services->isNotEmpty())
                 <th scope="col" class="text-center">
                     Action
                 </th>
+                @endif
             </tr>
         </thead>
         <tbody class="text-xs md:text-base">
+            @if ($services->isEmpty())
+                <tr>
+                    <td colspan="6" class="dark:bg-primary text-center py-4 text-primary dark:text-purple">
+                        List Antrian Kosong
+                    </td>
+                </tr>
+            @else
             @foreach ($services as $servis)
             <tr class="bg-gray-100 dark:bg-primary border-b border-primary dark:border-purple last:border-0 text-primary dark:text-purple">
                 <th scope="row" class="text-center px-4 py-4 font-medium whitespace-nowrap dark:text-white">
@@ -67,20 +76,29 @@
                     {{ $servis->plat_num }}
                 </td>
                 <td class="text-center py-4">
-                    {{ $servis->problem }}
+                    <?php
+                    $problem = $servis->problem;
+                    if (strlen($problem) > 20) {
+                        $problem = substr($problem, 0, 20) . "....";
+                    }
+                    echo $problem;
+                    ?>
                 </td>
                 <td class="text-center py-4">
                     {{ $servis->status }}
                 </td>
-                <td class="text-center">
+                <td class="">
+                    <div class="flex justify-center text-center">
                     @if ($servis->status=='waiting')
-                    <a href="{{ route('mechanic.updateService', ['id'=>$servis->id])}}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-2 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">
+                        <a href="{{ route('mechanic.updateService', ['id'=>$servis->id])}}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-2 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">
                         Update
-                    </a>
+                        </a>
+                    </div>
                     @endif
                 </td>
             </tr>
             @endforeach
+            @endif
         </tbody>
     </table>
 </div>

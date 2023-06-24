@@ -14,23 +14,29 @@ class ServiceController extends Controller
         $request->validate([
             'vehicle_name' => 'required',
             'plat_num' => 'required',
-            'problem' => ['required', 'in:Ganti Ban,Ganti Oli,Service Rutin,Lain-lain', 'max:50'],
+            'problem' => ['required', 'in:Ganti Ban,Ganti Oli,Service Rutin,Lain-lain', 'max:200'],
         ]);
 
         $user_id = auth()->user()->id;
         $dealer_id = Dealer::findOrFail($dealer_id);
 
         $service = new Service;
-        $service->vehicle_name=$request->get('vehicle_name');
-        $service->plat_num=$request->get('plat_num');
-        $service->problem=$request->get('problem');
+        $service->vehicle_name = $request->get('vehicle_name');
+        $service->plat_num = $request->get('plat_num');
+        $problem = $request->get('problem');
+
+        if ($problem === 'Lain-lain') {
+            $service->problem = $request->get('other_problem');
+        } else {
+            $service->problem = $problem;
+        }
+
         $service->user_id = $user_id;
         $service->dealer_id = $dealer_id->id;
 
         $service->save();
         return redirect()->route('customer.allservisku', ['id'=>$service->id])->with('success', 'Data Servis berhasil dibuat');
     }
-
 
     public function destroyService($id)
     {

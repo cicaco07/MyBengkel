@@ -7,7 +7,6 @@ use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
@@ -24,9 +23,9 @@ class RegisterController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => ['required', 'string', 'max:100'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'username' => ['required', 'string', 'max:100'],
+            'username' => ['required', 'string', 'max:100', 'unique:users'],
             'password' => ['required', 'string', 'min:8'],
-            'phone_number' => ['required', 'string', 'max:100'],
+            'phone_number' => ['required', 'string', 'max:13'],
             'address' => ['required', 'string', 'max:100'],
         ]);
     

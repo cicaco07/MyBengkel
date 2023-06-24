@@ -133,6 +133,10 @@
                                                         <option value="Yamaha" {{ $data->company === 'Yamaha' ? 'selected' : '' }}>Yamaha</option>
                                                     </select>
                                                 </div>
+                                                <div>
+                                                    <label for="maps" class="block mb-2 text-sm font-medium text-primary dark:text-purple">Maps</label>
+                                                    <input type="text" name="maps" id="maps" class="bg-gray-100 dark:bg-primary text-primary dark:text-purple text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d4699.144760674611!2d112.61842313156015!3d-7.9478794941768!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sid!2sid!4v1687606052357!5m2!1sid!2sid">
+                                                </div>
                                             </div>
                                             <button type="submit" class="text-primary inline-flex items-center bg-success hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
                                                 Simpan
