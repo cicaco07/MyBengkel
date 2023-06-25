@@ -54,7 +54,11 @@
         <div class="grid grid-flow-col gap-1 ">
             <div class="mx-4 my-4 max-w-xs bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 ">
                 <a href="#">
-                    <img class="rounded-t-lg" src="{{ asset('img/Mekanik.jpg')}}" alt="" />
+                    @if($user->avatar)
+                        <img class="h-64 w-64 rounded-full" src="{{ asset('storage/' . $user->avatar) }}" width="250">
+                    @else
+                        <img class="h-64 w-64 rounded-full" src="{{ asset('img/default user.png')}}" alt="" width="250"/>
+                    @endif
                 </a>
                 <div class="px-6 py-4 bg-gray-100 dark:bg-blue-400 rounded ">
                     <a href="#">

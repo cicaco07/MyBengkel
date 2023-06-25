@@ -31,36 +31,36 @@
             </button>
         </div>
         <div id="staticModal" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
-            <div class="relative w-full max-w-2xl max-h-full">
-                <div class="relative bg-secondary rounded-lg shadow">
-                    <div class="flex items-start justify-between p-4 rounded-t ">
+            <div class="relative w-full max-w-4xl max-h-full">
+                <div class="relative bg-gray-100 dark:bg-secondary rounded-lg shadow">
+                    <div class="flex items-start justify-between p-4 rounded-t">
                         <button type="button" class="text-gray-400 bg-transparent hover:bg-primary hover:text-purple rounded-lg text-sm p-1.5 ml-auto inline-flex items-center" data-modal-hide="staticModal">
                             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
                             </svg>
                         </button>
                     </div>
-                    <form action="{{ route('sparepart.store') }}" method="post" enctype="multipart/form-data">>
+                    <form action="{{ route('sparepart.store') }}" method="post" enctype="multipart/form-data">
                         @csrf
 
                         <div class="mb-6 mx-6">
-                            <label for="item_name" class="block mb-2 text-sm font-medium text-purple">Nama Sparepart</label>
-                            <input required type="text" id="item_name" name="item_name" class="bg-primary border border-secondary text-purple text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+                            <label for="item_name" class="block mb-2 text-sm font-medium text-primary dark:text-purple">Nama Sparepart</label>
+                            <input required type="text" id="item_name" name="item_name" class="bg-gray-100 dark:bg-primary border border-secondary text-primary dark:text-purple text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                         </div>
 
                         <div class="mb-6 mx-6">
-                            <label for="quantity_left" class="block mb-2 text-sm font-medium text-purple">Stok</label>
-                            <input required type="text" id="quantity_left" name="quantity_left" class="bg-primary border border-secondary text-purple text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                            <label for="quantity_left" class="block mb-2 text-sm font-medium text-primary dark:text-purple">Stok</label>
+                            <input required type="text" id="quantity_left" name="quantity_left" class="bg-gray-100 dark:bg-primary border border-secondary text-primary dark:text-purple text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                         </div>
 
                         <div class="mb-6 mx-6">
-                            <label for="price" class="block mb-2 text-sm font-medium text-purple">Harga</label>
-                            <input required type="text" id="price" name="price" class="bg-primary border border-secondary text-purple text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                            <label for="price" class="block mb-2 text-sm font-medium text-primary dark:text-purple">Harga</label>
+                            <input required type="text" id="price" name="price" class="bg-gray-100 dark:bg-primary border border-secondary text-primary dark:text-purple text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                         </div>
 
                         <div class="mb-6 mx-6">
-                            <label for="image" class="block mb-2 text-sm font-medium text-purple">Gambar</label>
-                            <input type="file" id="image" name="image" accept="image/*" class="bg-primary border border-secondary text-purple text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                            <label for="image" class="block mb-2 text-sm font-medium text-primary dark:text-purple">Gambar</label>
+                            <input type="file" id="image" name="image" accept="image/*" class="block w-full mb-5 text-sm text-primary dark:text-purple rounded-lg cursor-pointer bg-gray-100 dark:bg-primary border border-primary dark:border-none">
                         </div>
 
                         <div class="flex items-center p-6 space-x-2 border-gray-200 rounded-b">
