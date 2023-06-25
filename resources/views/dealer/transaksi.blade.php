@@ -3,10 +3,10 @@
 @section('title', 'Dealer - Transaksi')
 
 @section('main-content')
-<div class="p-4 border-1 rounded-lg mt-14 bg-secondary">
-    <div class="text-purple m-4 font-semibold text-2xl tracking-wide">Data Transaksi</div>
-    <div class="w-full p-4 mb-7 bg-primary border border-table-head-200 rounded-lg shadow sm:p-8 dark:bg-table-head-800 dark:border-table-head-700">
-        <h5 class="mb-2 text-2xl font-bold tracking-tight text-purple dark:text-white">Bulan 6</h5>
+<div class="p-4 rounded-lg mt-14 bg-gray-100 border border-purple dark:border-none shadow-md dark:bg-secondary">
+    <div class="text-primary dark:text-purple m-4 font-semibold text-2xl tracking-wide w-1/2">Data Transaksi</div>
+    <div class="w-full p-4 mb-7 bg-blue-300 dark:bg-primary border border-table-head-200 rounded-lg shadow sm:p-8 dark:bg-table-head-800 dark:border-table-head-700">
+        <h5 class="mb-2 text-2xl font-bold tracking-tight text-primary dark:text-white">Bulan 6</h5>
         <br>
         <div class="w-full md:mb-30">
             <!-- Tombol Print -->
@@ -18,8 +18,8 @@
         </div>
     </div>
 
-    <div class="w-full p-4 bg-primary border border-table-head-200 rounded-lg shadow sm:p-8 dark:bg-table-head-800 dark:border-table-head-700">
-        <h5 class="mb-2 text-2xl font-bold tracking-tight text-purple dark:text-white">Bulan 7</h5>
+    <div class="w-full p-4 mb-7 bg-blue-300 dark:bg-primary border border-table-head-200 rounded-lg shadow sm:p-8 dark:bg-table-head-800 dark:border-table-head-700">
+        <h5 class="mb-2 text-2xl font-bold tracking-tight text-primary dark:text-white">Bulan 7</h5>
         <br>
         <div class="w-full md:mb-30">
             <!-- Tombol Print -->

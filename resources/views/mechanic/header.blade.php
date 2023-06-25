@@ -9,8 +9,8 @@
    @else
       <img class="h-32 w-32 rounded-full" src="{{ asset('img/default user.png' . $user->avatar) }}">
    @endif
-   <div class="text-primary dark:text-purple mt-2 text-center">{{ $position }}</div>
-   <div class="text-primary dark:text-purple mb-4 text-center">Dealer {{ $company }} {{ $dealers }}</div>
+   <div class="text-primary text-base dark:text-purple mt-2 text-center">{{ $position }}</div>
+   <div class="text-primary text-base dark:text-purple mb-4 text-center">Dealer {{ $company }} {{ $dealers }}</div>
 </div>
    <li>
        <a href="{{route('mechanic.dashboard')}}" class="text-sm flex items-center p-3 mb-2 dark:hover:text-primary text-primary dark:text-purple rounded-lg hover:bg-dark-purple hover:text-primary hover:font-semibold">

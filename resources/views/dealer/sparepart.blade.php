@@ -1,6 +1,6 @@
 @extends('dealer.header')
 
-@section('title', 'Delaer - Servis')
+@section('title', 'Delaer - Sparepart')
 
 @section('main-content')
 @if(session('success'))
@@ -22,11 +22,11 @@
     </div>
 </div>
 @endif
-<div class="p-4 border-1 rounded-lg mt-14 bg-secondary">
-    <div class="text-purple m-4 font-semibold text-2xl tracking-wide">Data Sparepart</div>
-    <form action="{{ route('sparepart.store') }}" method="post" enctype="multipart/form-data">>
+<div class="p-4 rounded-lg mt-14 bg-gray-100 border border-purple dark:border-none shadow-md dark:bg-secondary">
+    <div class="text-primary dark:text-purple m-4 font-semibold text-2xl tracking-wide w-1/2">Data Sparepart</div>
+    <form action="{{ route('sparepart.store') }}" method="post" enctype="multipart/form-data">
         <div>
-            <button data-modal-target="staticModal" data-modal-toggle="staticModal" class="block text-black bg-purple my-6 hover:bg-white focus:ring-1 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center" type="button">
+            <button data-modal-target="staticModal" data-modal-toggle="staticModal" class="block text-black bg-purple my-6 hover:bg-dark-purple dark:hover:bg-white focus:ring-1 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center" type="button">
                 Tambah Sparepart
             </button>
         </div>
@@ -89,9 +89,9 @@
             <span class="sr-only">Search</span>
         </button>
     </form>
-    <a href="{{ route('spareparts.clear-search') }}" class="text-purple flex justify-end hover:text-white">Clear Search</a>
+    <a href="{{ route('spareparts.clear-search') }}" class="dark:text-purple text-primary flex justify-end hover:text-black dark:hover:text-white">Clear Search</a>
     <form action="{{ route('spareparts.search') }}" method="GET" class="mb-4 text-blue-500">
-        <tbody class="text-xs text-base">
+        <tbody class="text-xs">
             @forelse ($spareparts as $sparepart)
             @empty
             <tr>
@@ -105,21 +105,21 @@
 
     <div class="relative overflow-x-auto shadow-md rounded-lg">
         <table class="w-full text-sm text-left text-gray-500">
-            <thead class="text-xs text-purple uppercase bg-table-head">
+            <thead class="text-xs text-primary dark:text-purple uppercase bg-purple dark:bg-table-head">
                 <tr>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="text-center py-4">
                         No
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="text-center">
                         Image
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="text-center">
                         Nama Sparepart
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="text-center">
                         Harga
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="text-center">
                         Stok
                     </th>
                     <th scope="col" class="text-center">
@@ -129,11 +129,10 @@
 
             </thead>
             <tbody class=" text-xs md:text-base">
-                @foreach ($spareparts as $sparepart)
-                <tr class="bg-primary border-purple last:border-none text-purple">
-
-                    <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap dark:text-white">
-                        {{ $sparepart->id}}
+                @foreach ($spareparts as $index => $sparepart)
+                <tr class="bg-gray-100 dark:bg-primary border-b border-primary dark:border-purple last:border-0 text-primary dark:text-purple">
+                    <th scope="row" class="px-4 text-center py-4 font-medium whitespace-nowrap dark:text-white">
+                        {{ $spareparts->firstItem() + $index }}
                     </th>
                     <td class="px-6 py-4 ">
                         <img class="w-auto max-h-[100px] object-cover" src="{{ asset('/img/'. $sparepart->image) }}" alt="Sparepart Image">
@@ -224,7 +223,7 @@
 
     <div class="flex flex-col items-center mt-6">
         <div class="mt-5 md:mt-0">
-            {{ $spareparts->links('mechanic.pagination') }}
+            {{ $spareparts->links('dealer.pagination') }}
         </div>
     </div>
 </div>

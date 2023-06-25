@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Sparepart;
+use App\Models\Dealer;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreSparepartRequest;
 use App\Http\Requests\UpdateSparepartRequest;
@@ -28,7 +29,7 @@ class SparepartController extends Controller
             ->when($searchQuery, function ($query, $searchQuery) {
                 return $query->where('item_name', 'like', "%$searchQuery%");
             })
-            ->paginate(10);
+            ->paginate(5);
     
         $allSpareparts = Sparepart::where('dealer_id', $dealerId)->get();
     
@@ -50,7 +51,8 @@ class SparepartController extends Controller
     
      public function store(StoreSparepartRequest $request)
      {
-         $dealerId = Auth::user()->id;
+        $dealer = Dealer::where('user_id', Auth::user()->id)->first();
+        $dealerId = $dealer->id;
  
          // Validasi inputan jika diperlukan
          $validatedData = $request->validated();
