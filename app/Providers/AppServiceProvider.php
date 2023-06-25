@@ -15,6 +15,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(IMechanicRepository::class, MechanicRepository::class);
         $this->app->bind(IUserRepository::class, UserRepository::class);
         $this->app->bind(IDealerRepository::class, DealerRepository::class);
+        $this->app->bind(IServiceRepository::class, ServiceRepository::class);
     }
 
     /**

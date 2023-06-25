@@ -25,16 +25,11 @@ class UserRepository implements IUserRepository
             });
         }
 
-        $perPage = 5; // Jumlah item per halaman
-        $currentPage = request()->input('page', 1); // Halaman saat ini, default 1
-
-        // Ambil semua hasil yang cocok dengan query
+        $perPage = 5;
+        $currentPage = request()->input('page', 1);
         $results = $query->get();
-
-        // Buat objek Collection dari hasil
         $collection = collect($results);
 
-        // Buat objek LengthAwarePaginator dengan menggunakan Collection
         $data = new LengthAwarePaginator(
             $collection->forPage($currentPage, $perPage),
             $collection->count(),

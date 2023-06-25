@@ -1,7 +1,7 @@
 <?php
 namespace App\Repositories\Interfaces;
 
-Interface IMechanicRepository
+interface IMechanicRepository
 {
     public function getMechanicData();
 
@@ -10,8 +10,6 @@ Interface IMechanicRepository
     public function getAllDealerServis2($user);
 
     public function updateProfile($user, $request);
-
-    public function updateStatus1($id);
 
     public function updateStatus2($id);
 
@@ -28,5 +26,7 @@ Interface IMechanicRepository
     public function delete($id);
 
     public function findByKeyword($keyword);
+
+    public function updateServiceStatus($id, $price);
 
 }

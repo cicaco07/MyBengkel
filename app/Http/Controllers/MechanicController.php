@@ -2,20 +2,20 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Service;
-use App\Models\Cart;
 use App\Repositories\MechanicRepository;
-use Illuminate\Support\Carbon;
+use App\Repositories\ServiceRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class MechanicController extends Controller
 {
     private $mechanicRepository;
+    public $serviceRepository;
 
-    public function __construct(MechanicRepository $mechanicRepository)
+    public function __construct(MechanicRepository $mechanicRepository, ServiceRepository $serviceRepository)
     {
         $this->mechanicRepository = $mechanicRepository;
+        $this->serviceRepository = $serviceRepository;
     }
 
     public function dashboard()
@@ -73,43 +73,37 @@ class MechanicController extends Controller
     public function updateService($id)
     {
         $data = $this->mechanicRepository->getMechanicData();
-        $antrian = Service::findOrFail($id);
-        $carts = Cart::where('service_id', $antrian->id)
-                ->join('spareparts', 'carts.sparepart_id', '=', 'spareparts.id')
-                ->select('carts.*', 'spareparts.item_name')
-                ->get();
+        $antrian = $this->serviceRepository->getServiceById($id);
+        $carts = $this->serviceRepository->getServiceCarts($antrian->id);
 
         $totalSubtotal = $carts->sum('subtotal');
         $total = $totalSubtotal;
-        
+
         return view('mechanic.updateservice', $data, compact('antrian', 'carts', 'total'));
     }
 
     public function updateStatus(Request $request, $id)
     {
-        $user = Auth::user();
-        $data = $this->mechanicRepository->getMechanicData();
-        $data1 = $this->mechanicRepository->getAllDealerServis1($user);
-        $service = $this->mechanicRepository->updateStatus1($id);
-
         $request->validate([
             'price' => 'required',
         ]);
 
         $price = $request->input('price');
 
-        $totalprice = Service::find($id);
-        $totalprice->price = $price;
-        $totalprice->save();
+        $service = $this->mechanicRepository->updateServiceStatus($id, $price);
+
+        $user = Auth::user();
+        $data = $this->mechanicRepository->getMechanicData();
+        $data1 = $this->mechanicRepository->getAllDealerServis1($user);
 
         return redirect()
             ->route('mechanic.antrian')
             ->with([
-            'data' => $data,
-            'data1' => $data1,
-            'service' => $service,
-            'totalprice' => $totalprice
-        ])->with('success', 'Status servis berhasil diubah');
+                'data' => $data,
+                'data1' => $data1,
+                'service' => $service
+            ])
+            ->with('success', 'Status servis berhasil diubah');
     }
 
     public function updateStatus2($id)
@@ -134,13 +128,11 @@ class MechanicController extends Controller
         $request->validate([
             'message' => 'required',
         ]);
-    
+
         $message = $request->input('message');
-    
-        $service = Service::find($id);
-        $service->recommended_service = $message;
-        $service->save();
-    
+
+        $this->serviceRepository->updateRecommendedService($id, $message);
+
         return redirect()->back()->with('success', 'Recommended servis berhasil diperbarui');
     }
 
@@ -154,13 +146,9 @@ class MechanicController extends Controller
         $planDate = $request->input('datepicker');
         $time = $request->input('time');
 
-        $antrian = Service::find($id);
-        $antrian->plan_date = Carbon::createFromFormat('m/d/Y', $planDate)->format('Y-m-d');
-        $antrian->time = $time;
-        $antrian->save();
+        $this->serviceRepository->updateServiceSchedule($id, $planDate, $time);
 
         return redirect()->back()->with('success', 'Data berhasil diperbarui');
     }
 
-    
 }
