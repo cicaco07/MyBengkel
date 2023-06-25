@@ -141,7 +141,11 @@
                         </div>
                         <div>
                             <label for="position" class="block mb-2 text-sm font-medium text-primary dark:text-purple">Position</label>
-                            <input type="text" name="position" id="position" class="bg-gray-100 dark:bg-primary text-primary dark:text-purple text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="" required="">
+                            <select type="text" name="position" id="position" class="bg-gray-100 dark:bg-primary text-primary dark:text-purple text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5" placeholder="" required="">
+                                <option value="Kepala Mekanik">Kepala Mekanik</option>
+                                <option value="Mekanik">Mekanik</option>
+                            </select>
+                            
                         </div>
                     </div>
                     <button type="submit" class="text-primary inline-flex items-center bg-success hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">

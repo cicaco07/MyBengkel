@@ -5,7 +5,7 @@
 @section('main-content')
 <div class="p-4 border border-purple dark:border-none rounded-lg mt-14 shadow-md bg-gray-100 dark:bg-secondary">
     <div class="flex justify-between">
-        <div class="text-primary dark:text-purple m-4 font-semibold text-2xl tracking-wide ">Data Transaksi Bulan {{$month}}</div>
+        <div class="text-primary dark:text-purple m-4 font-semibold text-2xl tracking-wide">Data Transaksi Bulan {{$month}}</div>
         <div class="mt-10 mb-4 w-1/2">
         </div>
     </div>
@@ -36,11 +36,12 @@
             <tbody class="text-xs md:text-base">
                 @php
                 $total = 0; // Inisialisasi variabel total
+                $serviceCount = count($services); // Jumlah service
                 @endphp
-    
+            
                 @foreach ($services as $index => $service)
-                <tr class="bg-gray-100 dark:bg-primary border-b border-primary dark:border-purple last:border-0 text-primary dark:text-purple">
-                    <th scope="row" class="px-4 text-center py-4 font-medium whitespace-nowrap dark:text-white">
+                    <tr class="bg-gray-100 dark:bg-primary border-b border-primary dark:border-purple last:border-0 text-primary dark:text-purple">
+                        <th scope="row" class="px-4 text-center py-4 font-medium whitespace-nowrap dark:text-white">
                             {{ $index + 1 }}
                         </th>
                         <td class="px-6 py-4">
@@ -52,7 +53,7 @@
                         <td class="px-6 py-4">
                             {{ $service->price }}
                             @php
-                                $total += $service->price; // Menambahkan harga ke total
+                            $total += $service->price; // Menambahkan harga ke total
                             @endphp
                         </td>
                         <td class="px-6 py-4">
@@ -65,12 +66,21 @@
                 @endforeach
             </tbody>
         </table>
+        <div class="flex flex-col items-center mt-6 mb-4">
+            <span class="text-sm text-primary dark:text-purple">
+                Jumlah Service: {{ $serviceCount }}
+            </span>
+            <span class="text-sm text-primary dark:text-purple">
+                Total Biaya: Rp. {{ $total }}
+            </span>
+        </div>
     </div>
-    <div class="flex flex-col items-center mt-6">
-        <span class="text-sm text-primary dark:text-purple">
-            Total: Rp. {{ $total }} <!-- Menampilkan total harga -->
-        </span>
-    </div>
+</div>
+
+
+            
+            
+            
 
 <div class="flex flex-col items-center mt-6">
         <div class="mt-5 md:mt-0">

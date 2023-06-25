@@ -57,7 +57,7 @@ class DealerController extends Controller
 
         $services = Service::where('dealer_id', $dealer->id)
             ->where('status', '!=', 'done')
-            ->paginate(5);
+            ->paginate(10);
 
         return view('dealer.antrian', compact('user', 'services'));
     }
@@ -240,7 +240,7 @@ class DealerController extends Controller
             });
         }
 
-        $services = $services->paginate(5);
+        $services = $services->paginate(10);
 
         return view('dealer.antrian', compact('user', 'services', 'search'));
     }
@@ -252,7 +252,7 @@ class DealerController extends Controller
     
         $services = Service::where('dealer_id', $dealer->id)
             ->where('status', '=', 'done') // Tambahkan kondisi untuk menghindari status "done"
-            ->paginate(10);
+            ->paginate(5);
     
         return view('dealer.dataservis', compact('user', 'services'));
     }
@@ -268,19 +268,19 @@ class DealerController extends Controller
         $services = Service::where('dealer_id', $dealer->id)
             ->where('status', '=', 'done');
     
-        if (!empty($keyword)) {
-            $services->where(function ($query) use ($keyword) {
-                $query->whereHas('user', function ($query) use ($keyword) {
-                    $query->where('name', 'LIKE', "%$keyword%");
-                })
-                ->orWhere('plat_num', 'LIKE', "%$keyword%")
-                ->orWhere('problem', 'LIKE', "%$keyword%")
-                ->orWhere('status', 'LIKE', "%$keyword%")
-                ->orWhere('price', 'LIKE', "%$keyword%");
-            });
-        }
+            if (!empty($keyword)) {
+                $services->where(function ($query) use ($keyword) {
+                    $query->whereHas('user', function ($query) use ($keyword) {
+                        $query->where('name', 'LIKE', "%$keyword%");
+                    })
+                    ->orWhere('plat_num', 'LIKE', "%$keyword%")
+                    ->orWhere('problem', 'LIKE', "%$keyword%")
+                    ->orWhere('status', 'LIKE', "%$keyword%")
+                    ->orWhere('price', 'LIKE', $keyword);
+                });
+            }
     
-        $services = $services->get();
+        $services = $services->paginate(10);
     
         return view('dealer.dataservis', compact('user', 'services', 'search'));
     }
