@@ -62,6 +62,41 @@ class ServiceSeeder extends Seeder
                 'problem' => 'Ganti Ban',
                 'plat_num' => 'N 5680 LA',
             ],
+            [
+                'user_id' => '18',
+                'dealer_id' => '2',
+                'vehicle_name'=> 'Mio 2006',
+                'problem' => 'Ganti Oli',
+                'plat_num' => 'N 5680 LA',
+            ],
+            [
+                'user_id' => '25',
+                'dealer_id' => '2',
+                'vehicle_name'=> 'Mio 2006',
+                'problem' => 'Ganti Oli',
+                'plat_num' => 'N 5680 LA',
+            ],
+            [
+                'user_id' => '18',
+                'dealer_id' => '2',
+                'vehicle_name'=> 'Mio 2006',
+                'problem' => 'Ganti Per CVT',
+                'plat_num' => 'N 5680 LA',
+            ],
+            [
+                'user_id' => '18',
+                'dealer_id' => '2',
+                'vehicle_name'=> 'Mio 2006',
+                'problem' => 'Ganti kampas',
+                'plat_num' => 'N 5680 LA',
+            ],
+            [
+                'user_id' => '18',
+                'dealer_id' => '2',
+                'vehicle_name'=> 'Mio 2006',
+                'problem' => 'Ganti vanbelt',
+                'plat_num' => 'N 5680 LA',
+            ],
         ]);
     }
 }
