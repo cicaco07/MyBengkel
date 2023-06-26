@@ -23,7 +23,7 @@
                 </button>
             </form>
             <div class="text-primary dark:text-purple my-2 flex items-end">
-                @if(!empty($search))
+                @if(isset($search))
                     Hasil pencarian dari: {{ $search }}
                 @endif
             </div>
@@ -80,11 +80,13 @@
             @endif
         </tbody>
     </table>
+    
 </div>
-<div class="flex flex-col items-center mt-6">
-    <div class="mt-5 md:mt-0">
-        {{ $services->links('dealer.pagination') }}
+
+    <div class="flex flex-col items-center mt-6">
+        <div class="mt-5 md:mt-0">
+            {{ $services->links('dealer.pagination') }}
+        </div>
     </div>
-</div>
 </div>
 @endsection

@@ -218,32 +218,30 @@ class DealerController extends Controller
         return redirect()->back()->with('success', 'Mekanik berhasil dihapus');
     }
 
-    public function search(Request $request)
-    {
-        $user = Auth::user();
-        $keyword = $request->input('search');
-        $search = $keyword; // Simpan nilai $keyword ke dalam variabel $search
+public function search(Request $request)
+{
+    $user = Auth::user();
+    $keyword = $request->input('search');
+    $search = $keyword; // Simpan nilai $keyword ke dalam variabel $search
 
-        $dealer = $user->dealer;
+    $dealer = $user->dealer;
 
-        $services = Service::where('dealer_id', $dealer->id)
-            ->where('status', '!=', 'done');
+    $services = Service::where('dealer_id', $dealer->id)
+        ->where('status', '!=', 'done')
+        ->where(function ($query) use ($keyword) {
+            $query->whereHas('user', function ($query) use ($keyword) {
+                $query->where('name', 'LIKE', "%$keyword%");
+            })
+            ->orWhere('plat_num', 'LIKE', "%$keyword%")
+            ->orWhere('problem', 'LIKE', "%$keyword%")
+            ->orWhere('status', 'LIKE', "%$keyword%");
+        });
 
-        if (!empty($keyword)) {
-            $services->where(function ($query) use ($keyword) {
-                $query->whereHas('user', function ($query) use ($keyword) {
-                    $query->where('name', 'LIKE', "%$keyword%");
-                })
-                ->orWhere('plat_num', 'LIKE', "%$keyword%")
-                ->orWhere('problem', 'LIKE', "%$keyword%")
-                ->orWhere('status', 'LIKE', "%$keyword%");
-            });
-        }
+    $services = $services->paginate(10);
 
-        $services = $services->paginate(10);
+    return view('dealer.antrian', compact('user', 'services', 'search'));
+}
 
-        return view('dealer.antrian', compact('user', 'services', 'search'));
-    }
 
     public function dataservis()
     {
@@ -258,32 +256,34 @@ class DealerController extends Controller
     }
     
     public function search2(Request $request)
-    {
-        $user = Auth::user();
-        $keyword = $request->input('search');
-        $search = $keyword; // Simpan nilai $keyword ke dalam variabel $search
+{
+    $user = Auth::user();
+    $keyword = $request->input('search');
+    $search = $keyword; // Simpan nilai $keyword ke dalam variabel $search
+
+    $dealer = $user->dealer;
+
+    $services = Service::where('dealer_id', $dealer->id)
+    ->where('status', '=', 'done')
+    ->where(function ($query) use ($keyword) {
+        $query->whereHas('user', function ($query) use ($keyword) {
+            $query->where('name', 'LIKE', "%$keyword%");
+        })
+        ->orWhere('plat_num', 'LIKE', "%$keyword%")
+        ->orWhere('problem', 'LIKE', "%$keyword%")
+        ->orWhere('status', 'LIKE', "%$keyword%")
+        ->orWhere('price', 'LIKE', "%$keyword%");
+    });
+
+    $services = $services->paginate(10);
+
+    return view('dealer.dataservis', compact('user', 'services', 'search'));
+}
+
     
-        $dealer = $user->dealer;
     
-        $services = Service::where('dealer_id', $dealer->id)
-            ->where('status', '=', 'done');
     
-            if (!empty($keyword)) {
-                $services->where(function ($query) use ($keyword) {
-                    $query->whereHas('user', function ($query) use ($keyword) {
-                        $query->where('name', 'LIKE', "%$keyword%");
-                    })
-                    ->orWhere('plat_num', 'LIKE', "%$keyword%")
-                    ->orWhere('problem', 'LIKE', "%$keyword%")
-                    ->orWhere('status', 'LIKE', "%$keyword%")
-                    ->orWhere('price', 'LIKE', $keyword);
-                });
-            }
     
-        $services = $services->paginate(10);
-    
-        return view('dealer.dataservis', compact('user', 'services', 'search'));
-    }
 
     private function generatePDF($services, $carts, $month)
     {   
