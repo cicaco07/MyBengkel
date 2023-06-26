@@ -23,10 +23,16 @@
                 </button>
             </form>
             <div class="text-primary dark:text-purple my-2 flex items-end">
-                @if(!empty($search))
+                @if(isset($search))
                     Hasil pencarian dari: {{ $search }}
                 @endif
             </div>
+            {{-- <div class="text-primary dark:text-purple my-2 flex items-end">
+                @if(!empty($search))
+                    Hasil pencarian dari: {{ $search }}
+                @endif
+            </div>   --}}
+
         </div>
     </div>
     <div class="relative overflow-x-auto shadow-md rounded-lg">
