@@ -6,7 +6,6 @@ use App\Repositories\Interfaces\IMechanicRepository;
 use App\Models\User;
 use App\Models\Service;
 use App\Models\Mechanic;
-use App\Models\Sparepart;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -115,13 +114,6 @@ class MechanicRepository implements IMechanicRepository
         return $user;
     }
 
-    public function updateStatus1($id)
-    {
-        $service = Service::findOrFail($id);
-        $service->status = 'accept';
-        $service->save();
-    }
-
     public function updateStatus2($id)
     {
         $service = Service::findOrFail($id);
@@ -134,6 +126,16 @@ class MechanicRepository implements IMechanicRepository
         $service = Service::findOrFail($id);
         $service->status = 'done';
         $service->save();
+    }
+
+    public function updateServiceStatus($id, $price)
+    {
+        $service = Service::find($id);
+        $service->price = $price;
+        $service->status = 'accept';
+        $service->save();
+
+        return $service;
     }
 
     public function find($id)

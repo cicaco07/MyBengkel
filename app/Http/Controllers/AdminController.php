@@ -58,15 +58,11 @@ class AdminController extends Controller
     public function updateDealer(Request $request, $id, DealerRepository $dealerRepository)
     {
         $request->validate([
-            // 'dealer_name' => 'required',
-            // 'dealer_address' => 'required',
             'company' => 'required|in:Yamaha,Suzuki,Honda',
             'maps' => 'required'
         ]);
 
         $data = [
-            // 'dealer_name' => $request->dealer_name,
-            // 'dealer_address' => $request->dealer_address,
             'company' => $request->company,
             'maps' => $request->maps,
         ];

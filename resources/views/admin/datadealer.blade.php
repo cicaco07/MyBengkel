@@ -85,6 +85,13 @@
                 </tr>
             </thead>
             <tbody class="text-xs md:text-base">
+                @if ($users->isEmpty())
+                <tr>
+                    <td colspan="5" class="dark:bg-primary text-center py-4 text-primary dark:text-purple">
+                        Data tidak ditemukan / kosong
+                    </td>
+                </tr>
+                @else
                 @foreach ($users as $data)
                 <tr class="bg-gray-100 dark:bg-primary border-b border-primary dark:border-purple last:border-0 text-primary dark:text-purple">
                         <td scope="row" class="px-4 text-center py-4 font-medium whitespace-nowrap dark:text-white">
@@ -153,6 +160,7 @@
                         </td>
                     </tr>
                 @endforeach
+                @endif
             </tbody>
         </table>
     </div>

@@ -17,7 +17,7 @@ class SparepartSeeder extends Seeder
             [
                 'dealer_id' => 1,
                 'item_name' => 'Castrol',
-                'image' => 'castrol.jpg',
+                'image' => 'castrol.jpeg',
                 'quantity_left' => 300,
                 'price' => 76500,
             ],

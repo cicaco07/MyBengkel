@@ -1,7 +1,7 @@
 <?php
 namespace App\Repositories\Interfaces;
 
-Interface IDealerRepository
+interface IDealerRepository
 {
     public function find($id);
 
