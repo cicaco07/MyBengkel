@@ -9,27 +9,28 @@ use Illuminate\Http\Request;
 class CartController extends Controller
 {
     public function store(Request $request)
-    {
-        $request->validate([
-            'service_id' => 'required',
-            'sparepart_id' => 'required',
-            'quantity' => 'required',
-        ]);
-    
-        $serviceId = $request->input('service_id');
-        $sparepartIds = $request->input('sparepart_id');
-        $quantities = $request->input('quantity');
-    
-        $total = 0;
-    
-        foreach ($sparepartIds as $index => $sparepartId) {
-            $sparepart = Sparepart::find($sparepartId);
-            $subtotal = $sparepart->price * $quantities[$index];
-    
+{
+    $request->validate([
+        'service_id' => 'required',
+        'sparepart_id' => 'required',
+        'quantity' => 'required',
+    ]);
+
+    $serviceId = $request->input('service_id');
+    $sparepartIds = $request->input('sparepart_id');
+    $quantities = $request->input('quantity');
+
+    $total = 0;
+
+    foreach ($sparepartIds as $index => $sparepartId) {
+        $sparepart = Sparepart::find($sparepartId);
+        $subtotal = $sparepart->price * $quantities[$index];
+
+        if ($sparepart->quantity_left >= $quantities[$index]) {
             $cart = Cart::where('service_id', $serviceId)
                 ->where('sparepart_id', $sparepartId)
                 ->first();
-    
+
             if ($cart) {
                 $cart->quantity += $quantities[$index];
                 $cart->subtotal += $subtotal;
@@ -41,23 +42,28 @@ class CartController extends Controller
                 $cart->quantity = $quantities[$index];
                 $cart->subtotal = $subtotal;
                 $cart->save();
-    
-                $sparepart->quantity_left -= $quantities[$index];
-                $sparepart->save();
             }
-    
+
+            $sparepart->quantity_left -= $quantities[$index];
+            $sparepart->save();
+
             $total += $subtotal;
+        } else {
+            // Jika stok habis atau tidak mencukupi
+            return redirect()->back()->with('error', 'Stok ' . $sparepart->name . ' habis atau tidak mencukupi');
         }
-    
-        $serviceCart = Cart::where('service_id', $serviceId)->get();
-        $serviceCartTotal = $serviceCart->sum('subtotal');
-    
-        $lastCart = Cart::latest()->first();
-        $lastCart->total = $serviceCartTotal;
-        $lastCart->save();
-    
-        return redirect()->back()->with('success', 'Sparepart berhasil ditambahkan');
     }
+
+    $serviceCart = Cart::where('service_id', $serviceId)->get();
+    $serviceCartTotal = $serviceCart->sum('subtotal');
+
+    $lastCart = Cart::latest()->first();
+    $lastCart->total = $serviceCartTotal;
+    $lastCart->save();
+
+    return redirect()->back()->with('success', 'Sparepart berhasil ditambahkan');
+}
+
 
     public function removeItem($id)
     {
