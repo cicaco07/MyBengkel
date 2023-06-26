@@ -214,8 +214,6 @@ class UserSeeder extends Seeder
                 'role'=> 'mechanic',
                 'password'=> Hash::make('password')
             ],
-
-
             [
                 'username'=>'aulia',
                 'name'=> 'Aulia Cahya',
@@ -249,7 +247,7 @@ class UserSeeder extends Seeder
                 'email'=> 'user1@gmail.com',
                 'address' => 'user@address',
                 'phone_number'=> '082126641681',
-                'role'=> 'mekanik',
+                'role'=> 'mechanic',
                 'password'=> Hash::make('password')
             ],
             [
@@ -258,7 +256,7 @@ class UserSeeder extends Seeder
                 'email'=> 'user2@gmail.com',
                 'address' => 'user@address',
                 'phone_number'=> '082126641681',
-                'role'=> 'mekanik',
+                'role'=> 'mechanic',
                 'password'=> Hash::make('password')
             ],
             [
@@ -267,7 +265,7 @@ class UserSeeder extends Seeder
                 'email'=> 'user3@gmail.com',
                 'address' => 'user@address',
                 'phone_number'=> '082126641681',
-                'role'=> 'mekanik',
+                'role'=> 'mechanic',
                 'password'=> Hash::make('password')
             ],
             [
@@ -276,7 +274,7 @@ class UserSeeder extends Seeder
                 'email'=> 'user4@gmail.com',
                 'address' => 'user@address',
                 'phone_number'=> '082126641681',
-                'role'=> 'mekanik',
+                'role'=> 'mechanic',
                 'password'=> Hash::make('password')
             ],
             [
@@ -285,7 +283,7 @@ class UserSeeder extends Seeder
                 'email'=> 'user5@gmail.com',
                 'address' => 'user@address',
                 'phone_number'=> '082126641681',
-                'role'=> 'mekanik',
+                'role'=> 'mechanic',
                 'password'=> Hash::make('password')
             ],
             [
